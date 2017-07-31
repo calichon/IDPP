@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CombustibleCuponEditDlg" widgetVar="CombustibleCuponEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCombustibleCuponTitle}">
+            <h:form id="CombustibleCuponEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{combustibleCuponController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_codCombustibleCupon}" for="codCombustibleCupon" />
+                        <p:inputText id="codCombustibleCupon" value="#{combustibleCuponController.selected.codCombustibleCupon}" title="#{bundle.EditCombustibleCuponTitle_codCombustibleCupon}" required="true" requiredMessage="#{bundle.EditCombustibleCuponRequiredMessage_codCombustibleCupon}"/>
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_cantidadCupones}" for="cantidadCupones" />
+                        <p:inputText id="cantidadCupones" value="#{combustibleCuponController.selected.cantidadCupones}" title="#{bundle.EditCombustibleCuponTitle_cantidadCupones}" />
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_numeroCuponInicial}" for="numeroCuponInicial" />
+                        <p:inputText id="numeroCuponInicial" value="#{combustibleCuponController.selected.numeroCuponInicial}" title="#{bundle.EditCombustibleCuponTitle_numeroCuponInicial}" />
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_numeroCuponFinal}" for="numeroCuponFinal" />
+                        <p:inputText id="numeroCuponFinal" value="#{combustibleCuponController.selected.numeroCuponFinal}" title="#{bundle.EditCombustibleCuponTitle_numeroCuponFinal}" />
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_sumaTotal}" for="sumaTotal" />
+                        <p:inputText id="sumaTotal" value="#{combustibleCuponController.selected.sumaTotal}" title="#{bundle.EditCombustibleCuponTitle_sumaTotal}" />
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_codCombustibleComision}" for="codCombustibleComision" />
+                        <p:selectOneMenu id="codCombustibleComision" value="#{combustibleCuponController.selected.codCombustibleComision}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{combustibleComisionController.itemsAvailableSelectOne}"
+                                           var="codCombustibleComisionItem"
+                                           itemValue="#{codCombustibleComisionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCombustibleCuponLabel_codCuponDenominancion}" for="codCuponDenominancion" />
+                        <p:selectOneMenu id="codCuponDenominancion" value="#{combustibleCuponController.selected.codCuponDenominancion}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cuponDenominacionController.itemsAvailableSelectOne}"
+                                           var="codCuponDenominancionItem"
+                                           itemValue="#{codCuponDenominancionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{combustibleCuponController.update}" value="#{bundle.Save}" update="display,:CombustibleCuponListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CombustibleCuponEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CombustibleCuponEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

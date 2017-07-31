@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignacionVehiculoCreateDlg" widgetVar="AsignacionVehiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsignacionVehiculoTitle}">
+            <h:form id="AsignacionVehiculoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codAsignacionVehiculo}" for="codAsignacionVehiculo" />
+                        <p:inputText id="codAsignacionVehiculo" value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.CreateAsignacionVehiculoTitle_codAsignacionVehiculo}" required="true" requiredMessage="#{bundle.CreateAsignacionVehiculoRequiredMessage_codAsignacionVehiculo}"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_fechaAsignacion}" for="fechaAsignacion" />
+                        <p:calendar id="fechaAsignacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_fechaAsignacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_noSolicitud}" for="noSolicitud" />
+                        <p:inputText id="noSolicitud" value="#{asignacionVehiculoController.selected.noSolicitud}" title="#{bundle.CreateAsignacionVehiculoTitle_noSolicitud}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_yearSolicitud}" for="yearSolicitud" />
+                        <p:inputText id="yearSolicitud" value="#{asignacionVehiculoController.selected.yearSolicitud}" title="#{bundle.CreateAsignacionVehiculoTitle_yearSolicitud}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />
+                        <p:calendar id="fechaHoraUsoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_fechaHoraRetornoVehiculo}" for="fechaHoraRetornoVehiculo" />
+                        <p:calendar id="fechaHoraRetornoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_diasAsignacion}" for="diasAsignacion" />
+                        <p:inputText id="diasAsignacion" value="#{asignacionVehiculoController.selected.diasAsignacion}" title="#{bundle.CreateAsignacionVehiculoTitle_diasAsignacion}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_numPersonasViaje}" for="numPersonasViaje" />
+                        <p:inputText id="numPersonasViaje" value="#{asignacionVehiculoController.selected.numPersonasViaje}" title="#{bundle.CreateAsignacionVehiculoTitle_numPersonasViaje}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_destino}" for="destino" />
+                        <p:inputText id="destino" value="#{asignacionVehiculoController.selected.destino}" title="#{bundle.CreateAsignacionVehiculoTitle_destino}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_diligencia}" for="diligencia" />
+                        <p:inputText id="diligencia" value="#{asignacionVehiculoController.selected.diligencia}" title="#{bundle.CreateAsignacionVehiculoTitle_diligencia}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_causa1}" for="causa1" />
+                        <p:inputText id="causa1" value="#{asignacionVehiculoController.selected.causa1}" title="#{bundle.CreateAsignacionVehiculoTitle_causa1}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_causa2}" for="causa2" />
+                        <p:inputText id="causa2" value="#{asignacionVehiculoController.selected.causa2}" title="#{bundle.CreateAsignacionVehiculoTitle_causa2}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_causa3}" for="causa3" />
+                        <p:inputText id="causa3" value="#{asignacionVehiculoController.selected.causa3}" title="#{bundle.CreateAsignacionVehiculoTitle_causa3}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_utilizaPiloto}" for="utilizaPiloto" />
+                        <p:selectBooleanCheckbox id="utilizaPiloto" value="#{asignacionVehiculoController.selected.utilizaPiloto}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_utilizaVehiculo}" for="utilizaVehiculo" />
+                        <p:selectBooleanCheckbox id="utilizaVehiculo" value="#{asignacionVehiculoController.selected.utilizaVehiculo}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_cargaVoluminosa}" for="cargaVoluminosa" />
+                        <p:selectBooleanCheckbox id="cargaVoluminosa" value="#{asignacionVehiculoController.selected.cargaVoluminosa}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{asignacionVehiculoController.selected.observaciones}" title="#{bundle.CreateAsignacionVehiculoTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codDependenciaInstitucionJuzgado}" for="codDependenciaInstitucionJuzgado" />
+                        <p:selectOneMenu id="codDependenciaInstitucionJuzgado" value="#{asignacionVehiculoController.selected.codDependenciaInstitucionJuzgado}" >
+                            <f:selectItems value="#{dependenciaInstitucionController.itemsAvailableSelectOne}"
+                                           var="codDependenciaInstitucionJuzgadoItem"
+                                           itemValue="#{codDependenciaInstitucionJuzgadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPersonaAsignadorVehiculo}" for="codPersonaAsignadorVehiculo" />
+                        <p:selectOneMenu id="codPersonaAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaAsignadorVehiculoItem"
+                                           itemValue="#{codPersonaAsignadorVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPersonaCoordinadorJefe}" for="codPersonaCoordinadorJefe" />
+                        <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaCoordinadorJefeItem"
+                                           itemValue="#{codPersonaCoordinadorJefeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPersonaPasajero}" for="codPersonaPasajero" />
+                        <p:selectOneMenu id="codPersonaPasajero" value="#{asignacionVehiculoController.selected.codPersonaPasajero}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaPasajeroItem"
+                                           itemValue="#{codPersonaPasajeroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
+                        <p:selectOneMenu id="codPersonaSolicitante" value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaSolicitanteItem"
+                                           itemValue="#{codPersonaSolicitanteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}" for="codPuestoAsignadorVehiculo" />
+                        <p:selectOneMenu id="codPuestoAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo}" >
+                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                           var="codPuestoAsignadorVehiculoItem"
+                                           itemValue="#{codPuestoAsignadorVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPuestoCoordinadorJefe}" for="codPuestoCoordinadorJefe" />
+                        <p:selectOneMenu id="codPuestoCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe}" >
+                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                           var="codPuestoCoordinadorJefeItem"
+                                           itemValue="#{codPuestoCoordinadorJefeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
+                        <p:selectOneMenu id="codPuestoSolicitante" value="#{asignacionVehiculoController.selected.codPuestoSolicitante}" >
+                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                           var="codPuestoSolicitanteItem"
+                                           itemValue="#{codPuestoSolicitanteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codSedeLugarSalida}" for="codSedeLugarSalida" />
+                        <p:selectOneMenu id="codSedeLugarSalida" value="#{asignacionVehiculoController.selected.codSedeLugarSalida}" >
+                            <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"
+                                           var="codSedeLugarSalidaItem"
+                                           itemValue="#{codSedeLugarSalidaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codUnidadSolicitante}" for="codUnidadSolicitante" />
+                        <p:selectOneMenu id="codUnidadSolicitante" value="#{asignacionVehiculoController.selected.codUnidadSolicitante}" >
+                            <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
+                                           var="codUnidadSolicitanteItem"
+                                           itemValue="#{codUnidadSolicitanteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignacionVehiculoController.create}" value="#{bundle.Save}" update="display,:AsignacionVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsignacionVehiculoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignacionVehiculoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

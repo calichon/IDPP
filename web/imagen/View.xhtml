@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImagenViewDlg" widgetVar="ImagenViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewImagenTitle}">
+            <h:form id="ImagenViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{imagenController.selected != null}">
+                        <h:outputText value="#{bundle.ViewImagenLabel_codImagen}"/>
+                        <h:outputText value="#{imagenController.selected.codImagen}" title="#{bundle.ViewImagenTitle_codImagen}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_pathImagen}"/>
+                        <h:outputText value="#{imagenController.selected.pathImagen}" title="#{bundle.ViewImagenTitle_pathImagen}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_imagenb}"/>
+                        <h:outputText value="#{imagenController.selected.imagenb}" title="#{bundle.ViewImagenTitle_imagenb}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_nombreImagen}"/>
+                        <h:outputText value="#{imagenController.selected.nombreImagen}" title="#{bundle.ViewImagenTitle_nombreImagen}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_orden}"/>
+                        <h:outputText value="#{imagenController.selected.orden}" title="#{bundle.ViewImagenTitle_orden}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_activo}"/>
+                        <p:selectBooleanCheckbox value="#{imagenController.selected.activo}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_codTipoImagen}"/>
+                        <h:outputText value="#{imagenController.selected.codTipoImagen}" title="#{bundle.ViewImagenTitle_codTipoImagen}"/>
+                        <h:outputText value="#{bundle.ViewImagenLabel_codVehiculo}"/>
+                        <h:outputText value="#{imagenController.selected.codVehiculo}" title="#{bundle.ViewImagenTitle_codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ImagenViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

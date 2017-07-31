@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAsignacionVehiculoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AsignacionVehiculoListForm">
+                <p:panel header="#{bundle.ListAsignacionVehiculoTitle}">
+                    <p:dataTable id="datalist" value="#{asignacionVehiculoController.items}" var="item"
+                                 selectionMode="single" selection="#{asignacionVehiculoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codAsignacionVehiculo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codAsignacionVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codAsignacionVehiculo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaAsignacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaAsignacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_noSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noSolicitud}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_yearSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.yearSolicitud}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaHoraUsoVehiculo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaHoraRetornoVehiculo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_diasAsignacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.diasAsignacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_numPersonasViaje}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numPersonasViaje}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_destino}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.destino}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_diligencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.diligencia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_causa1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.causa1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_causa2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.causa2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_causa3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.causa3}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_utilizaPiloto}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.utilizaPiloto}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_utilizaVehiculo}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.utilizaVehiculo}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_cargaVoluminosa}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.cargaVoluminosa}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codDependenciaInstitucionJuzgado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codDependenciaInstitucionJuzgado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaAsignadorVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersonaAsignadorVehiculo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaCoordinadorJefe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersonaCoordinadorJefe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaPasajero}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersonaPasajero}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaSolicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersonaSolicitante}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPuestoAsignadorVehiculo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoCoordinadorJefe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPuestoCoordinadorJefe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoSolicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPuestoSolicitante}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codSedeLugarSalida}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codSedeLugarSalida}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codUnidadSolicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codUnidadSolicitante}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{asignacionVehiculoController.prepareCreate}" update=":AsignacionVehiculoCreateForm" oncomplete="PF('AsignacionVehiculoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AsignacionVehiculoViewForm" oncomplete="PF('AsignacionVehiculoViewDialog').show()" disabled="#{empty asignacionVehiculoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AsignacionVehiculoEditForm" oncomplete="PF('AsignacionVehiculoEditDialog').show()" disabled="#{empty asignacionVehiculoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{asignacionVehiculoController.destroy}" update=":growl,datalist" disabled="#{empty asignacionVehiculoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

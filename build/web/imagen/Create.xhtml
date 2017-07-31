@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImagenCreateDlg" widgetVar="ImagenCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateImagenTitle}">
+            <h:form id="ImagenCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{imagenController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_codImagen}" for="codImagen" />
+                        <p:inputText id="codImagen" value="#{imagenController.selected.codImagen}" title="#{bundle.CreateImagenTitle_codImagen}" required="true" requiredMessage="#{bundle.CreateImagenRequiredMessage_codImagen}"/>
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_pathImagen}" for="pathImagen" />
+                        <p:inputText id="pathImagen" value="#{imagenController.selected.pathImagen}" title="#{bundle.CreateImagenTitle_pathImagen}" />
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_imagenb}" for="imagenb" />
+                        <p:inputTextarea rows="4" cols="30" id="imagenb" value="#{imagenController.selected.imagenb}" title="#{bundle.CreateImagenTitle_imagenb}" />
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_nombreImagen}" for="nombreImagen" />
+                        <p:inputText id="nombreImagen" value="#{imagenController.selected.nombreImagen}" title="#{bundle.CreateImagenTitle_nombreImagen}" />
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_orden}" for="orden" />
+                        <p:inputText id="orden" value="#{imagenController.selected.orden}" title="#{bundle.CreateImagenTitle_orden}" />
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_activo}" for="activo" />
+                        <p:selectBooleanCheckbox id="activo" value="#{imagenController.selected.activo}" />
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_codTipoImagen}" for="codTipoImagen" />
+                        <p:selectOneMenu id="codTipoImagen" value="#{imagenController.selected.codTipoImagen}" >
+                            <f:selectItems value="#{tipoImagenController.itemsAvailableSelectOne}"
+                                           var="codTipoImagenItem"
+                                           itemValue="#{codTipoImagenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateImagenLabel_codVehiculo}" for="codVehiculo" />
+                        <p:selectOneMenu id="codVehiculo" value="#{imagenController.selected.codVehiculo}" >
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="codVehiculoItem"
+                                           itemValue="#{codVehiculoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{imagenController.create}" value="#{bundle.Save}" update="display,:ImagenListForm:datalist,:growl" oncomplete="handleSubmit(args,'ImagenCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ImagenCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

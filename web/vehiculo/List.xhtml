@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVehiculoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="VehiculoListForm">
+                <p:panel header="#{bundle.ListVehiculoTitle}">
+                    <p:dataTable id="datalist" value="#{vehiculoController.items}" var="item"
+                                 selectionMode="single" selection="#{vehiculoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codVehiculo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codVehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codVehiculo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_placa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.placa}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_nit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_poliza}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.poliza}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_modelo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modelo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_chasis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.chasis}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_vin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vin}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_centimetrosCubicos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.centimetrosCubicos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_cilindros}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cilindros}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_toneladas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.toneladas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_titulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_tarjetaCirculacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tarjetaCirculacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_noAsientos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noAsientos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_noInventarioRegistro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noInventarioRegistro}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_noMotor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noMotor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_orden}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orden}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_activo}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.activo}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codColor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codColor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codDepartamento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codLinea}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codLinea}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codMarca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codMarca}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codMunicipio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codMunicipio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codPersonaAsignacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersonaAsignacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codPueston}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPueston}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codTipoTipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codTipoTipo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codTipoUso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codTipoUso}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vehiculoController.prepareCreate}" update=":VehiculoCreateForm" oncomplete="PF('VehiculoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VehiculoViewForm" oncomplete="PF('VehiculoViewDialog').show()" disabled="#{empty vehiculoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VehiculoEditForm" oncomplete="PF('VehiculoEditDialog').show()" disabled="#{empty vehiculoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vehiculoController.destroy}" update=":growl,datalist" disabled="#{empty vehiculoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

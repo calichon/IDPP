@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CombustibleCuponCreateDlg" widgetVar="CombustibleCuponCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCombustibleCuponTitle}">
+            <h:form id="CombustibleCuponCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{combustibleCuponController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_codCombustibleCupon}" for="codCombustibleCupon" />
+                        <p:inputText id="codCombustibleCupon" value="#{combustibleCuponController.selected.codCombustibleCupon}" title="#{bundle.CreateCombustibleCuponTitle_codCombustibleCupon}" required="true" requiredMessage="#{bundle.CreateCombustibleCuponRequiredMessage_codCombustibleCupon}"/>
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_cantidadCupones}" for="cantidadCupones" />
+                        <p:inputText id="cantidadCupones" value="#{combustibleCuponController.selected.cantidadCupones}" title="#{bundle.CreateCombustibleCuponTitle_cantidadCupones}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_numeroCuponInicial}" for="numeroCuponInicial" />
+                        <p:inputText id="numeroCuponInicial" value="#{combustibleCuponController.selected.numeroCuponInicial}" title="#{bundle.CreateCombustibleCuponTitle_numeroCuponInicial}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_numeroCuponFinal}" for="numeroCuponFinal" />
+                        <p:inputText id="numeroCuponFinal" value="#{combustibleCuponController.selected.numeroCuponFinal}" title="#{bundle.CreateCombustibleCuponTitle_numeroCuponFinal}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_sumaTotal}" for="sumaTotal" />
+                        <p:inputText id="sumaTotal" value="#{combustibleCuponController.selected.sumaTotal}" title="#{bundle.CreateCombustibleCuponTitle_sumaTotal}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_codCombustibleComision}" for="codCombustibleComision" />
+                        <p:selectOneMenu id="codCombustibleComision" value="#{combustibleCuponController.selected.codCombustibleComision}" >
+                            <f:selectItems value="#{combustibleComisionController.itemsAvailableSelectOne}"
+                                           var="codCombustibleComisionItem"
+                                           itemValue="#{codCombustibleComisionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_codCuponDenominancion}" for="codCuponDenominancion" />
+                        <p:selectOneMenu id="codCuponDenominancion" value="#{combustibleCuponController.selected.codCuponDenominancion}" >
+                            <f:selectItems value="#{cuponDenominacionController.itemsAvailableSelectOne}"
+                                           var="codCuponDenominancionItem"
+                                           itemValue="#{codCuponDenominancionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{combustibleCuponController.create}" value="#{bundle.Save}" update="display,:CombustibleCuponListForm:datalist,:growl" oncomplete="handleSubmit(args,'CombustibleCuponCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CombustibleCuponCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

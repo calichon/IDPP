@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoImagenEditDlg" widgetVar="TipoImagenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipoImagenTitle}">
+            <h:form id="TipoImagenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoImagenController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTipoImagenLabel_codTipoImagen}" for="codTipoImagen" />
+                        <p:inputText id="codTipoImagen" value="#{tipoImagenController.selected.codTipoImagen}" title="#{bundle.EditTipoImagenTitle_codTipoImagen}" required="true" requiredMessage="#{bundle.EditTipoImagenRequiredMessage_codTipoImagen}"/>
+                        <p:outputLabel value="#{bundle.EditTipoImagenLabel_nombreTipoImagen}" for="nombreTipoImagen" />
+                        <p:inputText id="nombreTipoImagen" value="#{tipoImagenController.selected.nombreTipoImagen}" title="#{bundle.EditTipoImagenTitle_nombreTipoImagen}" />
+                        <p:outputLabel value="#{bundle.EditTipoImagenLabel_orden}" for="orden" />
+                        <p:inputText id="orden" value="#{tipoImagenController.selected.orden}" title="#{bundle.EditTipoImagenTitle_orden}" />
+                        <p:outputLabel value="#{bundle.EditTipoImagenLabel_activo}" for="activo" />
+                        <p:selectBooleanCheckbox id="activo" value="#{tipoImagenController.selected.activo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoImagenController.update}" value="#{bundle.Save}" update="display,:TipoImagenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoImagenEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoImagenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

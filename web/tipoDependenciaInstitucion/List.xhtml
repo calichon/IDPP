@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTipoDependenciaInstitucionTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TipoDependenciaInstitucionListForm">
+                <p:panel header="#{bundle.ListTipoDependenciaInstitucionTitle}">
+                    <p:dataTable id="datalist" value="#{tipoDependenciaInstitucionController.items}" var="item"
+                                 selectionMode="single" selection="#{tipoDependenciaInstitucionController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codTipoDependenciaInstitucion}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoDependenciaInstitucionTitle_codTipoDependenciaInstitucion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codTipoDependenciaInstitucion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoDependenciaInstitucionTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoDependenciaInstitucionTitle_codEstatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codEstatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoDependenciaInstitucionTitle_abreviatura}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abreviatura}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoDependenciaInstitucionController.prepareCreate}" update=":TipoDependenciaInstitucionCreateForm" oncomplete="PF('TipoDependenciaInstitucionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoDependenciaInstitucionViewForm" oncomplete="PF('TipoDependenciaInstitucionViewDialog').show()" disabled="#{empty tipoDependenciaInstitucionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoDependenciaInstitucionEditForm" oncomplete="PF('TipoDependenciaInstitucionEditDialog').show()" disabled="#{empty tipoDependenciaInstitucionController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoDependenciaInstitucionController.destroy}" update=":growl,datalist" disabled="#{empty tipoDependenciaInstitucionController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

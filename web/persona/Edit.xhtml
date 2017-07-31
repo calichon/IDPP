@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
+            <h:form id="PersonaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codPersona}" for="codPersona" />
+                        <p:inputText id="codPersona" value="#{personaController.selected.codPersona}" title="#{bundle.EditPersonaTitle_codPersona}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_codPersona}"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codTipoPersona}" for="codTipoPersona" />
+                        <p:inputText id="codTipoPersona" value="#{personaController.selected.codTipoPersona}" title="#{bundle.EditPersonaTitle_codTipoPersona}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_nombre1}" for="nombre1" />
+                        <p:inputText id="nombre1" value="#{personaController.selected.nombre1}" title="#{bundle.EditPersonaTitle_nombre1}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{personaController.selected.nombre2}" title="#{bundle.EditPersonaTitle_nombre2}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_apellido1}" for="apellido1" />
+                        <p:inputText id="apellido1" value="#{personaController.selected.apellido1}" title="#{bundle.EditPersonaTitle_apellido1}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{personaController.selected.apellido2}" title="#{bundle.EditPersonaTitle_apellido2}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_apellidoCasada}" for="apellidoCasada" />
+                        <p:inputText id="apellidoCasada" value="#{personaController.selected.apellidoCasada}" title="#{bundle.EditPersonaTitle_apellidoCasada}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codRegistro}" for="codRegistro" />
+                        <p:inputText id="codRegistro" value="#{personaController.selected.codRegistro}" title="#{bundle.EditPersonaTitle_codRegistro}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_numeroCedula}" for="numeroCedula" />
+                        <p:inputText id="numeroCedula" value="#{personaController.selected.numeroCedula}" title="#{bundle.EditPersonaTitle_numeroCedula}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{personaController.selected.nit}" title="#{bundle.EditPersonaTitle_nit}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{personaController.selected.sexo}" title="#{bundle.EditPersonaTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_estadoCivil}" for="estadoCivil" />
+                        <p:inputText id="estadoCivil" value="#{personaController.selected.estadoCivil}" title="#{bundle.EditPersonaTitle_estadoCivil}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codEstatus}" for="codEstatus" />
+                        <p:inputText id="codEstatus" value="#{personaController.selected.codEstatus}" title="#{bundle.EditPersonaTitle_codEstatus}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_cuentaBanco}" for="cuentaBanco" />
+                        <p:inputText id="cuentaBanco" value="#{personaController.selected.cuentaBanco}" title="#{bundle.EditPersonaTitle_cuentaBanco}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_pasaporte}" for="pasaporte" />
+                        <p:inputText id="pasaporte" value="#{personaController.selected.pasaporte}" title="#{bundle.EditPersonaTitle_pasaporte}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_domicilio}" for="domicilio" />
+                        <p:inputText id="domicilio" value="#{personaController.selected.domicilio}" title="#{bundle.EditPersonaTitle_domicilio}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codProfesion}" for="codProfesion" />
+                        <p:inputText id="codProfesion" value="#{personaController.selected.codProfesion}" title="#{bundle.EditPersonaTitle_codProfesion}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_partidaNacimiento}" for="partidaNacimiento" />
+                        <p:inputText id="partidaNacimiento" value="#{personaController.selected.partidaNacimiento}" title="#{bundle.EditPersonaTitle_partidaNacimiento}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codRelojPersona}" for="codRelojPersona" />
+                        <p:inputText id="codRelojPersona" value="#{personaController.selected.codRelojPersona}" title="#{bundle.EditPersonaTitle_codRelojPersona}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_urlFoto}" for="urlFoto" />
+                        <p:inputText id="urlFoto" value="#{personaController.selected.urlFoto}" title="#{bundle.EditPersonaTitle_urlFoto}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_foto}" for="foto" />
+                        <p:inputTextarea rows="4" cols="30" id="foto" value="#{personaController.selected.foto}" title="#{bundle.EditPersonaTitle_foto}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_providad}" for="providad" />
+                        <p:inputText id="providad" value="#{personaController.selected.providad}" title="#{bundle.EditPersonaTitle_providad}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_lugarNacimiento}" for="lugarNacimiento" />
+                        <p:inputText id="lugarNacimiento" value="#{personaController.selected.lugarNacimiento}" title="#{bundle.EditPersonaTitle_lugarNacimiento}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{personaController.selected.fecha}" title="#{bundle.EditPersonaTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_clasificacionGeografica}" for="clasificacionGeografica" />
+                        <p:inputText id="clasificacionGeografica" value="#{personaController.selected.clasificacionGeografica}" title="#{bundle.EditPersonaTitle_clasificacionGeografica}" />
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codMunicipio}" for="codMunicipio" />
+                        <p:selectOneMenu id="codMunicipio" value="#{personaController.selected.codMunicipio}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="codMunicipioItem"
+                                           itemValue="#{codMunicipioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codPais}" for="codPais" />
+                        <p:selectOneMenu id="codPais" value="#{personaController.selected.codPais}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{paisController.itemsAvailableSelectOne}"
+                                           var="codPaisItem"
+                                           itemValue="#{codPaisItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonaLabel_codPaisPasaporte}" for="codPaisPasaporte" />
+                        <p:selectOneMenu id="codPaisPasaporte" value="#{personaController.selected.codPaisPasaporte}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{paisController.itemsAvailableSelectOne}"
+                                           var="codPaisPasaporteItem"
+                                           itemValue="#{codPaisPasaporteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

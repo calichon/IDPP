@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SedeCreateDlg" widgetVar="SedeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSedeTitle}">
+            <h:form id="SedeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sedeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codSede}" for="codSede" />
+                        <p:inputText id="codSede" value="#{sedeController.selected.codSede}" title="#{bundle.CreateSedeTitle_codSede}" required="true" requiredMessage="#{bundle.CreateSedeRequiredMessage_codSede}"/>
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codTipoSede}" for="codTipoSede" />
+                        <p:inputText id="codTipoSede" value="#{sedeController.selected.codTipoSede}" title="#{bundle.CreateSedeTitle_codTipoSede}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_nombreSede}" for="nombreSede" />
+                        <p:inputText id="nombreSede" value="#{sedeController.selected.nombreSede}" title="#{bundle.CreateSedeTitle_nombreSede}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{sedeController.selected.direccion}" title="#{bundle.CreateSedeTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_telefono1}" for="telefono1" />
+                        <p:inputText id="telefono1" value="#{sedeController.selected.telefono1}" title="#{bundle.CreateSedeTitle_telefono1}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_telefono2}" for="telefono2" />
+                        <p:inputText id="telefono2" value="#{sedeController.selected.telefono2}" title="#{bundle.CreateSedeTitle_telefono2}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codOrganigrama}" for="codOrganigrama" />
+                        <p:inputText id="codOrganigrama" value="#{sedeController.selected.codOrganigrama}" title="#{bundle.CreateSedeTitle_codOrganigrama}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codEstatus}" for="codEstatus" />
+                        <p:inputText id="codEstatus" value="#{sedeController.selected.codEstatus}" title="#{bundle.CreateSedeTitle_codEstatus}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codRegionSupervision}" for="codRegionSupervision" />
+                        <p:inputText id="codRegionSupervision" value="#{sedeController.selected.codRegionSupervision}" title="#{bundle.CreateSedeTitle_codRegionSupervision}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_correoElectronico}" for="correoElectronico" />
+                        <p:inputText id="correoElectronico" value="#{sedeController.selected.correoElectronico}" title="#{bundle.CreateSedeTitle_correoElectronico}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_zona}" for="zona" />
+                        <p:inputText id="zona" value="#{sedeController.selected.zona}" title="#{bundle.CreateSedeTitle_zona}" />
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codMunicipio}" for="codMunicipio" />
+                        <p:selectOneMenu id="codMunicipio" value="#{sedeController.selected.codMunicipio}" >
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="codMunicipioItem"
+                                           itemValue="#{codMunicipioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSedeLabel_codCoordindor}" for="codCoordindor" />
+                        <p:selectOneMenu id="codCoordindor" value="#{sedeController.selected.codCoordindor}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codCoordindorItem"
+                                           itemValue="#{codCoordindorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sedeController.create}" value="#{bundle.Save}" update="display,:SedeListForm:datalist,:growl" oncomplete="handleSubmit(args,'SedeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SedeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

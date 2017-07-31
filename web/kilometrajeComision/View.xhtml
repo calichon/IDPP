@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KilometrajeComisionViewDlg" widgetVar="KilometrajeComisionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewKilometrajeComisionTitle}">
+            <h:form id="KilometrajeComisionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{kilometrajeComisionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codKilometrajeComision}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.codKilometrajeComision}" title="#{bundle.ViewKilometrajeComisionTitle_codKilometrajeComision}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_placa}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.placa}" title="#{bundle.ViewKilometrajeComisionTitle_placa}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_kilometrajeInicial}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.ViewKilometrajeComisionTitle_kilometrajeInicial}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_fechaHoraSalida}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.ViewKilometrajeComisionTitle_fechaHoraSalida}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_kilometrajeFinal}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.kilometrajeFinal}" title="#{bundle.ViewKilometrajeComisionTitle_kilometrajeFinal}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_fechaHoraEntrada}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.ViewKilometrajeComisionTitle_fechaHoraEntrada}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_comisionRealizada}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.comisionRealizada}" title="#{bundle.ViewKilometrajeComisionTitle_comisionRealizada}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa1}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.causa1}" title="#{bundle.ViewKilometrajeComisionTitle_causa1}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa2}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.causa2}" title="#{bundle.ViewKilometrajeComisionTitle_causa2}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa3}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.causa3}" title="#{bundle.ViewKilometrajeComisionTitle_causa3}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_diligenciasRealizadas}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.diligenciasRealizadas}" title="#{bundle.ViewKilometrajeComisionTitle_diligenciasRealizadas}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codDependenciaInstitucion}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.codDependenciaInstitucion}" title="#{bundle.ViewKilometrajeComisionTitle_codDependenciaInstitucion}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codPersonaPiloto}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.codPersonaPiloto}" title="#{bundle.ViewKilometrajeComisionTitle_codPersonaPiloto}"/>
+                        <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codVehiculo}"/>
+                        <h:outputText value="#{kilometrajeComisionController.selected.codVehiculo}" title="#{bundle.ViewKilometrajeComisionTitle_codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="KilometrajeComisionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

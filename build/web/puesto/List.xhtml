@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPuestoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PuestoListForm">
+                <p:panel header="#{bundle.ListPuestoTitle}">
+                    <p:dataTable id="datalist" value="#{puestoController.items}" var="item"
+                                 selectionMode="single" selection="#{puestoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codPuesto}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codPuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPuesto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codTipoPuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codTipoPuesto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codOrganigrama}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codOrganigrama}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codEstatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codEstatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_noDocCreacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noDocCreacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_noDocFinalizacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noDocFinalizacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_descripcionFemenino}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionFemenino}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_fechaSistema}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaSistema}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPersona}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codPuestoReemplazo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codPuestoReemplazo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPuestoTitle_codSede}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codSede}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{puestoController.prepareCreate}" update=":PuestoCreateForm" oncomplete="PF('PuestoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PuestoViewForm" oncomplete="PF('PuestoViewDialog').show()" disabled="#{empty puestoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PuestoEditForm" oncomplete="PF('PuestoEditDialog').show()" disabled="#{empty puestoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{puestoController.destroy}" update=":growl,datalist" disabled="#{empty puestoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

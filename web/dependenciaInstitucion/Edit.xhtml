@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DependenciaInstitucionEditDlg" widgetVar="DependenciaInstitucionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDependenciaInstitucionTitle}">
+            <h:form id="DependenciaInstitucionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dependenciaInstitucionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codDependenciaInstitucion}" for="codDependenciaInstitucion" />
+                        <p:inputText id="codDependenciaInstitucion" value="#{dependenciaInstitucionController.selected.codDependenciaInstitucion}" title="#{bundle.EditDependenciaInstitucionTitle_codDependenciaInstitucion}" required="true" requiredMessage="#{bundle.EditDependenciaInstitucionRequiredMessage_codDependenciaInstitucion}"/>
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codInstitucion}" for="codInstitucion" />
+                        <p:inputText id="codInstitucion" value="#{dependenciaInstitucionController.selected.codInstitucion}" title="#{bundle.EditDependenciaInstitucionTitle_codInstitucion}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codEstatus}" for="codEstatus" />
+                        <p:inputText id="codEstatus" value="#{dependenciaInstitucionController.selected.codEstatus}" title="#{bundle.EditDependenciaInstitucionTitle_codEstatus}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{dependenciaInstitucionController.selected.nombre}" title="#{bundle.EditDependenciaInstitucionTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{dependenciaInstitucionController.selected.direccion}" title="#{bundle.EditDependenciaInstitucionTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_telefono1}" for="telefono1" />
+                        <p:inputText id="telefono1" value="#{dependenciaInstitucionController.selected.telefono1}" title="#{bundle.EditDependenciaInstitucionTitle_telefono1}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codTipoOrgano}" for="codTipoOrgano" />
+                        <p:inputText id="codTipoOrgano" value="#{dependenciaInstitucionController.selected.codTipoOrgano}" title="#{bundle.EditDependenciaInstitucionTitle_codTipoOrgano}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codigoCausa}" for="codigoCausa" />
+                        <p:inputText id="codigoCausa" value="#{dependenciaInstitucionController.selected.codigoCausa}" title="#{bundle.EditDependenciaInstitucionTitle_codigoCausa}" />
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_fechaSistema}" for="fechaSistema" />
+                        <p:calendar id="fechaSistema" pattern="MM/dd/yyyy HH:mm:ss" value="#{dependenciaInstitucionController.selected.fechaSistema}" title="#{bundle.EditDependenciaInstitucionTitle_fechaSistema}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codDepartamento}" for="codDepartamento" />
+                        <p:selectOneMenu id="codDepartamento" value="#{dependenciaInstitucionController.selected.codDepartamento}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="codDepartamentoItem"
+                                           itemValue="#{codDepartamentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codMunicipio}" for="codMunicipio" />
+                        <p:selectOneMenu id="codMunicipio" value="#{dependenciaInstitucionController.selected.codMunicipio}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="codMunicipioItem"
+                                           itemValue="#{codMunicipioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codTipoDependenciaInstitucion}" for="codTipoDependenciaInstitucion" />
+                        <p:selectOneMenu id="codTipoDependenciaInstitucion" value="#{dependenciaInstitucionController.selected.codTipoDependenciaInstitucion}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoDependenciaInstitucionController.itemsAvailableSelectOne}"
+                                           var="codTipoDependenciaInstitucionItem"
+                                           itemValue="#{codTipoDependenciaInstitucionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dependenciaInstitucionController.update}" value="#{bundle.Save}" update="display,:DependenciaInstitucionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DependenciaInstitucionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DependenciaInstitucionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

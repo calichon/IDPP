@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignacionVehiculoPilotoViewDlg" widgetVar="AsignacionVehiculoPilotoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAsignacionVehiculoPilotoTitle}">
+            <h:form id="AsignacionVehiculoPilotoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoPilotoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_codAsignacionVehiculoPiloto}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.codAsignacionVehiculoPiloto}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_codAsignacionVehiculoPiloto}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_fechaHoraUsoVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_fechaHoraUsoVehiculo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_fechaHoraRetornoVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_fechaHoraRetornoVehiculo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_fechaHoraAsignacion}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.fechaHoraAsignacion}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_fechaHoraAsignacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_estatusAsignacion}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.estatusAsignacion}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_estatusAsignacion}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_codAsignacionVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.codAsignacionVehiculo}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_codAsignacionVehiculo}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_codPersonaPilotoAsignado}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.codPersonaPilotoAsignado}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_codPersonaPilotoAsignado}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoPilotoLabel_codVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoPilotoController.selected.codVehiculo}" title="#{bundle.ViewAsignacionVehiculoPilotoTitle_codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AsignacionVehiculoPilotoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

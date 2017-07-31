@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CombustibleCuponViewDlg" widgetVar="CombustibleCuponViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCombustibleCuponTitle}">
+            <h:form id="CombustibleCuponViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{combustibleCuponController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_codCombustibleCupon}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.codCombustibleCupon}" title="#{bundle.ViewCombustibleCuponTitle_codCombustibleCupon}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_cantidadCupones}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.cantidadCupones}" title="#{bundle.ViewCombustibleCuponTitle_cantidadCupones}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_numeroCuponInicial}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.numeroCuponInicial}" title="#{bundle.ViewCombustibleCuponTitle_numeroCuponInicial}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_numeroCuponFinal}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.numeroCuponFinal}" title="#{bundle.ViewCombustibleCuponTitle_numeroCuponFinal}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_sumaTotal}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.sumaTotal}" title="#{bundle.ViewCombustibleCuponTitle_sumaTotal}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_codCombustibleComision}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.codCombustibleComision}" title="#{bundle.ViewCombustibleCuponTitle_codCombustibleComision}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleCuponLabel_codCuponDenominancion}"/>
+                        <h:outputText value="#{combustibleCuponController.selected.codCuponDenominancion}" title="#{bundle.ViewCombustibleCuponTitle_codCuponDenominancion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CombustibleCuponViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

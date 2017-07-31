@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignacionVehiculoPilotoCreateDlg" widgetVar="AsignacionVehiculoPilotoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsignacionVehiculoPilotoTitle}">
+            <h:form id="AsignacionVehiculoPilotoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoPilotoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_codAsignacionVehiculoPiloto}" for="codAsignacionVehiculoPiloto" />
+                        <p:inputText id="codAsignacionVehiculoPiloto" value="#{asignacionVehiculoPilotoController.selected.codAsignacionVehiculoPiloto}" title="#{bundle.CreateAsignacionVehiculoPilotoTitle_codAsignacionVehiculoPiloto}" required="true" requiredMessage="#{bundle.CreateAsignacionVehiculoPilotoRequiredMessage_codAsignacionVehiculoPiloto}"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />
+                        <p:calendar id="fechaHoraUsoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoPilotoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoPilotoTitle_fechaHoraUsoVehiculo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_fechaHoraRetornoVehiculo}" for="fechaHoraRetornoVehiculo" />
+                        <p:calendar id="fechaHoraRetornoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoPilotoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoPilotoTitle_fechaHoraRetornoVehiculo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_fechaHoraAsignacion}" for="fechaHoraAsignacion" />
+                        <p:calendar id="fechaHoraAsignacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoPilotoController.selected.fechaHoraAsignacion}" title="#{bundle.EditAsignacionVehiculoPilotoTitle_fechaHoraAsignacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_estatusAsignacion}" for="estatusAsignacion" />
+                        <p:inputText id="estatusAsignacion" value="#{asignacionVehiculoPilotoController.selected.estatusAsignacion}" title="#{bundle.CreateAsignacionVehiculoPilotoTitle_estatusAsignacion}" />
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_codAsignacionVehiculo}" for="codAsignacionVehiculo" />
+                        <p:selectOneMenu id="codAsignacionVehiculo" value="#{asignacionVehiculoPilotoController.selected.codAsignacionVehiculo}" >
+                            <f:selectItems value="#{asignacionVehiculoController.itemsAvailableSelectOne}"
+                                           var="codAsignacionVehiculoItem"
+                                           itemValue="#{codAsignacionVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_codPersonaPilotoAsignado}" for="codPersonaPilotoAsignado" />
+                        <p:selectOneMenu id="codPersonaPilotoAsignado" value="#{asignacionVehiculoPilotoController.selected.codPersonaPilotoAsignado}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaPilotoAsignadoItem"
+                                           itemValue="#{codPersonaPilotoAsignadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_codVehiculo}" for="codVehiculo" />
+                        <p:selectOneMenu id="codVehiculo" value="#{asignacionVehiculoPilotoController.selected.codVehiculo}" >
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="codVehiculoItem"
+                                           itemValue="#{codVehiculoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignacionVehiculoPilotoController.create}" value="#{bundle.Save}" update="display,:AsignacionVehiculoPilotoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsignacionVehiculoPilotoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignacionVehiculoPilotoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

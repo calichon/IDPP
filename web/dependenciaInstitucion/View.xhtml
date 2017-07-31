@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DependenciaInstitucionViewDlg" widgetVar="DependenciaInstitucionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDependenciaInstitucionTitle}">
+            <h:form id="DependenciaInstitucionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dependenciaInstitucionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codDependenciaInstitucion}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codDependenciaInstitucion}" title="#{bundle.ViewDependenciaInstitucionTitle_codDependenciaInstitucion}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codInstitucion}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codInstitucion}" title="#{bundle.ViewDependenciaInstitucionTitle_codInstitucion}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codEstatus}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codEstatus}" title="#{bundle.ViewDependenciaInstitucionTitle_codEstatus}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_nombre}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.nombre}" title="#{bundle.ViewDependenciaInstitucionTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_direccion}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.direccion}" title="#{bundle.ViewDependenciaInstitucionTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_telefono1}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.telefono1}" title="#{bundle.ViewDependenciaInstitucionTitle_telefono1}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codTipoOrgano}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codTipoOrgano}" title="#{bundle.ViewDependenciaInstitucionTitle_codTipoOrgano}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codigoCausa}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codigoCausa}" title="#{bundle.ViewDependenciaInstitucionTitle_codigoCausa}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_fechaSistema}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.fechaSistema}" title="#{bundle.ViewDependenciaInstitucionTitle_fechaSistema}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codDepartamento}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codDepartamento}" title="#{bundle.ViewDependenciaInstitucionTitle_codDepartamento}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codMunicipio}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codMunicipio}" title="#{bundle.ViewDependenciaInstitucionTitle_codMunicipio}"/>
+                        <h:outputText value="#{bundle.ViewDependenciaInstitucionLabel_codTipoDependenciaInstitucion}"/>
+                        <h:outputText value="#{dependenciaInstitucionController.selected.codTipoDependenciaInstitucion}" title="#{bundle.ViewDependenciaInstitucionTitle_codTipoDependenciaInstitucion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DependenciaInstitucionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

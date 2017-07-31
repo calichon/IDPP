@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoCreateDlg" widgetVar="VehiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVehiculoTitle}">
+            <h:form id="VehiculoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codVehiculo}" for="codVehiculo" />
+                        <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.CreateVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_codVehiculo}"/>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_placa}" for="placa" />
+                        <p:inputText id="placa" value="#{vehiculoController.selected.placa}" title="#{bundle.CreateVehiculoTitle_placa}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{vehiculoController.selected.nit}" title="#{bundle.CreateVehiculoTitle_nit}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_poliza}" for="poliza" />
+                        <p:inputText id="poliza" value="#{vehiculoController.selected.poliza}" title="#{bundle.CreateVehiculoTitle_poliza}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{vehiculoController.selected.direccion}" title="#{bundle.CreateVehiculoTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{vehiculoController.selected.nombre}" title="#{bundle.CreateVehiculoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_modelo}" for="modelo" />
+                        <p:inputText id="modelo" value="#{vehiculoController.selected.modelo}" title="#{bundle.CreateVehiculoTitle_modelo}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_chasis}" for="chasis" />
+                        <p:inputText id="chasis" value="#{vehiculoController.selected.chasis}" title="#{bundle.CreateVehiculoTitle_chasis}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_vin}" for="vin" />
+                        <p:inputText id="vin" value="#{vehiculoController.selected.vin}" title="#{bundle.CreateVehiculoTitle_vin}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_centimetrosCubicos}" for="centimetrosCubicos" />
+                        <p:inputText id="centimetrosCubicos" value="#{vehiculoController.selected.centimetrosCubicos}" title="#{bundle.CreateVehiculoTitle_centimetrosCubicos}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_cilindros}" for="cilindros" />
+                        <p:inputText id="cilindros" value="#{vehiculoController.selected.cilindros}" title="#{bundle.CreateVehiculoTitle_cilindros}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_toneladas}" for="toneladas" />
+                        <p:inputText id="toneladas" value="#{vehiculoController.selected.toneladas}" title="#{bundle.CreateVehiculoTitle_toneladas}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_titulo}" for="titulo" />
+                        <p:inputText id="titulo" value="#{vehiculoController.selected.titulo}" title="#{bundle.CreateVehiculoTitle_titulo}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_tarjetaCirculacion}" for="tarjetaCirculacion" />
+                        <p:inputText id="tarjetaCirculacion" value="#{vehiculoController.selected.tarjetaCirculacion}" title="#{bundle.CreateVehiculoTitle_tarjetaCirculacion}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_noAsientos}" for="noAsientos" />
+                        <p:inputText id="noAsientos" value="#{vehiculoController.selected.noAsientos}" title="#{bundle.CreateVehiculoTitle_noAsientos}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_noInventarioRegistro}" for="noInventarioRegistro" />
+                        <p:inputText id="noInventarioRegistro" value="#{vehiculoController.selected.noInventarioRegistro}" title="#{bundle.CreateVehiculoTitle_noInventarioRegistro}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_noMotor}" for="noMotor" />
+                        <p:inputText id="noMotor" value="#{vehiculoController.selected.noMotor}" title="#{bundle.CreateVehiculoTitle_noMotor}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_orden}" for="orden" />
+                        <p:inputText id="orden" value="#{vehiculoController.selected.orden}" title="#{bundle.CreateVehiculoTitle_orden}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_activo}" for="activo" />
+                        <p:selectBooleanCheckbox id="activo" value="#{vehiculoController.selected.activo}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codColor}" for="codColor" />
+                        <p:selectOneMenu id="codColor" value="#{vehiculoController.selected.codColor}" >
+                            <f:selectItems value="#{colorController.itemsAvailableSelectOne}"
+                                           var="codColorItem"
+                                           itemValue="#{codColorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codDepartamento}" for="codDepartamento" />
+                        <p:selectOneMenu id="codDepartamento" value="#{vehiculoController.selected.codDepartamento}" >
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="codDepartamentoItem"
+                                           itemValue="#{codDepartamentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codLinea}" for="codLinea" />
+                        <p:selectOneMenu id="codLinea" value="#{vehiculoController.selected.codLinea}" >
+                            <f:selectItems value="#{lineaController.itemsAvailableSelectOne}"
+                                           var="codLineaItem"
+                                           itemValue="#{codLineaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codMarca}" for="codMarca" />
+                        <p:selectOneMenu id="codMarca" value="#{vehiculoController.selected.codMarca}" >
+                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
+                                           var="codMarcaItem"
+                                           itemValue="#{codMarcaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codMunicipio}" for="codMunicipio" />
+                        <p:selectOneMenu id="codMunicipio" value="#{vehiculoController.selected.codMunicipio}" >
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="codMunicipioItem"
+                                           itemValue="#{codMunicipioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codPersonaAsignacion}" for="codPersonaAsignacion" />
+                        <p:selectOneMenu id="codPersonaAsignacion" value="#{vehiculoController.selected.codPersonaAsignacion}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaAsignacionItem"
+                                           itemValue="#{codPersonaAsignacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codPueston}" for="codPueston" />
+                        <p:selectOneMenu id="codPueston" value="#{vehiculoController.selected.codPueston}" >
+                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                           var="codPuestonItem"
+                                           itemValue="#{codPuestonItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codTipoTipo}" for="codTipoTipo" />
+                        <p:selectOneMenu id="codTipoTipo" value="#{vehiculoController.selected.codTipoTipo}" >
+                            <f:selectItems value="#{tipoTipoController.itemsAvailableSelectOne}"
+                                           var="codTipoTipoItem"
+                                           itemValue="#{codTipoTipoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_codTipoUso}" for="codTipoUso" />
+                        <p:selectOneMenu id="codTipoUso" value="#{vehiculoController.selected.codTipoUso}" >
+                            <f:selectItems value="#{tipoUsoController.itemsAvailableSelectOne}"
+                                           var="codTipoUsoItem"
+                                           itemValue="#{codTipoUsoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoController.create}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args,'VehiculoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

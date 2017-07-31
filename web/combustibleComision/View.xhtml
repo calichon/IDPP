@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CombustibleComisionViewDlg" widgetVar="CombustibleComisionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCombustibleComisionTitle}">
+            <h:form id="CombustibleComisionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{combustibleComisionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codCombustibleComision}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.ViewCombustibleComisionTitle_codCombustibleComision}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_fechaEntrega}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.ViewCombustibleComisionTitle_fechaEntrega}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_placa}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.placa}" title="#{bundle.ViewCombustibleComisionTitle_placa}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_kilometrajeActual}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.ViewCombustibleComisionTitle_kilometrajeActual}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_comisionA}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.ViewCombustibleComisionTitle_comisionA}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_observaciones}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.ViewCombustibleComisionTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_importeTotalLetras}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.importeTotalLetras}" title="#{bundle.ViewCombustibleComisionTitle_importeTotalLetras}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_cantidadEstimadaCarga}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" title="#{bundle.ViewCombustibleComisionTitle_cantidadEstimadaCarga}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPersonaEncargadoTransporte}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" title="#{bundle.ViewCombustibleComisionTitle_codPersonaEncargadoTransporte}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPersonaReceptor}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codPersonaReceptor}" title="#{bundle.ViewCombustibleComisionTitle_codPersonaReceptor}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPersonaSolicitante}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codPersonaSolicitante}" title="#{bundle.ViewCombustibleComisionTitle_codPersonaSolicitante}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPuestoReceptor}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codPuestoReceptor}" title="#{bundle.ViewCombustibleComisionTitle_codPuestoReceptor}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPuestoSolicitante}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codPuestoSolicitante}" title="#{bundle.ViewCombustibleComisionTitle_codPuestoSolicitante}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codSede}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codSede}" title="#{bundle.ViewCombustibleComisionTitle_codSede}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codUnidad}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codUnidad}" title="#{bundle.ViewCombustibleComisionTitle_codUnidad}"/>
+                        <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codVehiculo}"/>
+                        <h:outputText value="#{combustibleComisionController.selected.codVehiculo}" title="#{bundle.ViewCombustibleComisionTitle_codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CombustibleComisionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
