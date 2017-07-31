@@ -133,7 +133,8 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Marca[ codMarca=" + codMarca + " ]";
+        //return "entities.Marca[ codMarca=" + codMarca + " ]";
+        return nombreMarca;
     }
     
 }
