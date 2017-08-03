@@ -159,7 +159,8 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Pais[ codPais=" + codPais + " ]";
+        //return "entities.Pais[ codPais=" + codPais + " ]";
+        return nombrePais;
     }
     
 }

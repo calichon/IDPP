@@ -544,7 +544,8 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Persona[ codPersona=" + codPersona + " ]";
+        //return "entities.Persona[ codPersona=" + codPersona + " ]";
+        return apellido1 + " " + apellido2 + " " + apellidoCasada + ", " + nombre1 + " " + nombre2;
     }
     
 }

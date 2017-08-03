@@ -135,7 +135,8 @@ public class Linea implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Linea[ codLinea=" + codLinea + " ]";
+        //return "entities.Linea[ codLinea=" + codLinea + " ]";
+        return nombreLinea;
     }
     
 }

@@ -122,7 +122,8 @@ public class TipoTipo implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.TipoTipo[ codTipoTipo=" + codTipoTipo + " ]";
+        //return "entities.TipoTipo[ codTipoTipo=" + codTipoTipo + " ]";
+        return nombreTipoTipo;
     }
     
 }

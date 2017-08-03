@@ -286,7 +286,8 @@ public class Puesto implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Puesto[ codPuesto=" + codPuesto + " ]";
+        //return "entities.Puesto[ codPuesto=" + codPuesto + " ]";
+        return descripcion;
     }
     
 }

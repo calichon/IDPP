@@ -122,7 +122,8 @@ public class Color implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Color[ codColor=" + codColor + " ]";
+        //return "entities.Color[ codColor=" + codColor + " ]";
+        return nombreColor;
     }
     
 }

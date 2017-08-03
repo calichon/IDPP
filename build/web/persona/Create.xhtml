@@ -11,7 +11,7 @@
         <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
             <h:form id="PersonaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{personaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_codPersona}" for="codPersona" />
                         <p:inputText id="codPersona" value="#{personaController.selected.codPersona}" title="#{bundle.CreatePersonaTitle_codPersona}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_codPersona}"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_codTipoPersona}" for="codTipoPersona" />
