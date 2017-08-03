@@ -11,7 +11,7 @@
         <p:dialog id="PuestoEditDlg" widgetVar="PuestoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPuestoTitle}">
             <h:form id="PuestoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{puestoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{puestoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPuestoLabel_codPuesto}" for="codPuesto" />
                         <p:inputText id="codPuesto" value="#{puestoController.selected.codPuesto}" title="#{bundle.EditPuestoTitle_codPuesto}" required="true" requiredMessage="#{bundle.EditPuestoRequiredMessage_codPuesto}"/>
                         <p:outputLabel value="#{bundle.EditPuestoLabel_codTipoPuesto}" for="codTipoPuesto" />

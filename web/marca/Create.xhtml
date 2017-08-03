@@ -11,7 +11,7 @@
         <p:dialog id="MarcaCreateDlg" widgetVar="MarcaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMarcaTitle}">
             <h:form id="MarcaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{marcaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{marcaController.selected != null}">
                         <ui:remove>
                         <p:outputLabel value="#{bundle.CreateMarcaLabel_codMarca}" for="codMarca" />
                         <p:inputText id="codMarca" value="#{marcaController.selected.codMarca}" title="#{bundle.CreateMarcaTitle_codMarca}" required="true" requiredMessage="#{bundle.CreateMarcaRequiredMessage_codMarca}"/>

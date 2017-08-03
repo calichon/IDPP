@@ -11,7 +11,7 @@
         <p:dialog id="LineaEditDlg" widgetVar="LineaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLineaTitle}">
             <h:form id="LineaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{lineaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{lineaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditLineaLabel_codLinea}" for="codLinea" />
                         <p:inputText id="codLinea" value="#{lineaController.selected.codLinea}" title="#{bundle.EditLineaTitle_codLinea}" required="true" requiredMessage="#{bundle.EditLineaRequiredMessage_codLinea}"/>
                         <p:outputLabel value="#{bundle.EditLineaLabel_nombreLinea}" for="nombreLinea" />

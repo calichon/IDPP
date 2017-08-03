@@ -11,7 +11,7 @@
         <p:dialog id="AsignacionVehiculoPilotoCreateDlg" widgetVar="AsignacionVehiculoPilotoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsignacionVehiculoPilotoTitle}">
             <h:form id="AsignacionVehiculoPilotoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoPilotoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{asignacionVehiculoPilotoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_codAsignacionVehiculoPiloto}" for="codAsignacionVehiculoPiloto" />
                         <p:inputText id="codAsignacionVehiculoPiloto" value="#{asignacionVehiculoPilotoController.selected.codAsignacionVehiculoPiloto}" title="#{bundle.CreateAsignacionVehiculoPilotoTitle_codAsignacionVehiculoPiloto}" required="true" requiredMessage="#{bundle.CreateAsignacionVehiculoPilotoRequiredMessage_codAsignacionVehiculoPiloto}"/>
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoPilotoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />

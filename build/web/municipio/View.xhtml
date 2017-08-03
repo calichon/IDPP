@@ -11,7 +11,7 @@
         <p:dialog id="MunicipioViewDlg" widgetVar="MunicipioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMunicipioTitle}">
             <h:form id="MunicipioViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{municipioController.selected != null}">
                         <h:outputText value="#{bundle.ViewMunicipioLabel_codMunicipio}"/>
                         <h:outputText value="#{municipioController.selected.codMunicipio}" title="#{bundle.ViewMunicipioTitle_codMunicipio}"/>
                         <h:outputText value="#{bundle.ViewMunicipioLabel_descripcion}"/>

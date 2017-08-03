@@ -11,7 +11,7 @@
         <p:dialog id="AsignacionVehiculoEditDlg" widgetVar="AsignacionVehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignacionVehiculoTitle}">
             <h:form id="AsignacionVehiculoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{asignacionVehiculoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codAsignacionVehiculo}" for="codAsignacionVehiculo" />
                         <p:inputText id="codAsignacionVehiculo" value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_codAsignacionVehiculo}" required="true" requiredMessage="#{bundle.EditAsignacionVehiculoRequiredMessage_codAsignacionVehiculo}"/>
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaAsignacion}" for="fechaAsignacion" />

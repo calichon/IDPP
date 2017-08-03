@@ -11,7 +11,7 @@
         <p:dialog id="ColorEditDlg" widgetVar="ColorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditColorTitle}">
             <h:form id="ColorEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{colorController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{colorController.selected != null}">
                         <p:outputLabel value="#{bundle.EditColorLabel_codColor}" for="codColor" />
                         <p:inputText id="codColor" value="#{colorController.selected.codColor}" title="#{bundle.EditColorTitle_codColor}" required="true" requiredMessage="#{bundle.EditColorRequiredMessage_codColor}"/>
                         <p:outputLabel value="#{bundle.EditColorLabel_nombreColor}" for="nombreColor" />

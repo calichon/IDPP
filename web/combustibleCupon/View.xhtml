@@ -11,7 +11,7 @@
         <p:dialog id="CombustibleCuponViewDlg" widgetVar="CombustibleCuponViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCombustibleCuponTitle}">
             <h:form id="CombustibleCuponViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{combustibleCuponController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{combustibleCuponController.selected != null}">
                         <h:outputText value="#{bundle.ViewCombustibleCuponLabel_codCombustibleCupon}"/>
                         <h:outputText value="#{combustibleCuponController.selected.codCombustibleCupon}" title="#{bundle.ViewCombustibleCuponTitle_codCombustibleCupon}"/>
                         <h:outputText value="#{bundle.ViewCombustibleCuponLabel_cantidadCupones}"/>

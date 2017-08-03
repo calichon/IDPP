@@ -11,7 +11,7 @@
         <p:dialog id="ImagenCreateDlg" widgetVar="ImagenCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateImagenTitle}">
             <h:form id="ImagenCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{imagenController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{imagenController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateImagenLabel_codImagen}" for="codImagen" />
                         <p:inputText id="codImagen" value="#{imagenController.selected.codImagen}" title="#{bundle.CreateImagenTitle_codImagen}" required="true" requiredMessage="#{bundle.CreateImagenRequiredMessage_codImagen}"/>
                         <p:outputLabel value="#{bundle.CreateImagenLabel_pathImagen}" for="pathImagen" />

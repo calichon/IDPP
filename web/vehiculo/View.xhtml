@@ -11,7 +11,7 @@
         <p:dialog id="VehiculoViewDlg" widgetVar="VehiculoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVehiculoTitle}">
             <h:form id="VehiculoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{vehiculoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{vehiculoController.selected != null}">
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codVehiculo}"/>
                         <h:outputText value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.ViewVehiculoTitle_codVehiculo}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_placa}"/>

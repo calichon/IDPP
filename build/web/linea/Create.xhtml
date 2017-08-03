@@ -11,7 +11,7 @@
         <p:dialog id="LineaCreateDlg" widgetVar="LineaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLineaTitle}">
             <h:form id="LineaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{lineaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{lineaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateLineaLabel_codLinea}" for="codLinea" />
                         <p:inputText id="codLinea" value="#{lineaController.selected.codLinea}" title="#{bundle.CreateLineaTitle_codLinea}" required="true" requiredMessage="#{bundle.CreateLineaRequiredMessage_codLinea}"/>
                         <p:outputLabel value="#{bundle.CreateLineaLabel_nombreLinea}" for="nombreLinea" />

@@ -11,7 +11,7 @@
         <p:dialog id="DepartamentoViewDlg" widgetVar="DepartamentoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDepartamentoTitle}">
             <h:form id="DepartamentoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{departamentoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{departamentoController.selected != null}">
                         <h:outputText value="#{bundle.ViewDepartamentoLabel_codDepartamento}"/>
                         <h:outputText value="#{departamentoController.selected.codDepartamento}" title="#{bundle.ViewDepartamentoTitle_codDepartamento}"/>
                         <h:outputText value="#{bundle.ViewDepartamentoLabel_descripcion}"/>

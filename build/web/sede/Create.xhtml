@@ -11,7 +11,7 @@
         <p:dialog id="SedeCreateDlg" widgetVar="SedeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSedeTitle}">
             <h:form id="SedeCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{sedeController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{sedeController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateSedeLabel_codSede}" for="codSede" />
                         <p:inputText id="codSede" value="#{sedeController.selected.codSede}" title="#{bundle.CreateSedeTitle_codSede}" required="true" requiredMessage="#{bundle.CreateSedeRequiredMessage_codSede}"/>
                         <p:outputLabel value="#{bundle.CreateSedeLabel_codTipoSede}" for="codTipoSede" />

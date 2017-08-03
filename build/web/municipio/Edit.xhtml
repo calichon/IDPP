@@ -11,7 +11,7 @@
         <p:dialog id="MunicipioEditDlg" widgetVar="MunicipioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMunicipioTitle}">
             <h:form id="MunicipioEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{municipioController.selected != null}">
                         <p:outputLabel value="#{bundle.EditMunicipioLabel_codMunicipio}" for="codMunicipio" />
                         <p:inputText id="codMunicipio" value="#{municipioController.selected.codMunicipio}" title="#{bundle.EditMunicipioTitle_codMunicipio}" required="true" requiredMessage="#{bundle.EditMunicipioRequiredMessage_codMunicipio}"/>
                         <p:outputLabel value="#{bundle.EditMunicipioLabel_descripcion}" for="descripcion" />

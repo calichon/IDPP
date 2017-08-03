@@ -11,7 +11,7 @@
         <p:dialog id="LineaViewDlg" widgetVar="LineaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLineaTitle}">
             <h:form id="LineaViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{lineaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{lineaController.selected != null}">
                         <h:outputText value="#{bundle.ViewLineaLabel_codLinea}"/>
                         <h:outputText value="#{lineaController.selected.codLinea}" title="#{bundle.ViewLineaTitle_codLinea}"/>
                         <h:outputText value="#{bundle.ViewLineaLabel_nombreLinea}"/>

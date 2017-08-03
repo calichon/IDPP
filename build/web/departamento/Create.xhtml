@@ -11,7 +11,7 @@
         <p:dialog id="DepartamentoCreateDlg" widgetVar="DepartamentoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDepartamentoTitle}">
             <h:form id="DepartamentoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{departamentoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{departamentoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateDepartamentoLabel_codDepartamento}" for="codDepartamento" />
                         <p:inputText id="codDepartamento" value="#{departamentoController.selected.codDepartamento}" title="#{bundle.CreateDepartamentoTitle_codDepartamento}" required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_codDepartamento}"/>
                         <p:outputLabel value="#{bundle.CreateDepartamentoLabel_descripcion}" for="descripcion" />

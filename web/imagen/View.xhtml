@@ -11,7 +11,7 @@
         <p:dialog id="ImagenViewDlg" widgetVar="ImagenViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewImagenTitle}">
             <h:form id="ImagenViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{imagenController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{imagenController.selected != null}">
                         <h:outputText value="#{bundle.ViewImagenLabel_codImagen}"/>
                         <h:outputText value="#{imagenController.selected.codImagen}" title="#{bundle.ViewImagenTitle_codImagen}"/>
                         <h:outputText value="#{bundle.ViewImagenLabel_pathImagen}"/>

@@ -11,7 +11,7 @@
         <p:dialog id="ImagenEditDlg" widgetVar="ImagenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditImagenTitle}">
             <h:form id="ImagenEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{imagenController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{imagenController.selected != null}">
                         <p:outputLabel value="#{bundle.EditImagenLabel_codImagen}" for="codImagen" />
                         <p:inputText id="codImagen" value="#{imagenController.selected.codImagen}" title="#{bundle.EditImagenTitle_codImagen}" required="true" requiredMessage="#{bundle.EditImagenRequiredMessage_codImagen}"/>
                         <p:outputLabel value="#{bundle.EditImagenLabel_pathImagen}" for="pathImagen" />

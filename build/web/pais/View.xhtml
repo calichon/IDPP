@@ -11,7 +11,7 @@
         <p:dialog id="PaisViewDlg" widgetVar="PaisViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPaisTitle}">
             <h:form id="PaisViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{paisController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{paisController.selected != null}">
                         <h:outputText value="#{bundle.ViewPaisLabel_codPais}"/>
                         <h:outputText value="#{paisController.selected.codPais}" title="#{bundle.ViewPaisTitle_codPais}"/>
                         <h:outputText value="#{bundle.ViewPaisLabel_nombrePais}"/>

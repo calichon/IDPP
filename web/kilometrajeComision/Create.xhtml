@@ -11,7 +11,7 @@
         <p:dialog id="KilometrajeComisionCreateDlg" widgetVar="KilometrajeComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateKilometrajeComisionTitle}">
             <h:form id="KilometrajeComisionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{kilometrajeComisionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{kilometrajeComisionController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codKilometrajeComision}" for="codKilometrajeComision" />
                         <p:inputText id="codKilometrajeComision" value="#{kilometrajeComisionController.selected.codKilometrajeComision}" title="#{bundle.CreateKilometrajeComisionTitle_codKilometrajeComision}" required="true" requiredMessage="#{bundle.CreateKilometrajeComisionRequiredMessage_codKilometrajeComision}"/>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_placa}" for="placa" />

@@ -11,7 +11,7 @@
         <p:dialog id="SedeEditDlg" widgetVar="SedeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSedeTitle}">
             <h:form id="SedeEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{sedeController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{sedeController.selected != null}">
                         <p:outputLabel value="#{bundle.EditSedeLabel_codSede}" for="codSede" />
                         <p:inputText id="codSede" value="#{sedeController.selected.codSede}" title="#{bundle.EditSedeTitle_codSede}" required="true" requiredMessage="#{bundle.EditSedeRequiredMessage_codSede}"/>
                         <p:outputLabel value="#{bundle.EditSedeLabel_codTipoSede}" for="codTipoSede" />

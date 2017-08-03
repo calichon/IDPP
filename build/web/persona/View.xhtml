@@ -11,7 +11,7 @@
         <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaTitle}">
             <h:form id="PersonaViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{personaController.selected != null}">
                         <h:outputText value="#{bundle.ViewPersonaLabel_codPersona}"/>
                         <h:outputText value="#{personaController.selected.codPersona}" title="#{bundle.ViewPersonaTitle_codPersona}"/>
                         <h:outputText value="#{bundle.ViewPersonaLabel_codTipoPersona}"/>

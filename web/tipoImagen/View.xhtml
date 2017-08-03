@@ -11,7 +11,7 @@
         <p:dialog id="TipoImagenViewDlg" widgetVar="TipoImagenViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTipoImagenTitle}">
             <h:form id="TipoImagenViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoImagenController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{tipoImagenController.selected != null}">
                         <h:outputText value="#{bundle.ViewTipoImagenLabel_codTipoImagen}"/>
                         <h:outputText value="#{tipoImagenController.selected.codTipoImagen}" title="#{bundle.ViewTipoImagenTitle_codTipoImagen}"/>
                         <h:outputText value="#{bundle.ViewTipoImagenLabel_nombreTipoImagen}"/>

@@ -11,7 +11,7 @@
         <p:dialog id="PuestoViewDlg" widgetVar="PuestoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPuestoTitle}">
             <h:form id="PuestoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{puestoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{puestoController.selected != null}">
                         <h:outputText value="#{bundle.ViewPuestoLabel_codPuesto}"/>
                         <h:outputText value="#{puestoController.selected.codPuesto}" title="#{bundle.ViewPuestoTitle_codPuesto}"/>
                         <h:outputText value="#{bundle.ViewPuestoLabel_codTipoPuesto}"/>

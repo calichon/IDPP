@@ -11,7 +11,7 @@
         <p:dialog id="CuponDenominacionEditDlg" widgetVar="CuponDenominacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCuponDenominacionTitle}">
             <h:form id="CuponDenominacionEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{cuponDenominacionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{cuponDenominacionController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCuponDenominacionLabel_codCuponDenominacion}" for="codCuponDenominacion" />
                         <p:inputText id="codCuponDenominacion" value="#{cuponDenominacionController.selected.codCuponDenominacion}" title="#{bundle.EditCuponDenominacionTitle_codCuponDenominacion}" required="true" requiredMessage="#{bundle.EditCuponDenominacionRequiredMessage_codCuponDenominacion}"/>
                         <p:outputLabel value="#{bundle.EditCuponDenominacionLabel_descripcion}" for="descripcion" />

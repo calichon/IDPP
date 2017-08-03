@@ -11,7 +11,7 @@
         <p:dialog id="MarcaEditDlg" widgetVar="MarcaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMarcaTitle}">
             <h:form id="MarcaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{marcaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{marcaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditMarcaLabel_codMarca}" for="codMarca" />
                         <p:inputText id="codMarca" value="#{marcaController.selected.codMarca}" title="#{bundle.EditMarcaTitle_codMarca}" required="true" requiredMessage="#{bundle.EditMarcaRequiredMessage_codMarca}"/>
                         <p:outputLabel value="#{bundle.EditMarcaLabel_nombreMarca}" for="nombreMarca" />

@@ -11,7 +11,7 @@
         <p:dialog id="VehiculoEditDlg" widgetVar="VehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVehiculoTitle}">
             <h:form id="VehiculoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{vehiculoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{vehiculoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_codVehiculo}" for="codVehiculo" />
                         <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.EditVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_codVehiculo}"/>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_placa}" for="placa" />

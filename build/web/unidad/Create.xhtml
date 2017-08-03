@@ -11,7 +11,7 @@
         <p:dialog id="UnidadCreateDlg" widgetVar="UnidadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUnidadTitle}">
             <h:form id="UnidadCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{unidadController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{unidadController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUnidadLabel_codUnidad}" for="codUnidad" />
                         <p:inputText id="codUnidad" value="#{unidadController.selected.codUnidad}" title="#{bundle.CreateUnidadTitle_codUnidad}" required="true" requiredMessage="#{bundle.CreateUnidadRequiredMessage_codUnidad}"/>
                         <p:outputLabel value="#{bundle.CreateUnidadLabel_descripcion}" for="descripcion" />

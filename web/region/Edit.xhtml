@@ -11,7 +11,7 @@
         <p:dialog id="RegionEditDlg" widgetVar="RegionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRegionTitle}">
             <h:form id="RegionEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{regionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{regionController.selected != null}">
                         <p:outputLabel value="#{bundle.EditRegionLabel_codRegion}" for="codRegion" />
                         <p:inputText id="codRegion" value="#{regionController.selected.codRegion}" title="#{bundle.EditRegionTitle_codRegion}" required="true" requiredMessage="#{bundle.EditRegionRequiredMessage_codRegion}"/>
                         <p:outputLabel value="#{bundle.EditRegionLabel_descripcion}" for="descripcion" />

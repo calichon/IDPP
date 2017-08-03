@@ -11,7 +11,7 @@
         <p:dialog id="RegionViewDlg" widgetVar="RegionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRegionTitle}">
             <h:form id="RegionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{regionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{regionController.selected != null}">
                         <h:outputText value="#{bundle.ViewRegionLabel_codRegion}"/>
                         <h:outputText value="#{regionController.selected.codRegion}" title="#{bundle.ViewRegionTitle_codRegion}"/>
                         <h:outputText value="#{bundle.ViewRegionLabel_descripcion}"/>

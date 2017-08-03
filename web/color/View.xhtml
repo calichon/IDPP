@@ -11,7 +11,7 @@
         <p:dialog id="ColorViewDlg" widgetVar="ColorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewColorTitle}">
             <h:form id="ColorViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{colorController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{colorController.selected != null}">
                         <h:outputText value="#{bundle.ViewColorLabel_codColor}"/>
                         <h:outputText value="#{colorController.selected.codColor}" title="#{bundle.ViewColorTitle_codColor}"/>
                         <h:outputText value="#{bundle.ViewColorLabel_nombreColor}"/>

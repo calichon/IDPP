@@ -11,7 +11,7 @@
         <p:dialog id="UnidadViewDlg" widgetVar="UnidadViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUnidadTitle}">
             <h:form id="UnidadViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{unidadController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{unidadController.selected != null}">
                         <h:outputText value="#{bundle.ViewUnidadLabel_codUnidad}"/>
                         <h:outputText value="#{unidadController.selected.codUnidad}" title="#{bundle.ViewUnidadTitle_codUnidad}"/>
                         <h:outputText value="#{bundle.ViewUnidadLabel_descripcion}"/>

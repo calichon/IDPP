@@ -11,7 +11,7 @@
         <p:dialog id="TipoImagenEditDlg" widgetVar="TipoImagenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipoImagenTitle}">
             <h:form id="TipoImagenEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoImagenController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{tipoImagenController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTipoImagenLabel_codTipoImagen}" for="codTipoImagen" />
                         <p:inputText id="codTipoImagen" value="#{tipoImagenController.selected.codTipoImagen}" title="#{bundle.EditTipoImagenTitle_codTipoImagen}" required="true" requiredMessage="#{bundle.EditTipoImagenRequiredMessage_codTipoImagen}"/>
                         <p:outputLabel value="#{bundle.EditTipoImagenLabel_nombreTipoImagen}" for="nombreTipoImagen" />

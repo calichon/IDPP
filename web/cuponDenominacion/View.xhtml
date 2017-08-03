@@ -11,7 +11,7 @@
         <p:dialog id="CuponDenominacionViewDlg" widgetVar="CuponDenominacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCuponDenominacionTitle}">
             <h:form id="CuponDenominacionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{cuponDenominacionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{cuponDenominacionController.selected != null}">
                         <h:outputText value="#{bundle.ViewCuponDenominacionLabel_codCuponDenominacion}"/>
                         <h:outputText value="#{cuponDenominacionController.selected.codCuponDenominacion}" title="#{bundle.ViewCuponDenominacionTitle_codCuponDenominacion}"/>
                         <h:outputText value="#{bundle.ViewCuponDenominacionLabel_descripcion}"/>

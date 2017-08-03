@@ -11,7 +11,7 @@
         <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
             <h:form id="PersonaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{personaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPersonaLabel_codPersona}" for="codPersona" />
                         <p:inputText id="codPersona" value="#{personaController.selected.codPersona}" title="#{bundle.EditPersonaTitle_codPersona}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_codPersona}"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_codTipoPersona}" for="codTipoPersona" />

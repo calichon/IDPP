@@ -11,7 +11,7 @@
         <p:dialog id="AsignacionVehiculoViewDlg" widgetVar="AsignacionVehiculoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAsignacionVehiculoTitle}">
             <h:form id="AsignacionVehiculoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{asignacionVehiculoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{asignacionVehiculoController.selected != null}">
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codAsignacionVehiculo}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_codAsignacionVehiculo}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_fechaAsignacion}"/>

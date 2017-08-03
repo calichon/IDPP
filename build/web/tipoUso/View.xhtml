@@ -11,7 +11,7 @@
         <p:dialog id="TipoUsoViewDlg" widgetVar="TipoUsoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTipoUsoTitle}">
             <h:form id="TipoUsoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoUsoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{tipoUsoController.selected != null}">
                         <h:outputText value="#{bundle.ViewTipoUsoLabel_codTipoUso}"/>
                         <h:outputText value="#{tipoUsoController.selected.codTipoUso}" title="#{bundle.ViewTipoUsoTitle_codTipoUso}"/>
                         <h:outputText value="#{bundle.ViewTipoUsoLabel_nombreTipoUso}"/>

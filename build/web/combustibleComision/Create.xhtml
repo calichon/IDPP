@@ -11,7 +11,7 @@
         <p:dialog id="CombustibleComisionCreateDlg" widgetVar="CombustibleComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCombustibleComisionTitle}">
             <h:form id="CombustibleComisionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{combustibleComisionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{combustibleComisionController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codCombustibleComision}" for="codCombustibleComision" />
                         <p:inputText id="codCombustibleComision" value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.CreateCombustibleComisionTitle_codCombustibleComision}" required="true" requiredMessage="#{bundle.CreateCombustibleComisionRequiredMessage_codCombustibleComision}"/>
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_fechaEntrega}" for="fechaEntrega" />

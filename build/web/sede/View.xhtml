@@ -11,7 +11,7 @@
         <p:dialog id="SedeViewDlg" widgetVar="SedeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSedeTitle}">
             <h:form id="SedeViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{sedeController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{sedeController.selected != null}">
                         <h:outputText value="#{bundle.ViewSedeLabel_codSede}"/>
                         <h:outputText value="#{sedeController.selected.codSede}" title="#{bundle.ViewSedeTitle_codSede}"/>
                         <h:outputText value="#{bundle.ViewSedeLabel_codTipoSede}"/>

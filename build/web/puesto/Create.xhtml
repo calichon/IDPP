@@ -11,7 +11,7 @@
         <p:dialog id="PuestoCreateDlg" widgetVar="PuestoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePuestoTitle}">
             <h:form id="PuestoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{puestoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{puestoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePuestoLabel_codPuesto}" for="codPuesto" />
                         <p:inputText id="codPuesto" value="#{puestoController.selected.codPuesto}" title="#{bundle.CreatePuestoTitle_codPuesto}" required="true" requiredMessage="#{bundle.CreatePuestoRequiredMessage_codPuesto}"/>
                         <p:outputLabel value="#{bundle.CreatePuestoLabel_codTipoPuesto}" for="codTipoPuesto" />

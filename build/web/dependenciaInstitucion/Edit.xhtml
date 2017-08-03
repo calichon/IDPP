@@ -11,7 +11,7 @@
         <p:dialog id="DependenciaInstitucionEditDlg" widgetVar="DependenciaInstitucionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDependenciaInstitucionTitle}">
             <h:form id="DependenciaInstitucionEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{dependenciaInstitucionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{dependenciaInstitucionController.selected != null}">
                         <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codDependenciaInstitucion}" for="codDependenciaInstitucion" />
                         <p:inputText id="codDependenciaInstitucion" value="#{dependenciaInstitucionController.selected.codDependenciaInstitucion}" title="#{bundle.EditDependenciaInstitucionTitle_codDependenciaInstitucion}" required="true" requiredMessage="#{bundle.EditDependenciaInstitucionRequiredMessage_codDependenciaInstitucion}"/>
                         <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codInstitucion}" for="codInstitucion" />

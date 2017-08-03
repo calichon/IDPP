@@ -11,7 +11,7 @@
         <p:dialog id="CombustibleCuponCreateDlg" widgetVar="CombustibleCuponCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCombustibleCuponTitle}">
             <h:form id="CombustibleCuponCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{combustibleCuponController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{combustibleCuponController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_codCombustibleCupon}" for="codCombustibleCupon" />
                         <p:inputText id="codCombustibleCupon" value="#{combustibleCuponController.selected.codCombustibleCupon}" title="#{bundle.CreateCombustibleCuponTitle_codCombustibleCupon}" required="true" requiredMessage="#{bundle.CreateCombustibleCuponRequiredMessage_codCombustibleCupon}"/>
                         <p:outputLabel value="#{bundle.CreateCombustibleCuponLabel_cantidadCupones}" for="cantidadCupones" />

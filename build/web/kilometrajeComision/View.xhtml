@@ -11,7 +11,7 @@
         <p:dialog id="KilometrajeComisionViewDlg" widgetVar="KilometrajeComisionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewKilometrajeComisionTitle}">
             <h:form id="KilometrajeComisionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{kilometrajeComisionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{kilometrajeComisionController.selected != null}">
                         <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codKilometrajeComision}"/>
                         <h:outputText value="#{kilometrajeComisionController.selected.codKilometrajeComision}" title="#{bundle.ViewKilometrajeComisionTitle_codKilometrajeComision}"/>
                         <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_placa}"/>

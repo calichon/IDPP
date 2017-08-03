@@ -11,7 +11,7 @@
         <p:dialog id="TipoDependenciaInstitucionCreateDlg" widgetVar="TipoDependenciaInstitucionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoDependenciaInstitucionTitle}">
             <h:form id="TipoDependenciaInstitucionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoDependenciaInstitucionController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{tipoDependenciaInstitucionController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTipoDependenciaInstitucionLabel_codTipoDependenciaInstitucion}" for="codTipoDependenciaInstitucion" />
                         <p:inputText id="codTipoDependenciaInstitucion" value="#{tipoDependenciaInstitucionController.selected.codTipoDependenciaInstitucion}" title="#{bundle.CreateTipoDependenciaInstitucionTitle_codTipoDependenciaInstitucion}" required="true" requiredMessage="#{bundle.CreateTipoDependenciaInstitucionRequiredMessage_codTipoDependenciaInstitucion}"/>
                         <p:outputLabel value="#{bundle.CreateTipoDependenciaInstitucionLabel_descripcion}" for="descripcion" />

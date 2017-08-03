@@ -11,7 +11,7 @@
         <p:dialog id="MunicipioCreateDlg" widgetVar="MunicipioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMunicipioTitle}">
             <h:form id="MunicipioCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{municipioController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateMunicipioLabel_codMunicipio}" for="codMunicipio" />
                         <p:inputText id="codMunicipio" value="#{municipioController.selected.codMunicipio}" title="#{bundle.CreateMunicipioTitle_codMunicipio}" required="true" requiredMessage="#{bundle.CreateMunicipioRequiredMessage_codMunicipio}"/>
                         <p:outputLabel value="#{bundle.CreateMunicipioLabel_descripcion}" for="descripcion" />

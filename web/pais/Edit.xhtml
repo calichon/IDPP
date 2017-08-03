@@ -11,7 +11,7 @@
         <p:dialog id="PaisEditDlg" widgetVar="PaisEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPaisTitle}">
             <h:form id="PaisEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{paisController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{paisController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPaisLabel_codPais}" for="codPais" />
                         <p:inputText id="codPais" value="#{paisController.selected.codPais}" title="#{bundle.EditPaisTitle_codPais}" required="true" requiredMessage="#{bundle.EditPaisRequiredMessage_codPais}"/>
                         <p:outputLabel value="#{bundle.EditPaisLabel_nombrePais}" for="nombrePais" />

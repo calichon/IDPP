@@ -11,7 +11,7 @@
         <p:dialog id="TipoUsoCreateDlg" widgetVar="TipoUsoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoUsoTitle}">
             <h:form id="TipoUsoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoUsoController.selected != null}">
+                    <p:panelGrid columns="6" rendered="#{tipoUsoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTipoUsoLabel_codTipoUso}" for="codTipoUso" />
                         <p:inputText id="codTipoUso" value="#{tipoUsoController.selected.codTipoUso}" title="#{bundle.CreateTipoUsoTitle_codTipoUso}" required="true" requiredMessage="#{bundle.CreateTipoUsoRequiredMessage_codTipoUso}"/>
                         <p:outputLabel value="#{bundle.CreateTipoUsoLabel_nombreTipoUso}" for="nombreTipoUso" />
