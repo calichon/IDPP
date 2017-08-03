@@ -1,5 +1,7 @@
 package jsf_classes;
 
+import entities.Departamento;
+import entities.Municipio;
 import entities.Vehiculo;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
@@ -14,19 +16,25 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import session_beans.MunicipioFacade;
 
 @Named("vehiculoController")
 @SessionScoped
 public class VehiculoController implements Serializable {
-
     @EJB
     private session_beans.VehiculoFacade ejbFacade;
+    private session_beans.MunicipioFacade ejbFacadeMunicipios;
     private List<Vehiculo> items = null;
+    private List<Municipio> itemsMunicipio = null;
     private Vehiculo selected;
+    private Municipio selectedMunicipio;
+    private int selectedDepartamento = 0;
+    
 
     public VehiculoController() {
     }
@@ -47,6 +55,10 @@ public class VehiculoController implements Serializable {
 
     private VehiculoFacade getFacade() {
         return ejbFacade;
+    }
+    
+    private MunicipioFacade getFacadeMunicipios() {
+        return ejbFacadeMunicipios;
     }
 
     public Vehiculo prepareCreate() {
@@ -120,6 +132,31 @@ public class VehiculoController implements Serializable {
     public List<Vehiculo> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public void onDepartamentoChange() {            
+            session_beans.MunicipioFacade ejbFacadeMunicipioFacadeLocal;
+            ejbFacadeMunicipioFacadeLocal = getFacadeMunicipios();
+            Departamento thisDepartamento;
+            thisDepartamento = selected.getCodDepartamento();
+            selectedDepartamento = thisDepartamento.getCodDepartamento();
+            MunicipioController thisMunicipio=new MunicipioController();     
+            if(selectedDepartamento > 0 ){
+                itemsMunicipio = thisMunicipio.getItemsAvailableSelectOneOrderedLimitedByDepartment(selectedDepartamento);
+                
+                //itemsMunicipio = getFacadeMunicipios().getMunicipioOrderedListLimitsDepartment(selectedDepartamento);
+            }
+            else{
+                itemsMunicipio = null;
+            }
+            
+            //itemsMunicipio = ejbFacade.
+    }
+    
+    public List<Municipio> getItemsMunicipio(){
+        return itemsMunicipio;
+    }
+    
+    
 
     @FacesConverter(forClass = Vehiculo.class)
     public static class VehiculoControllerConverter implements Converter {
@@ -158,7 +195,7 @@ public class VehiculoController implements Serializable {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Vehiculo.class.getName()});
                 return null;
             }
-        }
+        }        
 
     }
 

@@ -118,7 +118,11 @@ public class DepartamentoController implements Serializable {
     }
 
     public List<Departamento> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findAll();        
+    }
+    
+    public List<Departamento> getItemsAvailableSelectOneOrdered() {
+        return getFacade().getDepartamentoOrderedList();
     }
 
     @FacesConverter(forClass = Departamento.class)

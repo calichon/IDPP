@@ -19,6 +19,8 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     @PersistenceContext(unitName = "IDPPPU")
     private EntityManager em;
+    
+    MunicipioFacade mun;
 
     @Override
     protected EntityManager getEntityManager() {

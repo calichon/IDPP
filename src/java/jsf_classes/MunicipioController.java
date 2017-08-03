@@ -120,6 +120,18 @@ public class MunicipioController implements Serializable {
     public List<Municipio> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Municipio> getItemsAvailableSelectOneOrdered() {
+        return getFacade().getMunicipioOrderedList();
+    }
+    
+    public List<Municipio> getItemsAvailableSelectOneOrderedLimitedByDepartment(int depto) {
+        session_beans.MunicipioFacade ejbFacadeLocal;
+        List<Municipio> listaMunicipios = null;
+        ejbFacadeLocal = getFacade();
+        listaMunicipios = ejbFacadeLocal.getMunicipioOrderedListLimitsDepartment(depto);
+        return listaMunicipios;
+    }
 
     @FacesConverter(forClass = Municipio.class)
     public static class MunicipioControllerConverter implements Converter {

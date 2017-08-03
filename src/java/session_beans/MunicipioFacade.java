@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.Municipio;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,22 @@ public class MunicipioFacade extends AbstractFacade<Municipio> {
 
     public MunicipioFacade() {
         super(Municipio.class);
+    }
+    
+    public List<Municipio> getMunicipioOrderedList(){
+        EntityManager departamentoEM;
+        departamentoEM = getEntityManager();
+        Query departamentoQ;
+        departamentoQ = departamentoEM.createNamedQuery("Municipio.findAll");            
+        return departamentoQ.getResultList();
+    }
+    
+    public List<Municipio> getMunicipioOrderedListLimitsDepartment(int depto){
+        EntityManager departamentoEM;
+        departamentoEM = getEntityManager();
+        Query departamentoQ;
+        departamentoQ = departamentoEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
+        return departamentoQ.getResultList();
     }
     
 }

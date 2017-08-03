@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.Departamento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class DepartamentoFacade extends AbstractFacade<Departamento> {
 
     public DepartamentoFacade() {
         super(Departamento.class);
+    }
+    
+    public List<Departamento> getDepartamentoOrderedList(){
+        EntityManager departamentoEM;
+        departamentoEM = getEntityManager();
+        Query departamentoQ;
+        departamentoQ = departamentoEM.createNamedQuery("Departamento.findAll");            
+        return departamentoQ.getResultList();
     }
     
 }

@@ -39,6 +39,7 @@
                             </f:facet>
                             <h:outputText value="#{item.placa}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_nit}"/>
@@ -63,12 +64,14 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
+                        </ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_modelo}"/>
                             </f:facet>
                             <h:outputText value="#{item.modelo}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_chasis}"/>
@@ -147,6 +150,7 @@
                             </f:facet>
                             <h:outputText value="#{item.codColor}"/>
                         </p:column>
+                        </ui:remove>    
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>
@@ -159,18 +163,21 @@
                             </f:facet>
                             <h:outputText value="#{item.codLinea}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codMarca}"/>
                             </f:facet>
                             <h:outputText value="#{item.codMarca}"/>
                         </p:column>
+                        </ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codMunicipio}"/>
                             </f:facet>
                             <h:outputText value="#{item.codMunicipio}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codPersonaAsignacion}"/>
@@ -183,6 +190,7 @@
                             </f:facet>
                             <h:outputText value="#{item.codPueston}"/>
                         </p:column>
+                        </ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codTipoTipo}"/>
