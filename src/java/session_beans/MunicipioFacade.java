@@ -32,18 +32,18 @@ public class MunicipioFacade extends AbstractFacade<Municipio> {
     }
     
     public List<Municipio> getMunicipioOrderedList(){
-        EntityManager departamentoEM;
-        departamentoEM = getEntityManager();
+        EntityManager municipioEM;
+        municipioEM = getEntityManager();
         Query departamentoQ;
-        departamentoQ = departamentoEM.createNamedQuery("Municipio.findAll");            
+        departamentoQ = municipioEM.createNamedQuery("Municipio.findAll");            
         return departamentoQ.getResultList();
     }
     
     public List<Municipio> getMunicipioOrderedListLimitsDepartment(int depto){
-        EntityManager departamentoEM;
-        departamentoEM = getEntityManager();
+        EntityManager municipioEM;
+        municipioEM = getEntityManager();
         Query departamentoQ;
-        departamentoQ = departamentoEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
+        departamentoQ = municipioEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
         return departamentoQ.getResultList();
     }
     

@@ -21,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.EntityManager;
 import session_beans.MunicipioFacade;
 
 @Named("vehiculoController")
@@ -133,9 +134,23 @@ public class VehiculoController implements Serializable {
         return getFacade().findAll();
     }
     
-    public void onDepartamentoChange() {            
-            session_beans.MunicipioFacade ejbFacadeMunicipioFacadeLocal;
+    public void onDepartamentoChange() { 
+            Departamento thisDepartamento;
+            thisDepartamento = selected.getCodDepartamento();
+            selectedDepartamento = thisDepartamento.getCodDepartamento();
+            if(selectedDepartamento > 0 ){
+                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);
+                
+                //itemsMunicipio = getFacadeMunicipios().getMunicipioOrderedListLimitsDepartment(selectedDepartamento);
+            }
+            else{
+                itemsMunicipio = null;
+            }
+            /*session_beans.MunicipioFacade ejbFacadeMunicipioFacadeLocal;
             ejbFacadeMunicipioFacadeLocal = getFacadeMunicipios();
+            EntityManager emm;
+            emm=ejbFacade.get
+            
             Departamento thisDepartamento;
             thisDepartamento = selected.getCodDepartamento();
             selectedDepartamento = thisDepartamento.getCodDepartamento();
@@ -147,8 +162,14 @@ public class VehiculoController implements Serializable {
             }
             else{
                 itemsMunicipio = null;
-            }
-            
+            }*/
+            /*
+            EntityManager departamentoEM;
+        departamentoEM = getEntityManager();
+        Query departamentoQ;
+        departamentoQ = departamentoEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
+        return departamentoQ.getResultList();
+            */
             //itemsMunicipio = ejbFacade.
     }
     

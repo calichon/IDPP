@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Municipio.findAll", query = "SELECT m FROM Municipio m ORDER BY m.descripcion")
     , @NamedQuery(name = "Municipio.findByCodMunicipio", query = "SELECT m FROM Municipio m WHERE m.codMunicipio = :codMunicipio")
-    , @NamedQuery(name = "Municipio.findByCodDepartamento", query = "SELECT m FROM Municipio m WHERE m.codDepartamento = :codDepartamento")
+    , @NamedQuery(name = "Municipio.findByCodDepartamento", query = "SELECT m FROM Municipio m WHERE m.codDepartamento = :codDepartamento ORDER BY m.descripcion")
     , @NamedQuery(name = "Municipio.findByDescripcion", query = "SELECT m FROM Municipio m WHERE m.descripcion = :descripcion")
     , @NamedQuery(name = "Municipio.findByCodEstatus", query = "SELECT m FROM Municipio m WHERE m.codEstatus = :codEstatus")
     , @NamedQuery(name = "Municipio.findByCodGeoestadistico", query = "SELECT m FROM Municipio m WHERE m.codGeoestadistico = :codGeoestadistico")

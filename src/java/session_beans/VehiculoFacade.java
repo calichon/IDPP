@@ -5,10 +5,14 @@
  */
 package session_beans;
 
+import entities.Departamento;
+import entities.Municipio;
 import entities.Vehiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,6 +33,14 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     public VehiculoFacade() {
         super(Vehiculo.class);
+    }
+    
+    public List<Municipio> getMunicipioOrderedListLimitsDepartment(Departamento depto){
+        EntityManager municipioEM;
+        municipioEM = getEntityManager();
+        Query municipioQ;
+        municipioQ = municipioEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
+        return municipioQ.getResultList();
     }
     
 }
