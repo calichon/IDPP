@@ -12,8 +12,10 @@
             <h:form id="VehiculoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{vehiculoController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_codVehiculo}" for="codVehiculo" />
                         <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.EditVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_codVehiculo}"/>
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_placa}" for="placa" />
                         <p:inputText id="placa" value="#{vehiculoController.selected.placa}" title="#{bundle.EditVehiculoTitle_placa}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_nit}" for="nit" />

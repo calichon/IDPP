@@ -1,13 +1,23 @@
 package jsf_classes;
 
 import entities.Departamento;
+import entities.Imagen;
 import entities.Municipio;
 import entities.Vehiculo;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.VehiculoFacade;
-
+import session_beans.ImagenFacade;
+import session_beans.MunicipioFacade;
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,13 +26,14 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.EntityManager;
-import session_beans.MunicipioFacade;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 
 @Named("vehiculoController")
 @SessionScoped
@@ -30,10 +41,15 @@ public class VehiculoController implements Serializable {
     @EJB
     private session_beans.VehiculoFacade ejbFacade;
     private session_beans.MunicipioFacade ejbFacadeMunicipios;
+    @EJB
+    private session_beans.ImagenFacade ejbFacadeImagen;
     private List<Vehiculo> items = null;
     private List<Municipio> itemsMunicipio = null;
+    //private List<ImageToUpload> itemsImagen = new ArrayList<ImageToUpload>();
+    private List<UploadedFile> itemsImagen = new ArrayList<UploadedFile>();
     private Vehiculo selected;
     private Municipio selectedMunicipio;
+    private Imagen selectedImagen;
     private int selectedDepartamento = 0;
     
 
@@ -61,10 +77,15 @@ public class VehiculoController implements Serializable {
     private MunicipioFacade getFacadeMunicipios() {
         return ejbFacadeMunicipios;
     }
+    
+    private ImagenFacade getFacadeImagen() {
+        return ejbFacadeImagen;
+    }
 
     public Vehiculo prepareCreate() {
         selected = new Vehiculo();
         initializeEmbeddableKey();
+        itemsImagen.clear();
         return selected;
     }
 
@@ -72,7 +93,96 @@ public class VehiculoController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            //aqui hacer el insert de las imágenes
+            for(int i = 0; i<itemsImagen.size(); i++){
+                //inicia creación de la imagen en filesystem y guardado de la misma
+                
+                selectedImagen = new Imagen();
+                String basePath;
+                
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                basePath = ctx.getExternalContext().getInitParameter("imageSavePath");
+                
+                String unEncryptedFileName;
+                unEncryptedFileName = itemsImagen.get(i).getFileName();
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                unEncryptedFileName = timeStamp + "_" + unEncryptedFileName;
+                String encryptedFileName = "";
+                
+                try{
+                    //MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+                    //messageDigest.update(unEncryptedFileName.getBytes());
+                    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                    byte[] arr = messageDigest.digest(unEncryptedFileName.getBytes());
+                    
+                    StringBuffer hexString = new StringBuffer();
+                    for (int j=0;j<arr.length;j++) {
+                        hexString.append(Integer.toHexString(0xFF & arr[j]));
+                    }
+
+                    encryptedFileName = hexString.toString();
+                                        
+                    //encryptedFileName = Base64.getEncoder().encodeToString(arr);
+                    //encryptedFileName = new String(messageDigest.digest());
+                }
+                catch(Exception e){
+                    
+                }
+                
+                String fullFilePath = basePath + encryptedFileName + '_' + itemsImagen.get(i).getFileName();
+                
+                UploadedFile uploadedFile;
+                uploadedFile = itemsImagen.get(i);
+
+                try{
+                    File f = new File(basePath, encryptedFileName + '_' + unEncryptedFileName);
+                    FileOutputStream fos = new FileOutputStream(f);
+                    
+                    InputStream in = uploadedFile.getInputstream();
+                    //OutputStream out = new FileOutputStream(new File(fullFilePath));
+                    OutputStream out = fos;
+                    int read = 0;
+                    byte[] bytes = new byte[1024];
+                    while ((read = in.read(bytes)) != -1) {
+                        out.write(bytes, 0, read);
+                    }
+                    in.close();
+                    out.flush();
+                    out.close();
+                    selectedImagen.setPathImagen(fullFilePath);
+                }
+                catch(Exception e){
+                    System.out.println(e.getCause().toString());                    
+                }
+                //finaliza creación de la imagen en filesystem y guardado de la misma
+                //inicia creación de la imagen en db y guardado de la misma
+                try {
+                    long size = itemsImagen.get(i).getSize();
+                    byte[] data;
+                    InputStream stream = itemsImagen.get(i).getInputstream();
+                    data = new byte[(int) size];
+                    stream.read(data, 0, (int) size); 
+                    stream.close();
+                    selectedImagen.setImagenb(data);
+                } 
+                catch (Exception e) {
+                }
+                //finaliza creación de la imagen en db y guardado de la misma
+                //actualizacion de la entidad de imagen con las llaves foraneas que corresponden y con los paths
+                selectedImagen.setActivo(Boolean.TRUE);
+                selectedImagen.setCodVehiculo(selected);
+                //hacer persistente a través de su propio método de persist
+                persistImage(PersistAction.CREATE, "Imagen creada");
+                //persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoCreated"));
+                if (!JsfUtil.isValidationFailed()) {
+                    System.out.println("Exito");
+                }
+                else{
+                    System.out.println("Fracaso");
+                }                
+            }
         }
+        
     }
 
     public void update() {
@@ -99,9 +209,42 @@ public class VehiculoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    if (persistAction == PersistAction.CREATE) {
+                        getFacade().create(selected);
+                    }
+                    else{
+                        getFacade().edit(selected);
+                    }
                 } else {
                     getFacade().remove(selected);
+                }
+                JsfUtil.addSuccessMessage(successMessage);
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            }
+        }
+    }
+    
+    private void persistImage(PersistAction persistAction, String successMessage) {
+        if (selectedImagen != null) {
+            setEmbeddableKeys();
+            try {
+                if (persistAction != PersistAction.DELETE) {
+                    getFacadeImagen().edit(selectedImagen);
+                } else {
+                    getFacadeImagen().remove(selectedImagen);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -139,43 +282,70 @@ public class VehiculoController implements Serializable {
             thisDepartamento = selected.getCodDepartamento();
             selectedDepartamento = thisDepartamento.getCodDepartamento();
             if(selectedDepartamento > 0 ){
-                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);
-                
-                //itemsMunicipio = getFacadeMunicipios().getMunicipioOrderedListLimitsDepartment(selectedDepartamento);
+                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);                
             }
             else{
                 itemsMunicipio = null;
-            }
-            /*session_beans.MunicipioFacade ejbFacadeMunicipioFacadeLocal;
-            ejbFacadeMunicipioFacadeLocal = getFacadeMunicipios();
-            EntityManager emm;
-            emm=ejbFacade.get
-            
-            Departamento thisDepartamento;
-            thisDepartamento = selected.getCodDepartamento();
-            selectedDepartamento = thisDepartamento.getCodDepartamento();
-            MunicipioController thisMunicipio=new MunicipioController();     
-            if(selectedDepartamento > 0 ){
-                itemsMunicipio = thisMunicipio.getItemsAvailableSelectOneOrderedLimitedByDepartment(selectedDepartamento);
-                
-                //itemsMunicipio = getFacadeMunicipios().getMunicipioOrderedListLimitsDepartment(selectedDepartamento);
-            }
-            else{
-                itemsMunicipio = null;
-            }*/
-            /*
-            EntityManager departamentoEM;
-        departamentoEM = getEntityManager();
-        Query departamentoQ;
-        departamentoQ = departamentoEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
-        return departamentoQ.getResultList();
-            */
-            //itemsMunicipio = ejbFacade.
+            }            
     }
     
     public List<Municipio> getItemsMunicipio(){
         return itemsMunicipio;
     }
+    
+    /*public void addImageToUpload() {
+        itemsImagen.add(new ImageToUpload());
+    }
+
+    public void removeImageToUpload(ImageToUpload item) {
+        //itemsImagen.remove(item);
+        if(itemsImagen.size()>0){
+            itemsImagen.remove(itemsImagen.size()-1);
+        }
+    }
+
+    public List<ImageToUpload> getItemsImagen() {
+        return itemsImagen;
+    }
+    */
+    public void handleFileUpload(FileUploadEvent event) {
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        UploadedFile tempUF;
+        tempUF = event.getFile();
+        if(tempUF!=null){
+            itemsImagen.add(tempUF);
+        }
+    }
+    
+    /*public UploadedFile getItemsImagen() {
+        return null;
+    }
+
+    public void setItemsImagen(UploadedFile uf) {
+        this.uf = uf;
+        if (uf != null) {
+            try {
+                //byte[] data = uf.getContents();
+                
+                
+                long size = uf.getSize();
+                System.out.println("File size: " + size);  
+
+                byte[] data;
+                InputStream stream = uf.getInputstream();
+                data = new byte[(int) size];
+                stream.read(data, 0, (int) size); 
+                stream.close(); 
+                
+                current.setFileb(data);
+                ufProcessed = data;
+                //getFacade().edit(current);
+                JsfUtil.addSuccessMessage("Successful! " + uf.getFileName() + " is uploaded.");
+            } catch (Exception e) {
+            }
+        }
+    }*/
     
     
 

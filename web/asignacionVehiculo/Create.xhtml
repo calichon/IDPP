@@ -12,8 +12,10 @@
             <h:form id="AsignacionVehiculoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{asignacionVehiculoController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codAsignacionVehiculo}" for="codAsignacionVehiculo" />
                         <p:inputText id="codAsignacionVehiculo" value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.CreateAsignacionVehiculoTitle_codAsignacionVehiculo}" required="true" requiredMessage="#{bundle.CreateAsignacionVehiculoRequiredMessage_codAsignacionVehiculo}"/>
+                        </ui:remove>>
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_fechaAsignacion}" for="fechaAsignacion" />
                         <p:calendar id="fechaAsignacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_fechaAsignacion}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_noSolicitud}" for="noSolicitud" />
