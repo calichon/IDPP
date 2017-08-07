@@ -155,13 +155,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codDepartamento}"/>
+                            <h:outputText value="#{item.codDepartamento.descripcion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codLinea}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codLinea}"/>
+                            <h:outputText value="#{item.codLinea.nombreLinea}"/>
                         </p:column>
                         <ui:remove>
                         <p:column>
@@ -175,7 +175,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codMunicipio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codMunicipio}"/>
+                            <h:outputText value="#{item.codMunicipio.descripcion}"/>
                         </p:column>
                         <ui:remove>
                         <p:column>
@@ -195,13 +195,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codTipoTipo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codTipoTipo}"/>
+                            <h:outputText value="#{item.codTipoTipo.nombreTipoTipo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codTipoUso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codTipoUso}"/>
+                            <h:outputText value="#{item.codTipoUso.nombreTipoUso}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vehiculoController.prepareCreate}" update=":VehiculoCreateForm" oncomplete="PF('VehiculoCreateDialog').show()"/>

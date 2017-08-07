@@ -3,7 +3,6 @@
   <persistence-unit name="IDPPPU" transaction-type="JTA">
     <jta-data-source>java:app/DS_DB_IDPP</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <shared-cache-mode>NONE</shared-cache-mode>
     <properties/>
   </persistence-unit>
 </persistence>

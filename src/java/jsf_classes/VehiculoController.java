@@ -189,6 +189,93 @@ public class VehiculoController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoUpdated"));
+        for(int i = 0; i<itemsImagen.size(); i++){
+                //inicia creación de la imagen en filesystem y guardado de la misma
+                
+                selectedImagen = new Imagen();
+                String basePath;
+                
+                FacesContext ctx = FacesContext.getCurrentInstance();
+                basePath = ctx.getExternalContext().getInitParameter("imageSavePath");
+                
+                String unEncryptedFileName;
+                unEncryptedFileName = itemsImagen.get(i).getFileName();
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                unEncryptedFileName = timeStamp + "_" + unEncryptedFileName;
+                String encryptedFileName = "";
+                
+                try{
+                    //MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+                    //messageDigest.update(unEncryptedFileName.getBytes());
+                    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                    byte[] arr = messageDigest.digest(unEncryptedFileName.getBytes());
+                    
+                    StringBuffer hexString = new StringBuffer();
+                    for (int j=0;j<arr.length;j++) {
+                        hexString.append(Integer.toHexString(0xFF & arr[j]));
+                    }
+
+                    encryptedFileName = hexString.toString();
+                                        
+                    //encryptedFileName = Base64.getEncoder().encodeToString(arr);
+                    //encryptedFileName = new String(messageDigest.digest());
+                }
+                catch(Exception e){
+                    
+                }
+                
+                String fullFilePath = basePath + encryptedFileName + '_' + itemsImagen.get(i).getFileName();
+                
+                UploadedFile uploadedFile;
+                uploadedFile = itemsImagen.get(i);
+
+                try{
+                    File f = new File(basePath, encryptedFileName + '_' + unEncryptedFileName);
+                    FileOutputStream fos = new FileOutputStream(f);
+                    
+                    InputStream in = uploadedFile.getInputstream();
+                    //OutputStream out = new FileOutputStream(new File(fullFilePath));
+                    OutputStream out = fos;
+                    int read = 0;
+                    byte[] bytes = new byte[1024];
+                    while ((read = in.read(bytes)) != -1) {
+                        out.write(bytes, 0, read);
+                    }
+                    in.close();
+                    out.flush();
+                    out.close();
+                    selectedImagen.setPathImagen(fullFilePath);
+                }
+                catch(Exception e){
+                    System.out.println(e.getCause().toString());                    
+                }
+                //finaliza creación de la imagen en filesystem y guardado de la misma
+                //inicia creación de la imagen en db y guardado de la misma
+                try {
+                    long size = itemsImagen.get(i).getSize();
+                    byte[] data;
+                    InputStream stream = itemsImagen.get(i).getInputstream();
+                    data = new byte[(int) size];
+                    stream.read(data, 0, (int) size); 
+                    stream.close();
+                    selectedImagen.setImagenb(data);
+                } 
+                catch (Exception e) {
+                }
+                //finaliza creación de la imagen en db y guardado de la misma
+                //actualizacion de la entidad de imagen con las llaves foraneas que corresponden y con los paths
+                selectedImagen.setActivo(Boolean.TRUE);
+                selectedImagen.setCodVehiculo(selected);
+                //hacer persistente a través de su propio método de persist
+                persistImage(PersistAction.CREATE, "Imagen creada");
+                //persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoCreated"));
+                if (!JsfUtil.isValidationFailed()) {
+                    System.out.println("Exito");
+                }
+                else{
+                    System.out.println("Fracaso");
+                }                
+            }
     }
 
     public void destroy() {
