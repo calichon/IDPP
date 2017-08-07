@@ -42,4 +42,12 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         municipioQ = municipioEM.createNamedQuery("Municipio.findByCodDepartamento").setParameter("codDepartamento", depto);            
         return municipioQ.getResultList();
     }
+    
+    public void refreshEntity() {
+        //getEntityManager().refresh(this);
+        //getEntityManager().flush();
+        //getEntityManager().getEntityManagerFactory().getCache().evict(Vehiculo.class);
+        //getEntityManager().refresh(v);
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
+    }
 }

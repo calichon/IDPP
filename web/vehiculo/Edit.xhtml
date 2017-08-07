@@ -119,8 +119,17 @@
                     <p:commandButton actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoEditDialog.hide()"/>
                 </h:panelGroup>
+                
+                    <h:dataTable id="tablaImagenes" value="#{vehiculoController.selected.imagenList}" var="itemImagen">
+                        <h:column><h:inputText value="#{itemImagen.pathImagen}" /></h:column>
+                        <h:column>
+                            <p:commandButton value="Removerrrr">
+                                <p:ajax listener="#{vehiculoController.destroyImagen(itemImagen)}" update="tablaImagenes"/>
+                            </p:commandButton>                          
+                        </h:column>                
+                    </h:dataTable>             
+                
             </h:form>
         </p:dialog>
-
     </ui:composition>
 </html>

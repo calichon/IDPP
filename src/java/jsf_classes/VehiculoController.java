@@ -1,6 +1,7 @@
 package jsf_classes;
 
 import entities.Departamento;
+import entities.ImageToDownload;
 import entities.Imagen;
 import entities.Municipio;
 import entities.Vehiculo;
@@ -31,6 +32,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -45,7 +47,7 @@ public class VehiculoController implements Serializable {
     private session_beans.ImagenFacade ejbFacadeImagen;
     private List<Vehiculo> items = null;
     private List<Municipio> itemsMunicipio = null;
-    //private List<ImageToUpload> itemsImagen = new ArrayList<ImageToUpload>();
+    private List<Imagen> itemsImagenDownload = new ArrayList<Imagen>();
     private List<UploadedFile> itemsImagen = new ArrayList<UploadedFile>();
     private Vehiculo selected;
     private Municipio selectedMunicipio;
@@ -195,6 +197,18 @@ public class VehiculoController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+    
+    public void destroyImagen(Imagen itemI) {
+        selectedImagen = itemI;
+        persistImage(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ImagenDeleted"));
+        if (!JsfUtil.isValidationFailed()) {
+            selectedImagen = null; // Remove selection            
+        }
+        items = getFacade().findAll();
+        //getFacade().refreshEntity(selected);
+        getFacade().refreshEntity();
+        
     }
 
     public List<Vehiculo> getItems() {
@@ -386,8 +400,6 @@ public class VehiculoController implements Serializable {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Vehiculo.class.getName()});
                 return null;
             }
-        }        
-
+        }
     }
-
 }
