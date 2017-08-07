@@ -132,6 +132,7 @@ public class VehiculoController implements Serializable {
                 }
                 
                 String fullFilePath = basePath + encryptedFileName + '_' + itemsImagen.get(i).getFileName();
+                String urlFilePath = ctx.getExternalContext().getInitParameter("urlImagePath");
                 
                 UploadedFile uploadedFile;
                 uploadedFile = itemsImagen.get(i);
@@ -151,7 +152,8 @@ public class VehiculoController implements Serializable {
                     in.close();
                     out.flush();
                     out.close();
-                    selectedImagen.setPathImagen(fullFilePath);
+                    //selectedImagen.setPathImagen(fullFilePath);
+                    selectedImagen.setPathImagen(urlFilePath + encryptedFileName + '_' + unEncryptedFileName);
                 }
                 catch(Exception e){
                     System.out.println(e.getCause().toString());                    

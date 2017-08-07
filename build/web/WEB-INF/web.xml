@@ -6,7 +6,11 @@
     </context-param>
     <context-param>
         <param-name>imageSavePath</param-name>
-        <param-value>c:\\IDPPimages\\</param-value>
+        <param-value>C:\Users\Carlos\Documents\SmartGIT\IDPP\web\IDPPimages\</param-value>
+    </context-param>
+    <context-param>
+        <param-name>urlImagePath</param-name>
+        <param-value>/IDPPimages/</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

@@ -121,6 +121,7 @@
                 </h:panelGroup>                
                     <h:dataTable id="tablaImagenes" value="#{vehiculoController.selected.imagenList}" var="itemImagen">
                         <h:column><h:inputText value="#{itemImagen.pathImagen}" /></h:column>
+                        <h:column><h:graphicImage value = "#{itemImagen.pathImagen}" width="80px"/></h:column>
                         <h:column>
                             <p:commandButton value="Removerrrr">
                                 <p:ajax listener="#{vehiculoController.destroyImagen(itemImagen)}" update="tablaImagenes"/>
