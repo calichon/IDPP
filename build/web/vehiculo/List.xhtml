@@ -153,12 +153,6 @@
                         </ui:remove>    
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codDepartamento.descripcion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codLinea}"/>
                             </f:facet>
                             <h:outputText value="#{item.codLinea.nombreLinea}"/>
@@ -171,6 +165,12 @@
                             <h:outputText value="#{item.codMarca}"/>
                         </p:column>
                         </ui:remove>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codDepartamento.descripcion}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codMunicipio}"/>
