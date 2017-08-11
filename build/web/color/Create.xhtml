@@ -12,8 +12,10 @@
             <h:form id="ColorCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{colorController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateColorLabel_codColor}" for="codColor" />
                         <p:inputText id="codColor" value="#{colorController.selected.codColor}" title="#{bundle.CreateColorTitle_codColor}" required="true" requiredMessage="#{bundle.CreateColorRequiredMessage_codColor}"/>
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateColorLabel_nombreColor}" for="nombreColor" />
                         <p:inputText id="nombreColor" value="#{colorController.selected.nombreColor}" title="#{bundle.CreateColorTitle_nombreColor}" />
                         <p:outputLabel value="#{bundle.CreateColorLabel_orden}" for="orden" />

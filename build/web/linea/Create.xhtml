@@ -12,8 +12,10 @@
             <h:form id="LineaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{lineaController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateLineaLabel_codLinea}" for="codLinea" />
                         <p:inputText id="codLinea" value="#{lineaController.selected.codLinea}" title="#{bundle.CreateLineaTitle_codLinea}" required="true" requiredMessage="#{bundle.CreateLineaRequiredMessage_codLinea}"/>
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateLineaLabel_nombreLinea}" for="nombreLinea" />
                         <p:inputText id="nombreLinea" value="#{lineaController.selected.nombreLinea}" title="#{bundle.CreateLineaTitle_nombreLinea}" />
                         <p:outputLabel value="#{bundle.CreateLineaLabel_orden}" for="orden" />
