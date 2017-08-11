@@ -32,6 +32,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -53,7 +54,7 @@ public class VehiculoController implements Serializable {
     private Municipio selectedMunicipio;
     private Imagen selectedImagen;
     private int selectedDepartamento = 0;
-    
+    private boolean disableButtonCreateEnabled = false;
 
     public VehiculoController() {
     }
@@ -294,7 +295,9 @@ public class VehiculoController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selectedImagen = null; // Remove selection            
         }
-        items = getFacade().findAll();
+        selected.getImagenList().remove(itemI);
+        
+        //items = getFacade().findAll();
         //getFacade().refreshEntity(selected);
         getFacade().refreshEntity();
         
@@ -345,7 +348,13 @@ public class VehiculoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    if (persistAction == PersistAction.CREATE) {
+                         getFacadeImagen().create(selectedImagen);
+                         selected.getImagenList().add(selectedImagen);
+                    }
+                    else{
                     getFacadeImagen().edit(selectedImagen);
+                    }
                 } else {
                     getFacadeImagen().remove(selectedImagen);
                 }
@@ -392,25 +401,43 @@ public class VehiculoController implements Serializable {
             }            
     }
     
+    public void verifyPlacaOnCreate(){
+        boolean placaFounded = false;
+        placaFounded = getFacade().existsPlaca(selected.getPlaca());
+        if(placaFounded){
+            disableButtonCreateEnabled = true;
+            FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Placa duplicada"));
+        }
+        else{
+            disableButtonCreateEnabled = false;            
+    }
+    }
+
+    public void verifyPlacaOnUpdate(){
+        boolean placaFounded = false;
+        String placaFound = "";
+        String placaForm = "";
+        placaFounded = getFacade().existsPlaca(selected.getPlaca());
+        placaFound = getFacade().getPlacaById(selected.getCodVehiculo());
+        placaForm = selected.getPlaca();
+        if(placaFounded && (!placaFound.equals(placaForm))){
+            disableButtonCreateEnabled = true;
+            FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Placa duplicada"));
+        }
+        else{
+            disableButtonCreateEnabled = false;            
+        }
+        }
+    
+    public boolean getButtonCreateEnabled(){
+        return disableButtonCreateEnabled;
+    }
+
     public List<Municipio> getItemsMunicipio(){
         return itemsMunicipio;
     }
     
-    /*public void addImageToUpload() {
-        itemsImagen.add(new ImageToUpload());
-    }
-
-    public void removeImageToUpload(ImageToUpload item) {
-        //itemsImagen.remove(item);
-        if(itemsImagen.size()>0){
-            itemsImagen.remove(itemsImagen.size()-1);
-        }
-    }
-
-    public List<ImageToUpload> getItemsImagen() {
-        return itemsImagen;
-    }
-    */
+    
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -420,35 +447,6 @@ public class VehiculoController implements Serializable {
             itemsImagen.add(tempUF);
         }
     }
-    
-    /*public UploadedFile getItemsImagen() {
-        return null;
-    }
-
-    public void setItemsImagen(UploadedFile uf) {
-        this.uf = uf;
-        if (uf != null) {
-            try {
-                //byte[] data = uf.getContents();
-                
-                
-                long size = uf.getSize();
-                System.out.println("File size: " + size);  
-
-                byte[] data;
-                InputStream stream = uf.getInputstream();
-                data = new byte[(int) size];
-                stream.read(data, 0, (int) size); 
-                stream.close(); 
-                
-                current.setFileb(data);
-                ufProcessed = data;
-                //getFacade().edit(current);
-                JsfUtil.addSuccessMessage("Successful! " + uf.getFileName() + " is uploaded.");
-            } catch (Exception e) {
-            }
-        }
-    }*/
     
     
 

@@ -10,6 +10,7 @@
 
         <p:dialog id="VehiculoEditDlg" widgetVar="VehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVehiculoTitle}">
             <h:form id="VehiculoEditForm">
+                <p:messages autoUpdate="true" id="msgs" showDetail="true" showSummary="true" />
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{vehiculoController.selected != null}">
                         <ui:remove>
@@ -17,7 +18,9 @@
                         <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.EditVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_codVehiculo}"/>
                         </ui:remove>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_placa}" for="placa" />
-                        <p:inputText id="placa" value="#{vehiculoController.selected.placa}" title="#{bundle.EditVehiculoTitle_placa}" />
+                        <p:inputText id="placa" value="#{vehiculoController.selected.placa}" title="#{bundle.EditVehiculoTitle_placa}">
+                            <p:ajax event="keypress" delay="200" listener="#{vehiculoController.verifyPlacaOnUpdate}" update="buttonUpdateVehiculo" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_nit}" for="nit" />
                         <p:inputText id="nit" value="#{vehiculoController.selected.nit}" title="#{bundle.EditVehiculoTitle_nit}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_poliza}" for="poliza" />
@@ -116,18 +119,20 @@
                                            itemValue="#{codTipoUsoItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
+                    <p:commandButton id="buttonUpdateVehiculo" actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoEditDialog.hide()"/>
-                </h:panelGroup>                
                     <h:dataTable id="tablaImagenes" value="#{vehiculoController.selected.imagenList}" var="itemImagen">
                         <h:column><h:inputText value="#{itemImagen.pathImagen}" /></h:column>
                         <h:column><h:graphicImage value = "#{itemImagen.pathImagen}" width="80px"/></h:column>
                         <h:column>
-                            <p:commandButton value="Removerrrr">
-                                <p:ajax listener="#{vehiculoController.destroyImagen(itemImagen)}" update="tablaImagenes"/>
-                            </p:commandButton>                          
+                            <p:commandButton value="Removerrrr" actionListener="#{vehiculoController.destroyImagen(itemImagen)}" update="tablaImagenes"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="remove" action="#{vehiculoController.destroyImagen(itemImagen)}" />
                         </h:column>                
                     </h:dataTable>
+                </h:panelGroup>
+                    
             </h:form>
         </p:dialog>
     </ui:composition>
