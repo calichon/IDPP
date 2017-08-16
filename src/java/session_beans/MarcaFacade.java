@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.Marca;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class MarcaFacade extends AbstractFacade<Marca> {
 
     public MarcaFacade() {
         super(Marca.class);
+    }
+    
+    public List<Marca> getMarcaOrderedList(){
+        EntityManager marcaEM;
+        marcaEM = getEntityManager();
+        Query marcaQ;
+        marcaQ = marcaEM.createNamedQuery("Marca.findAll");            
+        return marcaQ.getResultList();
     }
     
 }

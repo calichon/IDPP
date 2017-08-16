@@ -26,14 +26,15 @@
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_codKilometrajeComision}"/>
                             </f:facet>
                             <h:outputText value="#{item.codKilometrajeComision}"/>
                         </p:column>
-                        <p:column>
+                        </ui:remove>
+                        <p:column filterBy="#{item.placa}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_placa}"/>
                             </f:facet>
@@ -41,9 +42,21 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_kilometrajeInicial}"/>
+                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_codPersonaPiloto}"/>
                             </f:facet>
-                            <h:outputText value="#{item.kilometrajeInicial}"/>
+                            <h:outputText value="#{item.codPersonaPiloto.apellido1.concat(' ').concat(item.codPersonaPiloto.apellido2).concat(', ').concat(item.codPersonaPiloto.nombre1).concat(item.codPersonaPiloto.nombre2)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ubicación del vehículo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codVehiculo.codMunicipio.descripcion.concat(',').concat(item.codVehiculo.codDepartamento.descripcion)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Lugar de la comisión"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codDependenciaInstitucion.direccion.concat(item.codDependenciaInstitucion.codMunicipio.descripcion).concat(', ').concat(item.codDependenciaInstitucion.codDepartamento.descripcion)}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -55,12 +68,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_kilometrajeFinal}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kilometrajeFinal}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_fechaHoraEntrada}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaHoraEntrada}">
@@ -69,11 +76,17 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_comisionRealizada}"/>
+                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_kilometrajeInicial}"/>
                             </f:facet>
-                            <h:outputText value="#{item.comisionRealizada}"/>
-                        </p:column>
+                            <h:outputText value="#{item.kilometrajeInicial}"/>
+                        </p:column>                        
                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_kilometrajeFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kilometrajeFinal}"/>
+                        </p:column>
+                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_causa1}"/>
                             </f:facet>
@@ -93,21 +106,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_comisionRealizada}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comisionRealizada}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_diligenciasRealizadas}"/>
                             </f:facet>
                             <h:outputText value="#{item.diligenciasRealizadas}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_codDependenciaInstitucion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codDependenciaInstitucion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_codPersonaPiloto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codPersonaPiloto}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -115,6 +122,17 @@
                             </f:facet>
                             <h:outputText value="#{item.codVehiculo}"/>
                         </p:column>
+                        </ui:remove>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Juzgado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codDependenciaInstitucion.nombre}"/>
+                        </p:column>
+                        
+                        
+                        
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{kilometrajeComisionController.prepareCreate}" update=":KilometrajeComisionCreateForm" oncomplete="PF('KilometrajeComisionCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KilometrajeComisionViewForm" oncomplete="PF('KilometrajeComisionViewDialog').show()" disabled="#{empty kilometrajeComisionController.selected}"/>

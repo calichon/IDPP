@@ -33,7 +33,7 @@
                             </f:facet>
                             <h:outputText value="#{item.codVehiculo}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.placa}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_placa}"/>
                             </f:facet>
@@ -150,21 +150,19 @@
                             </f:facet>
                             <h:outputText value="#{item.codColor}"/>
                         </p:column>
-                        </ui:remove>    
-                        <p:column>
+                        </ui:remove>
+                        <p:column filterBy="#{item.codMarca.nombreMarca}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_codMarca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codMarca.nombreMarca}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.codLinea.nombreLinea}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codLinea}"/>
                             </f:facet>
                             <h:outputText value="#{item.codLinea.nombreLinea}"/>
-                        </p:column>
-                        <ui:remove>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_codMarca}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codMarca}"/>
-                        </p:column>
-                        </ui:remove>
+                        </p:column>                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_codDepartamento}"/>

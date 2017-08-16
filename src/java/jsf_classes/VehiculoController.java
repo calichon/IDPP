@@ -3,6 +3,8 @@ package jsf_classes;
 import entities.Departamento;
 import entities.ImageToDownload;
 import entities.Imagen;
+import entities.Linea;
+import entities.Marca;
 import entities.Municipio;
 import entities.Vehiculo;
 import java.io.File;
@@ -46,14 +48,18 @@ public class VehiculoController implements Serializable {
     private session_beans.MunicipioFacade ejbFacadeMunicipios;
     @EJB
     private session_beans.ImagenFacade ejbFacadeImagen;
+    @EJB
+    private session_beans.LineaFacade ejbFacadeLinea;
     private List<Vehiculo> items = null;
     private List<Municipio> itemsMunicipio = null;
+    private List<Linea> itemsLinea = null;
     private List<Imagen> itemsImagenDownload = new ArrayList<Imagen>();
     private List<UploadedFile> itemsImagen = new ArrayList<UploadedFile>();
     private Vehiculo selected;
     private Municipio selectedMunicipio;
     private Imagen selectedImagen;
     private int selectedDepartamento = 0;
+    private int selectedMarca = 0;
     private boolean disableButtonCreateEnabled = false;
 
     public VehiculoController() {
@@ -401,6 +407,18 @@ public class VehiculoController implements Serializable {
             }            
     }
     
+    public void onMarcaChange() { 
+            Marca thisMarca;
+            thisMarca = selected.getCodMarca();
+            selectedMarca = thisMarca.getCodMarca();
+            if(selectedMarca > 0 ){
+                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);                
+            }
+            else{
+                itemsLinea = null;
+            }            
+    }
+    
     public void verifyPlacaOnCreate(){
         boolean placaFounded = false;
         placaFounded = getFacade().existsPlaca(selected.getPlaca());
@@ -434,7 +452,39 @@ public class VehiculoController implements Serializable {
     }
 
     public List<Municipio> getItemsMunicipio(){
+        Departamento thisDepartamento;
+        thisDepartamento = selected.getCodDepartamento();
+        if(thisDepartamento!=null){
+            selectedDepartamento = thisDepartamento.getCodDepartamento();
+            if(selectedDepartamento > 0 ){
+                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);                
+            }
+            else{
+                itemsMunicipio = null;
+            }
+        }
+        else{
+            itemsMunicipio = null;
+        }
         return itemsMunicipio;
+    }
+    
+    public List<Linea> getItemsLinea(){
+        Marca thisMarca;
+        thisMarca = selected.getCodMarca();
+        if(thisMarca!=null){
+            selectedMarca = thisMarca.getCodMarca();
+            if(selectedMarca > 0 ){
+                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);                
+            }
+            else{
+                itemsLinea = null;
+            }
+        }
+        else{
+            itemsLinea = null;
+        }        
+        return itemsLinea;
     }
     
     

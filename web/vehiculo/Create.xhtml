@@ -64,15 +64,16 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_codMarca}" for="codMarca" />
                         <p:selectOneMenu id="codMarca" value="#{vehiculoController.selected.codMarca}" effect="fold" filter="true" filterMatchMode="contains">
+                            <p:ajax listener="#{vehiculoController.onMarcaChange}" update="codLinea" />
                             <f:selectItem itemLabel="Seleccione marca" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{marcaController.itemsAvailableSelectOneOrdered}"
                                            var="codMarcaItem"
                                            itemValue="#{codMarcaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_codLinea}" for="codLinea" />
-                        <p:selectOneMenu id="codLinea" value="#{vehiculoController.selected.codLinea}" effect="fold" filter="true" filterMatchMode="contains">
+                        <p:selectOneMenu id="codLinea" value="#{vehiculoController.selected.codLinea}" effect="fold" filter="true" filterMatchMode="contains">                            
                             <f:selectItem itemLabel="Seleccione línea" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                            <f:selectItems value="#{lineaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{vehiculoController.itemsLinea}"
                                            var="codLineaItem"
                                            itemValue="#{codLineaItem}"/>
                         </p:selectOneMenu>

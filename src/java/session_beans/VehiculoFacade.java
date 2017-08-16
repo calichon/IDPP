@@ -8,6 +8,7 @@ package session_beans;
 import entities.Departamento;
 import entities.Municipio;
 import entities.Vehiculo;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,6 +34,13 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     public VehiculoFacade() {
         super(Vehiculo.class);
+    }
+    
+    public List<Vehiculo> findByDate(Date fechaInicio, Date fechaFin) {
+        EntityManager emVehiculo = getEntityManager();
+        Query vehiculoQ;        
+        vehiculoQ = emVehiculo.createNamedQuery("Vehiculo.findByDate").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin);
+        return vehiculoQ.getResultList();
     }
     
     public List<Municipio> getMunicipioOrderedListLimitsDepartment(Departamento depto){

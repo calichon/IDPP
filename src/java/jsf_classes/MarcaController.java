@@ -120,6 +120,10 @@ public class MarcaController implements Serializable {
     public List<Marca> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Marca> getItemsAvailableSelectOneOrdered() {
+        return getFacade().getMarcaOrderedList();
+    }
 
     @FacesConverter(forClass = Marca.class)
     public static class MarcaControllerConverter implements Converter {

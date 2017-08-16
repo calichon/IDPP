@@ -27,12 +27,56 @@
                         <p:inputText id="poliza" value="#{vehiculoController.selected.poliza}" title="#{bundle.EditVehiculoTitle_poliza}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_direccion}" for="direccion" />
                         <p:inputText id="direccion" value="#{vehiculoController.selected.direccion}" title="#{bundle.EditVehiculoTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codDepartamento}" for="codDepartamento" />
+                        <p:selectOneMenu id="codDepartamento" value="#{vehiculoController.selected.codDepartamento}" >
+                            <p:ajax listener="#{vehiculoController.onDepartamentoChange}" update="codMunicipio" />
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOneOrdered}"
+                                           var="codDepartamentoItem"
+                                           itemValue="#{codDepartamentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codMunicipio}" for="codMunicipio" />
+                        <p:selectOneMenu id="codMunicipio" value="#{vehiculoController.selected.codMunicipio}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsMunicipio}"
+                                           var="codMunicipioItem"
+                                           itemValue="#{codMunicipioItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{vehiculoController.selected.nombre}" title="#{bundle.EditVehiculoTitle_nombre}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_modelo}" for="modelo" />
                         <p:inputText id="modelo" value="#{vehiculoController.selected.modelo}" title="#{bundle.EditVehiculoTitle_modelo}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codTipoUso}" for="codTipoUso" />
+                        <p:selectOneMenu id="codTipoUso" value="#{vehiculoController.selected.codTipoUso}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoUsoController.itemsAvailableSelectOne}"
+                                           var="codTipoUsoItem"
+                                           itemValue="#{codTipoUsoItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_chasis}" for="chasis" />
                         <p:inputText id="chasis" value="#{vehiculoController.selected.chasis}" title="#{bundle.EditVehiculoTitle_chasis}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codTipoTipo}" for="codTipoTipo" />
+                        <p:selectOneMenu id="codTipoTipo" value="#{vehiculoController.selected.codTipoTipo}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoTipoController.itemsAvailableSelectOne}"
+                                           var="codTipoTipoItem"
+                                           itemValue="#{codTipoTipoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codMarca}" for="codMarca" />
+                        <p:selectOneMenu id="codMarca" value="#{vehiculoController.selected.codMarca}" >
+                            <p:ajax listener="#{vehiculoController.onMarcaChange}" update="codLinea" />
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
+                                           var="codMarcaItem"
+                                           itemValue="#{codMarcaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codLinea}" for="codLinea" />
+                        <p:selectOneMenu id="codLinea" value="#{vehiculoController.selected.codLinea}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsLinea}"
+                                           var="codLineaItem"
+                                           itemValue="#{codLineaItem}"/>
+                        </p:selectOneMenu>    
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_vin}" for="vin" />
                         <p:inputText id="vin" value="#{vehiculoController.selected.vin}" title="#{bundle.EditVehiculoTitle_vin}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_centimetrosCubicos}" for="centimetrosCubicos" />
@@ -45,51 +89,19 @@
                         <p:inputText id="titulo" value="#{vehiculoController.selected.titulo}" title="#{bundle.EditVehiculoTitle_titulo}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_tarjetaCirculacion}" for="tarjetaCirculacion" />
                         <p:inputText id="tarjetaCirculacion" value="#{vehiculoController.selected.tarjetaCirculacion}" title="#{bundle.EditVehiculoTitle_tarjetaCirculacion}" />
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noAsientos}" for="noAsientos" />
-                        <p:inputText id="noAsientos" value="#{vehiculoController.selected.noAsientos}" title="#{bundle.EditVehiculoTitle_noAsientos}" />
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noInventarioRegistro}" for="noInventarioRegistro" />
-                        <p:inputText id="noInventarioRegistro" value="#{vehiculoController.selected.noInventarioRegistro}" title="#{bundle.EditVehiculoTitle_noInventarioRegistro}" />
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noMotor}" for="noMotor" />
-                        <p:inputText id="noMotor" value="#{vehiculoController.selected.noMotor}" title="#{bundle.EditVehiculoTitle_noMotor}" />
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_orden}" for="orden" />
-                        <p:inputText id="orden" value="#{vehiculoController.selected.orden}" title="#{bundle.EditVehiculoTitle_orden}" />
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_activo}" for="activo" />
-                        <p:selectBooleanCheckbox id="activo" value="#{vehiculoController.selected.activo}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_codColor}" for="codColor" />
                         <p:selectOneMenu id="codColor" value="#{vehiculoController.selected.codColor}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{colorController.itemsAvailableSelectOne}"
                                            var="codColorItem"
                                            itemValue="#{codColorItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codDepartamento}" for="codDepartamento" />
-                        <p:selectOneMenu id="codDepartamento" value="#{vehiculoController.selected.codDepartamento}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
-                                           var="codDepartamentoItem"
-                                           itemValue="#{codDepartamentoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codLinea}" for="codLinea" />
-                        <p:selectOneMenu id="codLinea" value="#{vehiculoController.selected.codLinea}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{lineaController.itemsAvailableSelectOne}"
-                                           var="codLineaItem"
-                                           itemValue="#{codLineaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codMarca}" for="codMarca" />
-                        <p:selectOneMenu id="codMarca" value="#{vehiculoController.selected.codMarca}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
-                                           var="codMarcaItem"
-                                           itemValue="#{codMarcaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codMunicipio}" for="codMunicipio" />
-                        <p:selectOneMenu id="codMunicipio" value="#{vehiculoController.selected.codMunicipio}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
-                                           var="codMunicipioItem"
-                                           itemValue="#{codMunicipioItem}"/>
-                        </p:selectOneMenu>
+                        </p:selectOneMenu>         
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noAsientos}" for="noAsientos" />
+                        <p:inputText id="noAsientos" value="#{vehiculoController.selected.noAsientos}" title="#{bundle.EditVehiculoTitle_noAsientos}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noMotor}" for="noMotor" />
+                        <p:inputText id="noMotor" value="#{vehiculoController.selected.noMotor}" title="#{bundle.EditVehiculoTitle_noMotor}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_noInventarioRegistro}" for="noInventarioRegistro" />
+                        <p:inputText id="noInventarioRegistro" value="#{vehiculoController.selected.noInventarioRegistro}" title="#{bundle.EditVehiculoTitle_noInventarioRegistro}" />
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_codPersonaAsignacion}" for="codPersonaAsignacion" />
                         <p:selectOneMenu id="codPersonaAsignacion" value="#{vehiculoController.selected.codPersonaAsignacion}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -104,20 +116,10 @@
                                            var="codPuestonItem"
                                            itemValue="#{codPuestonItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codTipoTipo}" for="codTipoTipo" />
-                        <p:selectOneMenu id="codTipoTipo" value="#{vehiculoController.selected.codTipoTipo}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{tipoTipoController.itemsAvailableSelectOne}"
-                                           var="codTipoTipoItem"
-                                           itemValue="#{codTipoTipoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditVehiculoLabel_codTipoUso}" for="codTipoUso" />
-                        <p:selectOneMenu id="codTipoUso" value="#{vehiculoController.selected.codTipoUso}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{tipoUsoController.itemsAvailableSelectOne}"
-                                           var="codTipoUsoItem"
-                                           itemValue="#{codTipoUsoItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_orden}" for="orden" />
+                        <p:inputText id="orden" value="#{vehiculoController.selected.orden}" title="#{bundle.EditVehiculoTitle_orden}" />
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_activo}" for="activo" />
+                        <p:selectBooleanCheckbox id="activo" value="#{vehiculoController.selected.activo}" />
                     </p:panelGrid>
                     <p:commandButton id="buttonUpdateVehiculo" actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoEditDialog.hide()"/>

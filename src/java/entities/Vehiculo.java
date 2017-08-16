@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")
+    , @NamedQuery(name = "Vehiculo.findByDate", query = "Select DISTINCT(v) from Vehiculo v left outer join v.asignacionVehiculoPilotoList avp left join avp.codAsignacionVehiculo av WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY v.codVehiculo")
+        //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin)
     , @NamedQuery(name = "Vehiculo.findByCodVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.codVehiculo = :codVehiculo")
     , @NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT v FROM Vehiculo v WHERE v.placa = :placa")
     , @NamedQuery(name = "Vehiculo.findByNit", query = "SELECT v FROM Vehiculo v WHERE v.nit = :nit")
@@ -431,7 +433,7 @@ public class Vehiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Vehiculo[ codVehiculo=" + codVehiculo + " ]";
+        return placa;
     }
     
 }

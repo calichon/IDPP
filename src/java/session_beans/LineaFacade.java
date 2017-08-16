@@ -6,9 +6,12 @@
 package session_beans;
 
 import entities.Linea;
+import entities.Marca;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,14 @@ public class LineaFacade extends AbstractFacade<Linea> {
 
     public LineaFacade() {
         super(Linea.class);
+    }
+    
+    public List<Linea> getLineaOrderedListLimitsMarca(Marca marca){
+        EntityManager lineaEM;
+        lineaEM = getEntityManager();
+        Query lineaQ;
+        lineaQ = lineaEM.createNamedQuery("Linea.findByCodMarca").setParameter("codMarca", marca);            
+        return lineaQ.getResultList();
     }
     
 }

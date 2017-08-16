@@ -51,23 +51,23 @@
                         <h:outputText value="#{bundle.ViewVehiculoLabel_activo}"/>
                         <p:selectBooleanCheckbox value="#{vehiculoController.selected.activo}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codColor}"/>
-                        <h:outputText value="#{vehiculoController.selected.codColor}" title="#{bundle.ViewVehiculoTitle_codColor}"/>
+                        <h:outputText value="#{vehiculoController.selected.codColor.nombreColor}" title="#{bundle.ViewVehiculoTitle_codColor}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codDepartamento}"/>
-                        <h:outputText value="#{vehiculoController.selected.codDepartamento}" title="#{bundle.ViewVehiculoTitle_codDepartamento}"/>
+                        <h:outputText value="#{vehiculoController.selected.codDepartamento.descripcion}" title="#{bundle.ViewVehiculoTitle_codDepartamento}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codLinea}"/>
-                        <h:outputText value="#{vehiculoController.selected.codLinea}" title="#{bundle.ViewVehiculoTitle_codLinea}"/>
+                        <h:outputText value="#{vehiculoController.selected.codLinea.nombreLinea}" title="#{bundle.ViewVehiculoTitle_codLinea}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codMarca}"/>
-                        <h:outputText value="#{vehiculoController.selected.codMarca}" title="#{bundle.ViewVehiculoTitle_codMarca}"/>
+                        <h:outputText value="#{vehiculoController.selected.codMarca.nombreMarca}" title="#{bundle.ViewVehiculoTitle_codMarca}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codMunicipio}"/>
-                        <h:outputText value="#{vehiculoController.selected.codMunicipio}" title="#{bundle.ViewVehiculoTitle_codMunicipio}"/>
+                        <h:outputText value="#{vehiculoController.selected.codMunicipio.descripcion}" title="#{bundle.ViewVehiculoTitle_codMunicipio}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codPersonaAsignacion}"/>
-                        <h:outputText value="#{vehiculoController.selected.codPersonaAsignacion}" title="#{bundle.ViewVehiculoTitle_codPersonaAsignacion}"/>
+                        <h:outputText value="#{vehiculoController.selected.codPersonaAsignacion.apellido1.concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.apellido2).concat(', ').concat(vehiculoController.selected.codPersonaAsignacion.nombre1).concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.nombre2)}" title="#{bundle.ViewVehiculoTitle_codPersonaAsignacion}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codPueston}"/>
-                        <h:outputText value="#{vehiculoController.selected.codPueston}" title="#{bundle.ViewVehiculoTitle_codPueston}"/>
+                        <h:outputText value="#{vehiculoController.selected.codPueston.descripcion}" title="#{bundle.ViewVehiculoTitle_codPueston}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoTipo}"/>
-                        <h:outputText value="#{vehiculoController.selected.codTipoTipo}" title="#{bundle.ViewVehiculoTitle_codTipoTipo}"/>
+                        <h:outputText value="#{vehiculoController.selected.codTipoTipo.nombreTipoTipo}" title="#{bundle.ViewVehiculoTitle_codTipoTipo}"/>
                         <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoUso}"/>
-                        <h:outputText value="#{vehiculoController.selected.codTipoUso}" title="#{bundle.ViewVehiculoTitle_codTipoUso}"/>
+                        <h:outputText value="#{vehiculoController.selected.codTipoUso.nombreTipoUso}" title="#{bundle.ViewVehiculoTitle_codTipoUso}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="VehiculoViewDialog.hide()"/>
                 </h:panelGroup>
