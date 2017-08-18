@@ -73,7 +73,7 @@ public class Vehiculo implements Serializable {
     @Size(max = 250)
     @Column(name = "direccion")
     private String direccion;
-    @Size(max = 25)
+    @Size(max = 250)
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "modelo")
