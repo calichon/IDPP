@@ -12,10 +12,20 @@
             <h:form id="KilometrajeComisionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{kilometrajeComisionController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codKilometrajeComision}" for="codKilometrajeComision" />
                         <p:inputText id="codKilometrajeComision" value="#{kilometrajeComisionController.selected.codKilometrajeComision}" title="#{bundle.CreateKilometrajeComisionTitle_codKilometrajeComision}" required="true" requiredMessage="#{bundle.CreateKilometrajeComisionRequiredMessage_codKilometrajeComision}"/>
+                        </ui:remove>                        
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codVehiculo}" for="codVehiculo" />
+                        <p:selectOneMenu id="codVehiculo" value="#{kilometrajeComisionController.selected.codVehiculo}" >
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="codVehiculoItem"
+                                           itemValue="#{codVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_placa}" for="placa" />
                         <p:inputText id="placa" value="#{kilometrajeComisionController.selected.placa}" title="#{bundle.CreateKilometrajeComisionTitle_placa}" />
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_kilometrajeInicial}" for="kilometrajeInicial" />
                         <p:inputText id="kilometrajeInicial" value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.CreateKilometrajeComisionTitle_kilometrajeInicial}" />
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_fechaHoraSalida}" for="fechaHoraSalida" />
@@ -46,12 +56,8 @@
                                            var="codPersonaPilotoItem"
                                            itemValue="#{codPersonaPilotoItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codVehiculo}" for="codVehiculo" />
-                        <p:selectOneMenu id="codVehiculo" value="#{kilometrajeComisionController.selected.codVehiculo}" >
-                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
-                                           var="codVehiculoItem"
-                                           itemValue="#{codVehiculoItem}"/>
-                        </p:selectOneMenu>
+                        
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{kilometrajeComisionController.create}" value="#{bundle.Save}" update="display,:KilometrajeComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'KilometrajeComisionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="KilometrajeComisionCreateDialog.hide()"/>

@@ -59,6 +59,44 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return municipioQ.getResultList();
     }
     
+    public boolean existsPlaca(String placa){
+        EntityManager vehiculoEM;
+        vehiculoEM = getEntityManager();
+        boolean resultadoPlaca = false;
+        Query vehiculoQ;
+        vehiculoQ = vehiculoEM.createNamedQuery("Vehiculo.findByPlaca");
+        vehiculoQ.setParameter("placa", placa);
+        int cantidadResultados = 0;
+        cantidadResultados = vehiculoQ.getResultList().size();
+        if(cantidadResultados > 0){
+            resultadoPlaca = true;
+        }
+        else{
+            resultadoPlaca =  false;
+        }
+        return resultadoPlaca;
+    }
+    
+    public String getPlacaById(int codVehiculo){
+        EntityManager vehiculoEM;
+        vehiculoEM = getEntityManager();
+        String resultadoPlaca = "";
+        Query vehiculoQ;
+        vehiculoQ = vehiculoEM.createNamedQuery("Vehiculo.findByCodVehiculo");
+        vehiculoQ.setParameter("codVehiculo", codVehiculo);
+        int cantidadResultados = 0;
+        cantidadResultados = vehiculoQ.getResultList().size();
+        if(cantidadResultados > 0){
+            Vehiculo v;
+            v = (Vehiculo) vehiculoQ.getResultList().get(0);
+            resultadoPlaca = v.getPlaca();
+        }
+        else{
+            resultadoPlaca =  "";
+        }
+        return resultadoPlaca;
+    }
+    
     public void refreshEntity() {
         //getEntityManager().refresh(this);
         //getEntityManager().flush();

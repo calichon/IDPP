@@ -12,8 +12,10 @@
             <h:form id="TipoTipoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{tipoTipoController.selected != null}">
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.CreateTipoTipoLabel_codTipoTipo}" for="codTipoTipo" />
                         <p:inputText id="codTipoTipo" value="#{tipoTipoController.selected.codTipoTipo}" title="#{bundle.CreateTipoTipoTitle_codTipoTipo}" required="true" requiredMessage="#{bundle.CreateTipoTipoRequiredMessage_codTipoTipo}"/>
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateTipoTipoLabel_nombreTipoTipo}" for="nombreTipoTipo" />
                         <p:inputText id="nombreTipoTipo" value="#{tipoTipoController.selected.nombreTipoTipo}" title="#{bundle.CreateTipoTipoTitle_nombreTipoTipo}" />
                         <p:outputLabel value="#{bundle.CreateTipoTipoLabel_orden}" for="orden" />
