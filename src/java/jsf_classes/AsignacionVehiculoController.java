@@ -1,11 +1,15 @@
 package jsf_classes;
 
 import entities.AsignacionVehiculo;
+import entities.AsignacionVehiculoPiloto;
+import entities.Persona;
+import entities.Vehiculo;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.AsignacionVehiculoFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,14 +23,45 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.faces.model.SelectItem;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import session_beans.AsignacionVehiculoPilotoFacade;
+import session_beans.PersonaFacade;
+import session_beans.VehiculoFacade;
+
 @Named("asignacionVehiculoController")
 @SessionScoped
 public class AsignacionVehiculoController implements Serializable {
 
     @EJB
     private session_beans.AsignacionVehiculoFacade ejbFacade;
+    @EJB
+    private session_beans.AsignacionVehiculoPilotoFacade ejbFacadeAVP;
+    @EJB
+    private session_beans.VehiculoFacade ejbFacadeVehiculo;
+    @EJB
+    private session_beans.PersonaFacade ejbFacadePersona;
     private List<AsignacionVehiculo> items = null;
     private AsignacionVehiculo selected;
+    private AsignacionVehiculoPiloto selectedAVP;
+    private EntityManager em;
+    private List<SelectItem> pilotoAsignadoList;
+    private Persona pilotoAsignado;
+    private Vehiculo vehiculoAsignado;
+    private VehiculoController vehiculoController = new VehiculoController();
+    private AsignacionVehiculoPiloto lastAVP;    
+    private AsignacionVehiculoPiloto lastAVPorig;
+    private List<Vehiculo> vehiculosDisponibles = null;
+    private List<Vehiculo> vehiculosDisponiblesEdit = null;
+    private List<Persona> pilotosDisponibles = null;
+    private Date fechaInicio;
+    private Date fechaFin;
+    
+    private int dias = 0;
 
     public AsignacionVehiculoController() {
     }
@@ -34,9 +69,60 @@ public class AsignacionVehiculoController implements Serializable {
     public AsignacionVehiculo getSelected() {
         return selected;
     }
+    
+    public AsignacionVehiculoPiloto getSelectedAVP() {
+        return selectedAVP;
+    }
+    
+    public AsignacionVehiculoPiloto getLastAVP(){        
+        lastAVPorig = selected.getAsignacionVehiculoPilotoList().get(selected.getAsignacionVehiculoPilotoList().size() - 1);//.codVehiculo.toString();                
+        lastAVP = new AsignacionVehiculoPiloto();
+        lastAVP.setCodAsignacionVehiculo(lastAVPorig.getCodAsignacionVehiculo());
+        lastAVP.setCodAsignacionVehiculoPiloto(lastAVPorig.getCodAsignacionVehiculoPiloto());
+        lastAVP.setCodPersonaPilotoAsignado(lastAVPorig.getCodPersonaPilotoAsignado());
+        lastAVP.setCodVehiculo(lastAVPorig.getCodVehiculo());
+        lastAVP.setEstatusAsignacion(lastAVPorig.getEstatusAsignacion());
+        lastAVP.setFechaHoraAsignacion(lastAVPorig.getFechaHoraAsignacion());
+        lastAVP.setFechaHoraRetornoVehiculo(lastAVPorig.getFechaHoraRetornoVehiculo());
+        lastAVP.setFechaHoraUsoVehiculo(lastAVPorig.getFechaHoraUsoVehiculo());
+        return lastAVP;
+    }
+    
+    public List<SelectItem> getPilotoAsignadoList() {
+        pilotoAsignadoList = new ArrayList<SelectItem>();
+        pilotoAsignadoList.add(new SelectItem("1", "Mercedes"));
+        pilotoAsignadoList.add(new SelectItem("2", "Kia"));
+        return pilotoAsignadoList;
+    }
+    
+    public void setPilotoAsignado(Persona piloto){
+        pilotoAsignado = piloto;
+    }
+    
+    public Persona getPilotoAsignado(){
+        return pilotoAsignado;
+    }
+    
+    public void setVehiculoAsignado(Vehiculo vehiculo){
+        vehiculoAsignado = vehiculo;
+    }
+    
+    public Vehiculo getVehiculoAsignado(){
+        if(vehiculoAsignado == null){
+            getLastAVP();
+            if(lastAVPorig != null){
+                vehiculoAsignado = lastAVPorig.getCodVehiculo();
+            }
+        }
+        return vehiculoAsignado;
+    }
 
     public void setSelected(AsignacionVehiculo selected) {
         this.selected = selected;
+    }
+    
+    public void setSelectedAVP(AsignacionVehiculoPiloto selectedAVP) {
+        this.selectedAVP = selectedAVP;
     }
 
     protected void setEmbeddableKeys() {
@@ -48,21 +134,43 @@ public class AsignacionVehiculoController implements Serializable {
     private AsignacionVehiculoFacade getFacade() {
         return ejbFacade;
     }
+    
+    private AsignacionVehiculoPilotoFacade getFacadeAVP() {
+        return ejbFacadeAVP;
+    }
+    
+    private VehiculoFacade getFacadeVehiculo() {
+        return ejbFacadeVehiculo;
+    }
+    
+    private PersonaFacade getFacadePersona(){
+        return ejbFacadePersona;
+    }
 
     public AsignacionVehiculo prepareCreate() {
-        selected = new AsignacionVehiculo();
+        selected = new AsignacionVehiculo();        
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public AsignacionVehiculoPiloto prepareCreateAVP() {
+        selectedAVP = new AsignacionVehiculoPiloto();        
+        initializeEmbeddableKey();
+        return selectedAVP;
+    }
 
     public void create() {
+        prepareCreateAVP();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AsignacionVehiculoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
+    
+    
     public void update() {
+        prepareCreateAVP();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AsignacionVehiculoUpdated"));
     }
 
@@ -80,13 +188,51 @@ public class AsignacionVehiculoController implements Serializable {
         }
         return items;
     }
+    
+    public EntityManager getEntityManager() {
+        return em;
+    }
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.em = entityManager;
+    }
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    //getFacade().edit(selected);
+                    if (persistAction == PersistAction.CREATE) {                    
+                        selectedAVP.setCodAsignacionVehiculo(selected);
+                        em = getEntityManager();                    
+                        selectedAVP.setCodPersonaPilotoAsignado(pilotoAsignado);
+                        selectedAVP.setCodVehiculo(vehiculoAsignado);
+                        selectedAVP.setFechaHoraAsignacion(selected.getFechaAsignacion());
+                        selectedAVP.setFechaHoraUsoVehiculo(selected.getFechaHoraUsoVehiculo());
+                        selectedAVP.setFechaHoraRetornoVehiculo(selected.getFechaHoraRetornoVehiculo());
+                        selectedAVP.setEstatusAsignacion("A");
+                        AsignacionVehiculoPilotoFacade favp;
+                        favp = getFacadeAVP();
+                        favp.edit(selectedAVP);
+                    }
+                    else{
+                        //getFacade().edit(selected);
+                        selectedAVP.setCodAsignacionVehiculo(selected);
+                        em = getEntityManager();                    
+                        selectedAVP.setCodPersonaPilotoAsignado(lastAVP.getCodPersonaPilotoAsignado());
+                        selectedAVP.setCodVehiculo(lastAVP.getCodVehiculo());
+                        selectedAVP.setFechaHoraAsignacion(selected.getFechaAsignacion());
+                        selectedAVP.setFechaHoraUsoVehiculo(selected.getFechaHoraUsoVehiculo());
+                        selectedAVP.setFechaHoraRetornoVehiculo(selected.getFechaHoraRetornoVehiculo());
+                        selectedAVP.setEstatusAsignacion("A");                        
+                        lastAVPorig.setEstatusAsignacion("R");
+                        AsignacionVehiculoPilotoFacade favp;
+                        favp = getFacadeAVP();
+                        favp.edit(selectedAVP);
+                        favp.edit(lastAVPorig);
+                    }
+                    //here vik
                 } else {
                     getFacade().remove(selected);
                 }
@@ -119,6 +265,131 @@ public class AsignacionVehiculoController implements Serializable {
 
     public List<AsignacionVehiculo> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    public void setTotalDias(){
+        Calendar cal1 = new GregorianCalendar();
+        Calendar cal2 = new GregorianCalendar();        
+        
+        Date date1 = selected.getFechaHoraUsoVehiculo();        
+        Date date2 = selected.getFechaHoraRetornoVehiculo();
+        if(date1!=null && date2!=null){
+            cal1.setTime(date1);
+            cal2.setTime(date2);
+            dias = daysBetween(cal1.getTime(),cal2.getTime());
+        }        
+        selected.setDiasAsignacion(dias);        
+        fechaInicio = selected.getFechaHoraUsoVehiculo();
+        fechaFin = selected.getFechaHoraRetornoVehiculo();
+    }
+
+    public List<Vehiculo> getVehiculosDisponibles() {
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Vehiculo> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+            
+        }
+        else{
+            pFechaFin = fechaFin;
+        }        
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
+        }
+        return itemsDisponiblesFecha;
+    }
+    
+    public List<Vehiculo> getVehiculosDisponiblesEdit() {
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Vehiculo> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+            
+        }
+        else{
+            pFechaFin = fechaFin;
+        }        
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());            
+        }
+        return itemsDisponiblesFecha;
+    }
+    
+    public List<Persona> getPilotosDisponibles(){
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Persona> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+            
+        }
+        else{
+            pFechaFin = fechaFin;
+        }        
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadePersona().findByDate(pFechaInicio,pFechaFin);
+        }
+        return itemsDisponiblesFecha;
+    }
+    
+    public List<Persona> getPilotosDisponiblesEdit(){
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Persona> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+            
+        }
+        else{
+            pFechaFin = fechaFin;
+        }        
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadePersona().findByDateAndId(pFechaInicio,pFechaFin,selected);
+        }
+        return itemsDisponiblesFecha;
+    }
+    
+    private int daysBetween(Date d1, Date d2){
+        int ret = 0;
+        ret = (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+        if(ret < 0){
+            ret = 0;
+        }
+        return ret;
+    }
+    
+    public int getDias(){
+        return dias;
+    }
+              
+    public List<String> autocompletarDestino(String query) {
+        return getFacade().getDestinoOrderedList(query);
     }
 
     @FacesConverter(forClass = AsignacionVehiculo.class)

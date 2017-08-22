@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
+    , @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin) OR avp.fechaHoraRetornoVehiculo IS NULL) ORDER BY p.codPersona")
+    , @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin) OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
+        //left outer join p.asignacionVehiculoPilotoList avp
+        //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona
     , @NamedQuery(name = "Persona.findByCodPersona", query = "SELECT p FROM Persona p WHERE p.codPersona = :codPersona")
     , @NamedQuery(name = "Persona.findByCodTipoPersona", query = "SELECT p FROM Persona p WHERE p.codTipoPersona = :codTipoPersona")
     , @NamedQuery(name = "Persona.findByNombre1", query = "SELECT p FROM Persona p WHERE p.nombre1 = :nombre1")
@@ -162,6 +166,7 @@ public class Persona implements Serializable {
     private List<AsignacionVehiculo> asignacionVehiculoList1;
     @OneToMany(mappedBy = "codPersonaPasajero")
     private List<AsignacionVehiculo> asignacionVehiculoList2;
+    
     @OneToMany(mappedBy = "codPersonaSolicitante")
     private List<AsignacionVehiculo> asignacionVehiculoList3;
     @OneToMany(mappedBy = "codCoordindor")

@@ -230,7 +230,8 @@ public class DependenciaInstitucion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.DependenciaInstitucion[ codDependenciaInstitucion=" + codDependenciaInstitucion + " ]";
+        //return "entities.DependenciaInstitucion[ codDependenciaInstitucion=" + codDependenciaInstitucion + " ]";
+        return nombre;
     }
     
 }

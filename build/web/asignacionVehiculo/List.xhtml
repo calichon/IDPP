@@ -47,12 +47,14 @@
                             </f:facet>
                             <h:outputText value="#{item.noSolicitud}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_yearSolicitud}"/>
                             </f:facet>
                             <h:outputText value="#{item.yearSolicitud}"/>
                         </p:column>
+                        </ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"/>
@@ -139,61 +141,63 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codDependenciaInstitucionJuzgado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codDependenciaInstitucionJuzgado}"/>
+                            <h:outputText value="#{item.codDependenciaInstitucionJuzgado.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaAsignadorVehiculo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaAsignadorVehiculo}"/>
+                            <h:outputText value="#{item.codPersonaAsignadorVehiculo.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaCoordinadorJefe}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaCoordinadorJefe}"/>
+                            <h:outputText value="#{item.codPersonaCoordinadorJefe.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaPasajero}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaPasajero}"/>
+                            <h:outputText value="#{item.codPersonaPasajero.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaSolicitante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaSolicitante}"/>
+                            <h:outputText value="#{item.codPersonaSolicitante.toString()}"/>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPuestoAsignadorVehiculo}"/>
+                            <h:outputText value="#{item.codPuestoAsignadorVehiculo.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoCoordinadorJefe}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPuestoCoordinadorJefe}"/>
+                            <h:outputText value="#{item.codPuestoCoordinadorJefe.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPuestoSolicitante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPuestoSolicitante}"/>
+                            <h:outputText value="#{item.codPuestoSolicitante.toString()}"/>
                         </p:column>
+                        </ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codSedeLugarSalida}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codSedeLugarSalida}"/>
+                            <h:outputText value="#{item.codSedeLugarSalida.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codUnidadSolicitante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codUnidadSolicitante}"/>
+                            <h:outputText value="#{item.codUnidadSolicitante.toString()}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{asignacionVehiculoController.prepareCreate}" update=":AsignacionVehiculoCreateForm" oncomplete="PF('AsignacionVehiculoCreateDialog').show()"/>

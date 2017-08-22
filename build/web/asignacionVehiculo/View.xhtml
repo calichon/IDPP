@@ -12,16 +12,26 @@
             <h:form id="AsignacionVehiculoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{asignacionVehiculoController.selected != null}">
+                        <ui:remove>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codAsignacionVehiculo}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_codAsignacionVehiculo}"/>
+                        </ui:remove>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_fechaAsignacion}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.ViewAsignacionVehiculoTitle_fechaAsignacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_noSolicitud}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.noSolicitud}" title="#{bundle.ViewAsignacionVehiculoTitle_noSolicitud}"/>
+                        
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codUnidadSolicitante}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codUnidadSolicitante.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codUnidadSolicitante}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaPasajero}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaPasajero.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaPasajero}"/>
+                        <ui:remove>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_yearSolicitud}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.yearSolicitud}" title="#{bundle.ViewAsignacionVehiculoTitle_yearSolicitud}"/>
+                        </ui:remove>
+                        
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_fechaHoraUsoVehiculo}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_fechaHoraUsoVehiculo}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -34,6 +44,9 @@
                         <h:outputText value="#{asignacionVehiculoController.selected.diasAsignacion}" title="#{bundle.ViewAsignacionVehiculoTitle_diasAsignacion}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_numPersonasViaje}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.numPersonasViaje}" title="#{bundle.ViewAsignacionVehiculoTitle_numPersonasViaje}"/>
+                        
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codSedeLugarSalida}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codSedeLugarSalida.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codSedeLugarSalida}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_destino}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.destino}" title="#{bundle.ViewAsignacionVehiculoTitle_destino}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_diligencia}"/>
@@ -44,6 +57,9 @@
                         <h:outputText value="#{asignacionVehiculoController.selected.causa2}" title="#{bundle.ViewAsignacionVehiculoTitle_causa2}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_causa3}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.causa3}" title="#{bundle.ViewAsignacionVehiculoTitle_causa3}"/>
+                        
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codDependenciaInstitucionJuzgado}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codDependenciaInstitucionJuzgado.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codDependenciaInstitucionJuzgado}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_utilizaPiloto}"/>
                         <p:selectBooleanCheckbox value="#{asignacionVehiculoController.selected.utilizaPiloto}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_utilizaVehiculo}"/>
@@ -52,26 +68,26 @@
                         <p:selectBooleanCheckbox value="#{asignacionVehiculoController.selected.cargaVoluminosa}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_observaciones}"/>
                         <h:outputText value="#{asignacionVehiculoController.selected.observaciones}" title="#{bundle.ViewAsignacionVehiculoTitle_observaciones}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codDependenciaInstitucionJuzgado}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codDependenciaInstitucionJuzgado}" title="#{bundle.ViewAsignacionVehiculoTitle_codDependenciaInstitucionJuzgado}"/>
+                        
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaAsignadorVehiculo}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaAsignadorVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaAsignadorVehiculo}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaCoordinadorJefe}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaCoordinadorJefe}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaPasajero}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaPasajero}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaPasajero}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaCoordinadorJefe}"/>
+                        
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaSolicitante}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaSolicitante}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPersonaSolicitante.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaSolicitante}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoCoordinadorJefe}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoCoordinadorJefe}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoCoordinadorJefe}"/>
                         <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoSolicitante}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoSolicitante}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoSolicitante}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codSedeLugarSalida}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codSedeLugarSalida}" title="#{bundle.ViewAsignacionVehiculoTitle_codSedeLugarSalida}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codUnidadSolicitante}"/>
-                        <h:outputText value="#{asignacionVehiculoController.selected.codUnidadSolicitante}" title="#{bundle.ViewAsignacionVehiculoTitle_codUnidadSolicitante}"/>
+                        <h:outputText value="#{asignacionVehiculoController.selected.codPuestoSolicitante.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoSolicitante}"/>
+                        
+                        
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_vehiculoAsignado}" />
+                        <h:outputText value="#{asignacionVehiculoController.selected.asignacionVehiculoPilotoList.get(asignacionVehiculoController.selected.asignacionVehiculoPilotoList.size() - 1).codVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_vehiculoAsignado}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_pilotoAsignado}" />
+                        <h:outputText value="#{asignacionVehiculoController.selected.asignacionVehiculoPilotoList.get(asignacionVehiculoController.selected.asignacionVehiculoPilotoList.size() - 1).codPersonaPilotoAsignado.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_pilotoAsignado}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AsignacionVehiculoViewDialog.hide()"/>
                 </h:panelGroup>

@@ -12,45 +12,17 @@
             <h:form id="CombustibleComisionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{combustibleComisionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codCombustibleComision}" for="codCombustibleComision" />
-                        <p:inputText id="codCombustibleComision" value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.CreateCombustibleComisionTitle_codCombustibleComision}" required="true" requiredMessage="#{bundle.CreateCombustibleComisionRequiredMessage_codCombustibleComision}"/>
+                        <ui:remove>
+                            <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codCombustibleComision}" for="codCombustibleComision" />
+                            <p:inputText id="codCombustibleComision" value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.CreateCombustibleComisionTitle_codCombustibleComision}" required="true" requiredMessage="#{bundle.CreateCombustibleComisionRequiredMessage_codCombustibleComision}"/>
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_fechaEntrega}" for="fechaEntrega" />
                         <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy HH:mm:ss" value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.EditCombustibleComisionTitle_fechaEntrega}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_placa}" for="placa" />
-                        <p:inputText id="placa" value="#{combustibleComisionController.selected.placa}" title="#{bundle.CreateCombustibleComisionTitle_placa}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_kilometrajeActual}" for="kilometrajeActual" />
-                        <p:inputText id="kilometrajeActual" value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.CreateCombustibleComisionTitle_kilometrajeActual}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_comisionA}" for="comisionA" />
-                        <p:inputText id="comisionA" value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.CreateCombustibleComisionTitle_comisionA}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.CreateCombustibleComisionTitle_observaciones}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_importeTotalLetras}" for="importeTotalLetras" />
-                        <p:inputText id="importeTotalLetras" value="#{combustibleComisionController.selected.importeTotalLetras}" title="#{bundle.CreateCombustibleComisionTitle_importeTotalLetras}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_cantidadEstimadaCarga}" for="cantidadEstimadaCarga" />
-                        <p:inputText id="cantidadEstimadaCarga" value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" title="#{bundle.CreateCombustibleComisionTitle_cantidadEstimadaCarga}" />
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaEncargadoTransporte}" for="codPersonaEncargadoTransporte" />
-                        <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" >
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaEncargadoTransporteItem"
-                                           itemValue="#{codPersonaEncargadoTransporteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaReceptor}" for="codPersonaReceptor" />
-                        <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaReceptorItem"
-                                           itemValue="#{codPersonaReceptorItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
                         <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" >
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="codPersonaSolicitanteItem"
                                            itemValue="#{codPersonaSolicitanteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPuestoReceptor}" for="codPuestoReceptor" />
-                        <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" >
-                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
-                                           var="codPuestoReceptorItem"
-                                           itemValue="#{codPuestoReceptorItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
                         <p:selectOneMenu id="codPuestoSolicitante" value="#{combustibleComisionController.selected.codPuestoSolicitante}" >
@@ -70,12 +42,53 @@
                                            var="codUnidadItem"
                                            itemValue="#{codUnidadItem}"/>
                         </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codVehiculo}" for="codVehiculo" />
                         <p:selectOneMenu id="codVehiculo" value="#{combustibleComisionController.selected.codVehiculo}" >
                             <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
                                            var="codVehiculoItem"
                                            itemValue="#{codVehiculoItem}"/>
                         </p:selectOneMenu>
+                        
+                        
+                        <ui:remove>
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_placa}" for="placa" />
+                        <p:inputText id="placa" value="#{combustibleComisionController.selected.placa}" title="#{bundle.CreateCombustibleComisionTitle_placa}" />
+                        </ui:remove>
+                        
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_kilometrajeActual}" for="kilometrajeActual" />
+                        <p:inputText id="kilometrajeActual" value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.CreateCombustibleComisionTitle_kilometrajeActual}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_comisionA}" for="comisionA" />
+                        <p:inputText id="comisionA" value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.CreateCombustibleComisionTitle_comisionA}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.CreateCombustibleComisionTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_importeTotalLetras}" for="importeTotalLetras" />
+                        <p:inputText id="importeTotalLetras" value="#{combustibleComisionController.selected.importeTotalLetras}" title="#{bundle.CreateCombustibleComisionTitle_importeTotalLetras}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_cantidadEstimadaCarga}" for="cantidadEstimadaCarga" />
+                        <p:inputText id="cantidadEstimadaCarga" value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" title="#{bundle.CreateCombustibleComisionTitle_cantidadEstimadaCarga}" />
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaEncargadoTransporte}" for="codPersonaEncargadoTransporte" />
+                        <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaEncargadoTransporteItem"
+                                           itemValue="#{codPersonaEncargadoTransporteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaReceptor}" for="codPersonaReceptor" />
+                        <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="codPersonaReceptorItem"
+                                           itemValue="#{codPersonaReceptorItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPuestoReceptor}" for="codPuestoReceptor" />
+                        <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" >
+                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                           var="codPuestoReceptorItem"
+                                           itemValue="#{codPuestoReceptorItem}"/>
+                        </p:selectOneMenu>
+                        
+                        
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{combustibleComisionController.create}" value="#{bundle.Save}" update="display,:CombustibleComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CombustibleComisionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CombustibleComisionCreateDialog.hide()"/>

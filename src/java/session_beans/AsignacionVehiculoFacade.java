@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.AsignacionVehiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class AsignacionVehiculoFacade extends AbstractFacade<AsignacionVehiculo>
 
     public AsignacionVehiculoFacade() {
         super(AsignacionVehiculo.class);
+    }
+    
+    public List<String> getDestinoOrderedList(String query){
+        EntityManager asignacionVehiculoEM;
+        asignacionVehiculoEM = getEntityManager();
+        Query destinoQ;
+        destinoQ = asignacionVehiculoEM.createNamedQuery("AsignacionVehiculo.findAllDestino").setParameter("search", query);;
+        return destinoQ.getResultList();
     }
     
 }

@@ -1,7 +1,6 @@
 package jsf_classes;
 
 import entities.Departamento;
-import entities.ImageToDownload;
 import entities.Imagen;
 import entities.Municipio;
 import entities.Vehiculo;
@@ -16,6 +15,7 @@ import session_beans.ImagenFacade;
 import session_beans.MunicipioFacade;
 import java.io.Serializable;
 import java.security.MessageDigest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +32,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -285,6 +284,7 @@ public class VehiculoController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
+
         }
     }
     

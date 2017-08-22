@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AsignacionVehiculo.findAll", query = "SELECT a FROM AsignacionVehiculo a")
+    , @NamedQuery(name = "AsignacionVehiculo.findAllDestino", query = "SELECT DISTINCT(a.destino) FROM AsignacionVehiculo a WHERE a.destino LIKE CONCAT('%',:search,'%') ORDER BY a.destino")
     , @NamedQuery(name = "AsignacionVehiculo.findByCodAsignacionVehiculo", query = "SELECT a FROM AsignacionVehiculo a WHERE a.codAsignacionVehiculo = :codAsignacionVehiculo")
     , @NamedQuery(name = "AsignacionVehiculo.findByFechaAsignacion", query = "SELECT a FROM AsignacionVehiculo a WHERE a.fechaAsignacion = :fechaAsignacion")
     , @NamedQuery(name = "AsignacionVehiculo.findByNoSolicitud", query = "SELECT a FROM AsignacionVehiculo a WHERE a.noSolicitud = :noSolicitud")
@@ -62,8 +63,10 @@ public class AsignacionVehiculo implements Serializable {
     private Integer codAsignacionVehiculo;
     @Column(name = "fecha_asignacion")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaAsignacion;
-    @Column(name = "no_solicitud")
+    private Date fechaAsignacion;    
+//    @SequenceGenerator(name="asignacion_vehiculo_no_solicitud",sequenceName="asignacion_vehiculo_no_solicitud")            
+//    @GeneratedValue(strategy=GenerationType.AUTO, generator="asignacion_vehiculo_no_solicitud")         
+    @Column(name = "no_solicitud", insertable = false)
     private Integer noSolicitud;
     @Column(name = "year_solicitud")
     private Integer yearSolicitud;

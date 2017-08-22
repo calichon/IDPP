@@ -5,10 +5,14 @@
  */
 package session_beans;
 
+import entities.AsignacionVehiculo;
 import entities.Persona;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +33,19 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         super(Persona.class);
     }
     
+    public List<Persona> findByDate(Date fechaInicio, Date fechaFin) {
+        EntityManager em = getEntityManager();
+        Query personaQ;        
+        personaQ = em.createNamedQuery("Persona.findByDate").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin);
+        //personaQ = em.createNamedQuery("Persona.findByDate");
+        return personaQ.getResultList();
+    }
+    
+    public List<Persona> findByDateAndId(Date fechaInicio, Date fechaFin, AsignacionVehiculo id) {
+        EntityManager em = getEntityManager();
+        Query personaQ;        
+        personaQ = em.createNamedQuery("Persona.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id);
+        //personaQ = em.createNamedQuery("Persona.findByDate");
+        return personaQ.getResultList();
+    }
 }

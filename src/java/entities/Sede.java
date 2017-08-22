@@ -80,6 +80,7 @@ public class Sede implements Serializable {
     private String zona;
     @OneToMany(mappedBy = "codSede")
     private List<CombustibleComision> combustibleComisionList;
+    
     @OneToMany(mappedBy = "codSedeLugarSalida")
     private List<AsignacionVehiculo> asignacionVehiculoList;
     @JoinColumn(name = "cod_municipio", referencedColumnName = "cod_municipio")
@@ -251,7 +252,8 @@ public class Sede implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Sede[ codSede=" + codSede + " ]";
+        //return "entities.Sede[ codSede=" + codSede + " ]";
+        return nombreSede;
     }
     
 }
