@@ -5,10 +5,13 @@
  */
 package session_beans;
 
+import entities.AsignacionVehiculo;
 import entities.AsignacionVehiculoPiloto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,14 @@ public class AsignacionVehiculoPilotoFacade extends AbstractFacade<AsignacionVeh
 
     public AsignacionVehiculoPilotoFacade() {
         super(AsignacionVehiculoPiloto.class);
+    }
+    
+    public List<AsignacionVehiculoPiloto> findByAV(Integer id){
+        EntityManager em = getEntityManager();
+        Query avpQ;        
+        avpQ = em.createNamedQuery("AsignacionVehiculoPiloto.findByCodAsignacionVehiculo").setParameter("codAsignacionVehiculo", em.find(AsignacionVehiculo.class, id));
+        //codAsignacionVehiculo
+        return avpQ.getResultList();
     }
     
 }

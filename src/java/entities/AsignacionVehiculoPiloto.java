@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "AsignacionVehiculoPiloto.findAll", query = "SELECT a FROM AsignacionVehiculoPiloto a")
     , @NamedQuery(name = "AsignacionVehiculoPiloto.findByCodAsignacionVehiculoPiloto", query = "SELECT a FROM AsignacionVehiculoPiloto a WHERE a.codAsignacionVehiculoPiloto = :codAsignacionVehiculoPiloto")
+    , @NamedQuery(name = "AsignacionVehiculoPiloto.findByCodAsignacionVehiculo", query = "SELECT a FROM AsignacionVehiculoPiloto a WHERE a.codAsignacionVehiculo = :codAsignacionVehiculo")
     , @NamedQuery(name = "AsignacionVehiculoPiloto.findByFechaHoraUsoVehiculo", query = "SELECT a FROM AsignacionVehiculoPiloto a WHERE a.fechaHoraUsoVehiculo = :fechaHoraUsoVehiculo")
     , @NamedQuery(name = "AsignacionVehiculoPiloto.findByFechaHoraRetornoVehiculo", query = "SELECT a FROM AsignacionVehiculoPiloto a WHERE a.fechaHoraRetornoVehiculo = :fechaHoraRetornoVehiculo")
     , @NamedQuery(name = "AsignacionVehiculoPiloto.findByFechaHoraAsignacion", query = "SELECT a FROM AsignacionVehiculoPiloto a WHERE a.fechaHoraAsignacion = :fechaHoraAsignacion")
@@ -57,9 +59,11 @@ public class AsignacionVehiculoPiloto implements Serializable {
     @Size(max = 2)
     @Column(name = "estatus_asignacion")
     private String estatusAsignacion;
+    
     @JoinColumn(name = "cod_asignacion_vehiculo", referencedColumnName = "cod_asignacion_vehiculo")
-    @ManyToOne
+    @ManyToOne(targetEntity=AsignacionVehiculo.class, cascade = CascadeType.ALL)
     private AsignacionVehiculo codAsignacionVehiculo;
+    
     @JoinColumn(name = "cod_persona_piloto_asignado", referencedColumnName = "cod_persona")
     @ManyToOne
     private Persona codPersonaPilotoAsignado;

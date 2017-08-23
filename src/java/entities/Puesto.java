@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -46,6 +47,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Puesto.findByFechaSistema", query = "SELECT p FROM Puesto p WHERE p.fechaSistema = :fechaSistema")})
 public class Puesto implements Serializable {
 
+    @JoinColumn(name = "cod_organigrama", referencedColumnName = "cod_organigrama")
+    @ManyToOne
+    private Organigrama codOrganigrama;
+    @OneToMany(mappedBy = "codPuesto")
+    private Collection<Persona> personaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,9 +60,7 @@ public class Puesto implements Serializable {
     @Column(name = "cod_puesto")
     private Integer codPuesto;
     @Column(name = "cod_tipo_puesto")
-    private Integer codTipoPuesto;
-    @Column(name = "cod_organigrama")
-    private Integer codOrganigrama;
+    private Integer codTipoPuesto;    
     @Size(max = 100)
     @Column(name = "descripcion")
     private String descripcion;
@@ -119,15 +124,7 @@ public class Puesto implements Serializable {
 
     public void setCodTipoPuesto(Integer codTipoPuesto) {
         this.codTipoPuesto = codTipoPuesto;
-    }
-
-    public Integer getCodOrganigrama() {
-        return codOrganigrama;
-    }
-
-    public void setCodOrganigrama(Integer codOrganigrama) {
-        this.codOrganigrama = codOrganigrama;
-    }
+    }    
 
     public String getDescripcion() {
         return descripcion;
@@ -288,6 +285,23 @@ public class Puesto implements Serializable {
     public String toString() {
         //return "entities.Puesto[ codPuesto=" + codPuesto + " ]";
         return descripcion;
+    }
+
+    public Organigrama getCodOrganigrama() {
+        return codOrganigrama;
+    }
+
+    public void setCodOrganigrama(Organigrama codOrganigrama) {
+        this.codOrganigrama = codOrganigrama;
+    }
+
+    @XmlTransient
+    public Collection<Persona> getPersonaCollection() {
+        return personaCollection;
+    }
+
+    public void setPersonaCollection(Collection<Persona> personaCollection) {
+        this.personaCollection = personaCollection;
     }
     
 }

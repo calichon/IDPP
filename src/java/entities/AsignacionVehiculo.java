@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -134,7 +136,8 @@ public class AsignacionVehiculo implements Serializable {
     @JoinColumn(name = "cod_unidad_solicitante", referencedColumnName = "cod_unidad")
     @ManyToOne
     private Unidad codUnidadSolicitante;
-    @OneToMany(mappedBy = "codAsignacionVehiculo")
+    
+    @OneToMany(mappedBy = "codAsignacionVehiculo",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private List<AsignacionVehiculoPiloto> asignacionVehiculoPilotoList;
 
     public AsignacionVehiculo() {

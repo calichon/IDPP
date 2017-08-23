@@ -34,15 +34,16 @@
                         
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codUnidadSolicitante}" for="codUnidadSolicitante" />
                         <p:selectOneMenu id="codUnidadSolicitante" value="#{asignacionVehiculoController.selected.codUnidadSolicitante}" effect="fold" filter="true" filterMatchMode="contains" >
+                            <p:ajax listener="#{asignacionVehiculoController.onUnidadChange}" update="codPersonaPasajero" />
                             <f:selectItem itemLabel="Seleccione unidad" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                             <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
                                            var="codUnidadSolicitanteItem"
-                                           itemValue="#{codUnidadSolicitanteItem}"/>                                                                                    
+                                           itemValue="#{codUnidadSolicitanteItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_codPersonaPasajero}" for="codPersonaPasajero" />
                         <p:selectOneMenu id="codPersonaPasajero" value="#{asignacionVehiculoController.selected.codPersonaPasajero}" >
                             <f:selectItem itemLabel="Seleccione pasajero" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{asignacionVehiculoController.pasajerosUnidad}"
                                            var="codPersonaPasajeroItem"
                                            itemValue="#{codPersonaPasajeroItem}"/>
                         </p:selectOneMenu>

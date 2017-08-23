@@ -7,19 +7,29 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-
-        <p:dialog id="AsignacionVehiculoEditDlg" widgetVar="AsignacionVehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignacionVehiculoTitle}">
-            <h:form id="AsignacionVehiculoEditForm">
+        <f:metadata>            
+            <f:viewAction action="#{asignacionVehiculoController.setPasajerosUnidad()}" />
+            
+        </f:metadata>
+        
+        <p:dialog id="AsignacionVehiculoEditDlg" widgetVar="AsignacionVehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignacionVehiculoTitle}" onShow="updateDialog()">
+            
+            <h:form id="AsignacionVehiculoEditForm">                
+                <p:remoteCommand name="updateDialog" update="codPersonaPasajero" actionListener="#{asignacionVehiculoController.setPasajerosUnidad()}"/>
                 <h:panelGroup id="display">
+                    
                     <p:panelGrid columns="6" rendered="#{asignacionVehiculoController.selected != null}">
+                        
                         <ui:remove>
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codAsignacionVehiculo}" for="codAsignacionVehiculo" />
                         <p:inputText id="codAsignacionVehiculo" value="#{asignacionVehiculoController.selected.codAsignacionVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_codAsignacionVehiculo}" required="true" requiredMessage="#{bundle.EditAsignacionVehiculoRequiredMessage_codAsignacionVehiculo}"/>
                         </ui:remove>
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaAsignacion}" for="fechaAsignacion" />
                         <p:calendar id="fechaAsignacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_fechaAsignacion}"  showOn="button"/>
+                        
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codUnidadSolicitante}" for="codUnidadSolicitante" />
                         <p:selectOneMenu id="codUnidadSolicitante" value="#{asignacionVehiculoController.selected.codUnidadSolicitante}" >
+                            <p:ajax listener="#{asignacionVehiculoController.onUnidadChange}" update="codPersonaPasajero" />
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
                                            var="codUnidadSolicitanteItem"
@@ -28,7 +38,7 @@
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaPasajero}" for="codPersonaPasajero" />
                         <p:selectOneMenu id="codPersonaPasajero" value="#{asignacionVehiculoController.selected.codPersonaPasajero}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{asignacionVehiculoController.pasajerosUnidad}"
                                            var="codPersonaPasajeroItem"
                                            itemValue="#{codPersonaPasajeroItem}"/>
                         </p:selectOneMenu>
@@ -40,9 +50,15 @@
                         <p:inputText id="yearSolicitud" value="#{asignacionVehiculoController.selected.yearSolicitud}" title="#{bundle.EditAsignacionVehiculoTitle_yearSolicitud}" />
                         </ui:remove>
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />
-                        <p:calendar id="fechaHoraUsoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button"/>
+                        <p:calendar id="fechaHoraUsoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button">
+                            <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>
+                        </p:calendar>
+                        
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaHoraRetornoVehiculo}" for="fechaHoraRetornoVehiculo" />
-                        <p:calendar id="fechaHoraRetornoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"  showOn="button"/>
+                        <p:calendar id="fechaHoraRetornoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"  showOn="button">
+                            <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>
+                        </p:calendar>
+                            
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_diasAsignacion}" for="diasAsignacion" />
                         <p:inputText id="diasAsignacion" value="#{asignacionVehiculoController.selected.diasAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_diasAsignacion}" />
                         <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_numPersonasViaje}" for="numPersonasViaje" />
@@ -143,9 +159,7 @@
                             <f:selectItems value="#{asignacionVehiculoController.pilotosDisponiblesEdit}"
                                            var="pilotoAsignado"
                                            itemValue="#{pilotoAsignado}"/>
-                        </p:selectOneMenu>
-                        
-                        <h:outputText value="#{asignacionVehiculoController.lastAVP.toString()}" />
+                        </p:selectOneMenu>                                                
                         
                     </p:panelGrid>
                     <p:commandButton actionListener="#{asignacionVehiculoController.update}" value="#{bundle.Save}" update="display,:AsignacionVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsignacionVehiculoEditDialog');"/>

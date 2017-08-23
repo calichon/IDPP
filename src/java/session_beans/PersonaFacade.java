@@ -7,6 +7,7 @@ package session_beans;
 
 import entities.AsignacionVehiculo;
 import entities.Persona;
+import entities.Unidad;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -46,6 +47,13 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         Query personaQ;        
         personaQ = em.createNamedQuery("Persona.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id);
         //personaQ = em.createNamedQuery("Persona.findByDate");
+        return personaQ.getResultList();
+    }
+    
+    public List<Persona> findByUnidad(Unidad u) {
+        EntityManager em = getEntityManager();
+        Query personaQ;        
+        personaQ = em.createNamedQuery("Persona.findByUnidad").setParameter("unidad", u);
         return personaQ.getResultList();
     }
 }

@@ -3,15 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/src/java/jsf_classes/AsignacionVehiculoController.java</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/web/asignacionVehiculo/View.xhtml</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/src/java/jsf_classes/VehiculoController.java</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/src/java/Bundle.properties</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/web/asignacionVehiculo/Create.xhtml</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/src/java/session_beans/AsignacionVehiculoFacade.java</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/web/combustibleComision/Create.xhtml</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/web/asignacionVehiculo/Edit.xhtml</file>
-            <file>file:/D:/Freelancing/Clientes/IDPP/git_code/src/java/entities/AsignacionVehiculo.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/entities/AsignacionVehiculo.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/session_beans/VehiculoFacade.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/web/asignacionVehiculo/Edit.xhtml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/conf/persistence.xml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/session_beans/AsignacionVehiculoPilotoFacade.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/entities/Vehiculo.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/jsf_classes/AsignacionVehiculoController.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/entities/AsignacionVehiculoPiloto.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/session_beans/AbstractFacade.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/entities/Persona.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy/src/java/jsf_classes/VehiculoController.java</file>
         </group>
     </open-files>
 </project-private>

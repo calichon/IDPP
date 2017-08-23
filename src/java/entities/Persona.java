@@ -36,10 +36,50 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-    , @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin) OR avp.fechaHoraRetornoVehiculo IS NULL) ORDER BY p.codPersona")
-    , @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin) OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
+    //, @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) ORDER BY p.codPersona")
+    , @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) \n" +
+"from Persona p \n" +
+"left outer join p.asignacionVehiculoPilotoList avp \n" +
+"WHERE \n" +
+"p.codPersona NOT IN (\n" +
+"    SELECT p.codPersona\n" +
+"    FROM Persona p\n" +
+"    left outer join p.asignacionVehiculoPilotoList avp \n" +
+"    WHERE \n" +
+"    ((:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') \n" +
+"    AND avp.fechaHoraRetornoVehiculo IS NOT NULL) \n" +
+")"+
+"AND p.codPersona IN (" +
+            "SELECT p.codPersona\n" +
+            "FROM Persona p\n" +
+            "left outer join p.puestoList pl \n" +
+            "WHERE  pl.codTipoPuesto = 2 "+
+            ")\n" +
+"ORDER BY p.codPersona")
+        
+    //, @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
+    , @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) \n" +
+"from Persona p \n" +
+"left outer join p.asignacionVehiculoPilotoList avp \n" +
+"WHERE \n" +
+"p.codPersona NOT IN (\n" +
+"    SELECT p.codPersona\n" +
+"    FROM Persona p\n" +
+"    left outer join p.asignacionVehiculoPilotoList avp \n" +
+"    WHERE \n" +
+"    ((:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') \n" +
+"    AND avp.fechaHoraRetornoVehiculo IS NOT NULL AND avp.codAsignacionVehiculo != :codAsignacionVehiculo ) \n" +
+"AND p.codPersona IN (" +
+"SELECT p.codPersona\n" +
+"FROM Persona p\n" +
+"left outer join p.puestoList pl \n" +
+"WHERE  pl.codTipoPuesto = 2 "+
+")\n" +
+")\n" +
+"ORDER BY p.codPersona")
         //left outer join p.asignacionVehiculoPilotoList avp
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona
+    , @NamedQuery(name = "Persona.findByUnidad", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl join pl.codOrganigrama o join o.codUnidad u WHERE u = :unidad")
     , @NamedQuery(name = "Persona.findByCodPersona", query = "SELECT p FROM Persona p WHERE p.codPersona = :codPersona")
     , @NamedQuery(name = "Persona.findByCodTipoPersona", query = "SELECT p FROM Persona p WHERE p.codTipoPersona = :codTipoPersona")
     , @NamedQuery(name = "Persona.findByNombre1", query = "SELECT p FROM Persona p WHERE p.nombre1 = :nombre1")
@@ -66,6 +106,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByFecha", query = "SELECT p FROM Persona p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Persona.findByClasificacionGeografica", query = "SELECT p FROM Persona p WHERE p.clasificacionGeografica = :clasificacionGeografica")})
 public class Persona implements Serializable {
+
+    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
+    @JoinColumn(name = "cod_puesto", referencedColumnName = "cod_puesto")
+    @ManyToOne
+    private Puesto codPuesto;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -130,9 +177,6 @@ public class Persona implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "url_foto")
     private String urlFoto;
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
     @Size(max = 100)
     @Column(name = "providad")
     private String providad;
@@ -355,13 +399,6 @@ public class Persona implements Serializable {
         this.urlFoto = urlFoto;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
 
     public String getProvidad() {
         return providad;
@@ -551,6 +588,22 @@ public class Persona implements Serializable {
     public String toString() {
         //return "entities.Persona[ codPersona=" + codPersona + " ]";
         return apellido1 + " " + apellido2 + " " + apellidoCasada + ", " + nombre1 + " " + nombre2;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public Puesto getCodPuesto() {
+        return codPuesto;
+    }
+
+    public void setCodPuesto(Puesto codPuesto) {
+        this.codPuesto = codPuesto;
     }
     
 }

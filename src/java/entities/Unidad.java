@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Unidad.findByTieneDependencia", query = "SELECT u FROM Unidad u WHERE u.tieneDependencia = :tieneDependencia")
     , @NamedQuery(name = "Unidad.findByNomenclatura", query = "SELECT u FROM Unidad u WHERE u.nomenclatura = :nomenclatura")})
 public class Unidad implements Serializable {
+
+    @OneToMany(mappedBy = "codUnidad")
+    private Collection<Organigrama> organigramaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -148,6 +152,15 @@ public class Unidad implements Serializable {
     public String toString() {
         //return "entities.Unidad[ codUnidad=" + codUnidad + " ]";
         return descripcion;
+    }
+
+    @XmlTransient
+    public Collection<Organigrama> getOrganigramaCollection() {
+        return organigramaCollection;
+    }
+
+    public void setOrganigramaCollection(Collection<Organigrama> organigramaCollection) {
+        this.organigramaCollection = organigramaCollection;
     }
     
 }
