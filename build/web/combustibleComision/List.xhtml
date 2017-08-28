@@ -41,12 +41,16 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
+                        <ui:remove>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_placa}"/>
                             </f:facet>
                             <h:outputText value="#{item.placa}"/>
                         </p:column>
+                        </ui:remove>
+
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_kilometrajeActual}"/>
@@ -67,12 +71,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCombustibleComisionTitle_importeTotalLetras}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.importeTotalLetras}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_cantidadEstimadaCarga}"/>
                             </f:facet>
                             <h:outputText value="#{item.cantidadEstimadaCarga}"/>
@@ -81,54 +79,54 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codPersonaEncargadoTransporte}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaEncargadoTransporte}"/>
+                            <h:outputText value="#{item.codPersonaEncargadoTransporte.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codPersonaReceptor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaReceptor}"/>
+                            <h:outputText value="#{item.codPersonaReceptor.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codPersonaSolicitante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPersonaSolicitante}"/>
+                            <h:outputText value="#{item.codPersonaSolicitante.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codPuestoReceptor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPuestoReceptor}"/>
+                            <h:outputText value="#{item.codPuestoReceptor.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codPuestoSolicitante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPuestoSolicitante}"/>
+                            <h:outputText value="#{item.codPuestoSolicitante.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codSede}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codSede}"/>
+                            <h:outputText value="#{item.codSede.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codUnidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codUnidad}"/>
+                            <h:outputText value="#{item.codUnidad.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCombustibleComisionTitle_codVehiculo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codVehiculo}"/>
+                            <h:outputText value="#{item.codVehiculo.toString()}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{combustibleComisionController.prepareCreate}" update=":CombustibleComisionCreateForm" oncomplete="PF('CombustibleComisionCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CombustibleComisionViewForm" oncomplete="PF('CombustibleComisionViewDialog').show()" disabled="#{empty combustibleComisionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CombustibleComisionEditForm" oncomplete="PF('CombustibleComisionEditDialog').show()" disabled="#{empty combustibleComisionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{combustibleComisionController.init}"  update=":CombustibleComisionEditForm" oncomplete="PF('CombustibleComisionEditDialog').show()" disabled="#{empty combustibleComisionController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{combustibleComisionController.destroy}" update=":growl,datalist" disabled="#{empty combustibleComisionController.selected}"/>
                         </f:facet>
                     </p:dataTable>

@@ -1,11 +1,16 @@
 package jsf_classes;
 
+import com.sun.faces.component.visit.FullVisitContext;
 import entities.CombustibleComision;
+import entities.CombustibleCupon;
+import entities.Persona;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.CombustibleComisionFacade;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -15,9 +20,14 @@ import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.visit.VisitCallback;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import session_beans.CombustibleCuponFacade;
 
 @Named("combustibleComisionController")
 @SessionScoped
@@ -25,10 +35,134 @@ public class CombustibleComisionController implements Serializable {
 
     @EJB
     private session_beans.CombustibleComisionFacade ejbFacade;
+    @EJB
+    private session_beans.CombustibleCuponFacade ejbFacadeCupon;
     private List<CombustibleComision> items = null;
     private CombustibleComision selected;
+    private List<CombustibleCupon> cupones   = new ArrayList<CombustibleCupon>();
 
     public CombustibleComisionController() {
+//        CombustibleCupon temp = new CombustibleCupon();
+//        temp.setCantidadCupones(2);
+//        temp.setSumaTotal(BigInteger.ZERO);
+//        temp.setNumeroCuponInicial(BigInteger.valueOf(100));
+//        temp.setNumeroCuponFinal(BigInteger.valueOf(120));
+//        cupones.add(temp);
+//        CombustibleCupon temp2 = new CombustibleCupon();
+//        temp2.setCantidadCupones(5);
+//        temp2.setSumaTotal(BigInteger.valueOf(300));
+//        temp2.setNumeroCuponInicial(BigInteger.valueOf(250));
+//        temp2.setNumeroCuponFinal(BigInteger.valueOf(255));
+//        cupones.add(temp2);
+//        cupones.add(new CombustibleCupon());
+
+    }
+
+    public void init(){
+        //cupones.clear();
+        if(selected.getCombustibleCuponList()!=null){
+            cupones = selected.getCombustibleCuponList();
+        }
+        else{
+            cupones = new ArrayList<CombustibleCupon>();
+        }
+        String s = new String();
+    }
+
+    public void initCreate(){
+
+    }
+
+    public void eliminarCupon(CombustibleCupon cupon){
+        if(cupones.contains(cupon)){
+            cupones.remove(cupon);
+        }
+    }
+
+    public String getTotalGeneral(){
+        String s;
+        BigInteger suma = BigInteger.ZERO;
+        for (CombustibleCupon cupon : cupones) {
+            BigInteger t = cupon.getSumaTotal();
+            if(cupon.getSumaTotal() != null){
+                suma = suma.add(cupon.getSumaTotal());
+            }
+            else{
+                if(cupon.getCodCuponDenominancion() != null && cupon.getCantidadCupones() != null){
+                    BigInteger cuponDenominacion = cupon.getCodCuponDenominancion().getDenominacion();
+                    BigInteger numero = BigInteger.valueOf(cupon.getCantidadCupones());
+                    BigInteger total = cuponDenominacion.multiply(numero);
+                    suma = suma.add(total);
+                }
+            }
+        }
+        s = suma.toString();
+        return s;
+    }
+
+    public String getTotal(CombustibleCupon cupon){
+        String s;
+        if(cupon.getCodCuponDenominancion() != null && cupon.getCantidadCupones() != null){
+            BigInteger cuponDenominacion = cupon.getCodCuponDenominancion().getDenominacion();
+            BigInteger numero = BigInteger.valueOf(cupon.getCantidadCupones());
+            BigInteger total = cuponDenominacion.multiply(numero);
+            cupon.setSumaTotal(total);
+            s = total.toString();
+        }
+        else{
+            s = "0";
+        }
+
+        return s;
+    }
+
+    public List<CombustibleCupon> getCupones(){
+        return cupones;
+    }
+
+    public UIComponent findComponent(final String id) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        UIViewRoot root = context.getViewRoot();
+        final UIComponent[] found = new UIComponent[1];
+
+        root.visitTree(new FullVisitContext(context), new VisitCallback() {
+            @Override
+            public VisitResult visit(VisitContext context, UIComponent component) {
+                if(component.getId().equals(id)){
+                    found[0] = component;
+                    return VisitResult.COMPLETE;
+                }
+                return VisitResult.ACCEPT;
+            }
+        });
+
+        return found[0];
+
+    }
+
+    public void agregarRecibo(){
+        cupones.add(new CombustibleCupon());
+    }
+
+
+    public void onVehiculoChange(){
+        if(selected.getCodVehiculo()==null){
+            selected.setKilometrajeActual(null);
+        }
+    }
+
+    public void onSolicitanteChange(){
+        Persona solicitante = selected.getCodPersonaSolicitante();
+        if(solicitante.getPuestoList().size()>0){
+            selected.setCodPuestoSolicitante(solicitante.getPuestoList().get(0));
+            if(solicitante.getPuestoList().get(0).getCodSede() != null){
+                selected.setCodSede(solicitante.getPuestoList().get(0).getCodSede());
+            }
+            if(solicitante.getPuestoList().get(0).getCodOrganigrama() != null){
+                selected.setCodUnidad(solicitante.getPuestoList().get(0).getCodOrganigrama().getCodUnidad());
+            }
+        }
+
     }
 
     public CombustibleComision getSelected() {
@@ -45,12 +179,17 @@ public class CombustibleComisionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private CombustibleComisionFacade getFacade() {
+    public CombustibleComisionFacade getFacade() {
         return ejbFacade;
+    }
+
+    public CombustibleCuponFacade getFacadeCupon() {
+        return ejbFacadeCupon;
     }
 
     public CombustibleComision prepareCreate() {
         selected = new CombustibleComision();
+        cupones = new ArrayList<CombustibleCupon>();
         initializeEmbeddableKey();
         return selected;
     }
@@ -86,7 +225,35 @@ public class CombustibleComisionController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    if (persistAction == PersistAction.CREATE) {
+                        for (CombustibleCupon cupon : cupones) {
+                            cupon.setCodCombustibleComision(selected);
+                        }
+                        selected.setCombustibleCuponList(cupones);
+                        getFacade().edit(selected);
+                    }
+                    else{
+                        List<CombustibleCupon> mylist = selected.getCombustibleCuponList();
+                        Boolean boo = false;
+                        if(mylist == cupones){
+                            boo = true;
+                        }
+                        for (CombustibleCupon cupon : cupones) {
+                            cupon.setCodCombustibleComision(selected);
+                            if(cupon.getCodCombustibleCupon()!=null){
+                                getFacadeCupon().edit(cupon);
+                            }
+                        }
+
+                        if(selected.getCombustibleCuponList().size()>0){
+                            //getFacadeCupon().edit(selected.getCombustibleCuponList().get(0));
+                            getFacade().edit(selected);
+                        }
+                        else{
+                            getFacade().edit(selected);
+                        }
+                    }
+
                 } else {
                     getFacade().remove(selected);
                 }

@@ -6,9 +6,13 @@
 package session_beans;
 
 import entities.CombustibleComision;
+import entities.Vehiculo;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +29,14 @@ public class CombustibleComisionFacade extends AbstractFacade<CombustibleComisio
         return em;
     }
 
+    
+    public List<CombustibleComision> findByVehiculo(Vehiculo vehiculo) {
+        EntityManager em = getEntityManager();
+        Query Q;
+        Q = em.createNamedQuery("CombustibleComision.findByCodVehiculo").setParameter("vehiculo", vehiculo);
+        return Q.getResultList();
+    }
+            
     public CombustibleComisionFacade() {
         super(CombustibleComision.class);
     }

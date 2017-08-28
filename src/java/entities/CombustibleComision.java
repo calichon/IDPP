@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "CombustibleComision.findByCodCombustibleComision", query = "SELECT c FROM CombustibleComision c WHERE c.codCombustibleComision = :codCombustibleComision")
     , @NamedQuery(name = "CombustibleComision.findByFechaEntrega", query = "SELECT c FROM CombustibleComision c WHERE c.fechaEntrega = :fechaEntrega")
     , @NamedQuery(name = "CombustibleComision.findByPlaca", query = "SELECT c FROM CombustibleComision c WHERE c.placa = :placa")
+    , @NamedQuery(name = "CombustibleComision.findByCodVehiculo", query = "SELECT c FROM CombustibleComision c WHERE c.codVehiculo = :vehiculo ORDER BY c.codCombustibleComision desc")
     , @NamedQuery(name = "CombustibleComision.findByKilometrajeActual", query = "SELECT c FROM CombustibleComision c WHERE c.kilometrajeActual = :kilometrajeActual")
     , @NamedQuery(name = "CombustibleComision.findByComisionA", query = "SELECT c FROM CombustibleComision c WHERE c.comisionA = :comisionA")
     , @NamedQuery(name = "CombustibleComision.findByObservaciones", query = "SELECT c FROM CombustibleComision c WHERE c.observaciones = :observaciones")
@@ -95,7 +97,7 @@ public class CombustibleComision implements Serializable {
     @JoinColumn(name = "cod_vehiculo", referencedColumnName = "cod_vehiculo")
     @ManyToOne
     private Vehiculo codVehiculo;
-    @OneToMany(mappedBy = "codCombustibleComision")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},mappedBy = "codCombustibleComision",orphanRemoval=true)
     private List<CombustibleCupon> combustibleCuponList;
 
     public CombustibleComision() {
@@ -266,5 +268,5 @@ public class CombustibleComision implements Serializable {
     public String toString() {
         return "entities.CombustibleComision[ codCombustibleComision=" + codCombustibleComision + " ]";
     }
-    
+
 }

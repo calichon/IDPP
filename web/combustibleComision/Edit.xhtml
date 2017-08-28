@@ -8,82 +8,285 @@
 
     <ui:composition>
 
-        <p:dialog id="CombustibleComisionEditDlg" widgetVar="CombustibleComisionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCombustibleComisionTitle}">
+        <p:dialog id="CombustibleComisionEditDlg" widgetVar="CombustibleComisionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCombustibleComisionTitle}" onShow="updateDialog()">
             <h:form id="CombustibleComisionEditForm">
+                <p:remoteCommand name="updateDialog" update="cuponest" actionListener="#{combustibleComisionController.init()}"/>
+                <p:remoteCommand name="refreshFooter" update="cuponest"/>
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="6" rendered="#{combustibleComisionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codCombustibleComision}" for="codCombustibleComision" />
-                        <p:inputText id="codCombustibleComision" value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.EditCombustibleComisionTitle_codCombustibleComision}" required="true" requiredMessage="#{bundle.EditCombustibleComisionRequiredMessage_codCombustibleComision}"/>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_fechaEntrega}" for="fechaEntrega" />
-                        <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy HH:mm:ss" value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.EditCombustibleComisionTitle_fechaEntrega}"  showOn="button"/>
+                    <p:panelGrid rendered="#{combustibleComisionController.selected != null}">
+                        <f:facet name="header">
+                        <p:row>
+                            <p:column >Datos generales</p:column>
+                        </p:row>
+                        </f:facet>
+                        <p:row>
+                            <ui:remove>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codCombustibleComision}" for="codCombustibleComision" />
+                                <p:inputText id="codCombustibleComision" value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.EditCombustibleComisionTitle_codCombustibleComision}" required="true" requiredMessage="#{bundle.EditCombustibleComisionRequiredMessage_codCombustibleComision}"/>
+                            </ui:remove>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_fechaEntrega}" for="fechaEntrega" />
+                            </p:column>
+                            <p:column>
+                                <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy HH:mm:ss" value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.EditCombustibleComisionTitle_fechaEntrega}"  showOn="button"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" >
+                                    <p:ajax listener="#{combustibleComisionController.onSolicitanteChange}" update="codVehiculo codPuestoSolicitante codUnidad codSede"/>
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                                   var="codPersonaSolicitanteItem"
+                                                   itemValue="#{codPersonaSolicitanteItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codPuestoSolicitante" value="#{combustibleComisionController.selected.codPuestoSolicitante}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                                   var="codPuestoSolicitanteItem"
+                                                   itemValue="#{codPuestoSolicitanteItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codSede}" for="codSede" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codSede" value="#{combustibleComisionController.selected.codSede}" disabled="true" >
+                                    <f:selectItem itemLabel="Seleccione sede" itemDisabled="true" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"
+                                                   var="codSedeItem"
+                                                   itemValue="#{codSedeItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codUnidad}" for="codUnidad" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codUnidad" value="#{combustibleComisionController.selected.codUnidad}" disabled="true" >
+                                    <f:selectItem itemLabel="Seleccione unidad" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
+                                                   var="codUnidadItem"
+                                                   itemValue="#{codUnidadItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="ui-widget-header">Datos del vehículo</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codVehiculo}" for="codVehiculo" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codVehiculo" value="#{combustibleComisionController.selected.codVehiculo}" disabled="#{combustibleComisionController.selected.codPersonaSolicitante==null}">
+                                    <p:ajax listener="#{combustibleComisionController.onVehiculoChange}" update="vehiculoTipo vehiculoMarca kilometrajeActual cantidadEstimadaCarga" />
+                                    <f:selectItem itemLabel="Seleccione placa" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                                   var="codVehiculoItem"
+                                                   itemValue="#{codVehiculoItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_vehiculoTipo}"  />
+                            </p:column>
+                            <p:column>
+                                <h:outputText  id="vehiculoTipo" value="#{combustibleComisionController.selected.codVehiculo.codTipoTipo.nombreTipoTipo}"  />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_vehiculoMarca}"  />
+                            </p:column>
+                            <p:column>
+                                <h:outputText  id="vehiculoMarca" value="#{combustibleComisionController.selected.codVehiculo.codMarca.nombreMarca}"  />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_kilometrajeActual}" for="kilometrajeActual" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="kilometrajeActual" value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.EditCombustibleComisionTitle_kilometrajeActual}" disabled="#{combustibleComisionController.selected.codVehiculo==null}" >
+                                    <ui:remove>
+                                        <f:validator validatorId = "com.idpp.KmValidator" />
+                                        <f:attribute name="selected" value="#{combustibleComisionController.selected}" />
+                                        <f:attribute name="ejbFacade" value="#{combustibleComisionController.getFacade()}" />
+                                        <p:clientValidator/>
+                                    </ui:remove>
+                                </p:inputText>
+                                <h:message for="kilometrajeActual" style = "color:red" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_comisionA}" for="comisionA" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="comisionA" value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.EditCombustibleComisionTitle_comisionA}" />
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_cantidadEstimadaCarga}" for="cantidadEstimadaCarga" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneRadio id="cantidadEstimadaCarga" value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" disabled="#{combustibleComisionController.selected.codVehiculo==null}">
+                                    <f:selectItem itemLabel="0" itemValue="0" />
+                                    <f:selectItem itemLabel="1" itemValue="1" />
+                                    <f:selectItem itemLabel="2" itemValue="2" />
+                                    <f:selectItem itemLabel="3" itemValue="3" />
+                                    <f:selectItem itemLabel="4" itemValue="4" />
+                                    <f:selectItem itemLabel="5" itemValue="5" />
+                                    <f:selectItem itemLabel="6" itemValue="6" />
+                                    <f:selectItem itemLabel="7" itemValue="7" />
+                                    <f:selectItem itemLabel="8" itemValue="8" />
+                                    <f:selectItem itemLabel="9" itemValue="9" />
+                                    <f:selectItem itemLabel="10" itemValue="10" />
+                                    <f:selectItem itemLabel="11" itemValue="11" />
+                                    <f:selectItem itemLabel="12" itemValue="12" />
+                                </p:selectOneRadio>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_observaciones}" for="observaciones" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="observaciones" value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.EditCombustibleComisionTitle_observaciones}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column styleClass="ui-widget-header">Descripción de cupones</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="6">
+                                  <p:commandButton value="Agregar más recibos" ajax="true">
+                                      <p:ajax listener="#{combustibleComisionController.agregarRecibo()}"   update="cuponest"/>
+                                  </p:commandButton>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="6">
+                                <p:dataTable id="cuponest" var="cupon" value="#{combustibleComisionController.cupones}">
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="Cantidad"/>
+                                            <p:column headerText="Denominación"/>
+                                            <p:column colspan="2" headerText="Numeración"/>
+                                            <p:column headerText="Total"/>
+                                        </p:row>
+                                    </p:columnGroup>
+                                    <p:column>
+                                        <p:inputText value="#{cupon.codCombustibleCupon}" id="codCombustibleCupon" type="hidden" />
+                                        <p:inputText id="cantidadCupones" value="#{cupon.cantidadCupones}">
+                                            <p:ajax listener="#{combustibleComisionController.getTotal(cupon)}" update="sumaTotal" oncomplete="refreshFooter();"/>
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_denominacion}" for="denominacion" />
+                                        <p:selectOneMenu id="denominacion" value="#{cupon.codCuponDenominancion}">
+                                            <p:ajax listener="#{combustibleComisionController.getTotal(cupon)}" update="sumaTotal" oncomplete="refreshFooter();"/>
+                                            <f:selectItem itemLabel="Seleccione denominación" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems value="#{cuponDenominacionController.itemsAvailableSelectOne}"
+                                                           var="cuponDenominacion"
+                                                           itemValue="#{cuponDenominacion}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_numeroCuponInicial}" for="numeroCuponInicial" />
+                                        <p:inputText id="numeroCuponInicial" value="#{cupon.numeroCuponInicial}" binding="#{numeroCuponIniciale}">
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_numeroCuponFinal}" for="numeroCuponFinal" />
+                                        <p:inputText id="numeroCuponFinal" value="#{cupon.numeroCuponFinal}">
+                                            <f:validator validatorId = "com.idpp.CuponValidator" />
+                                            <f:attribute name="controller" value="#{combustibleComisionController}" />
+                                            <f:attribute name="cupon" value="#{cupon}" />
+                                            <f:attribute name="cuponInicial" value="#{numeroCuponIniciale}" />
+                                            <f:attribute name="cuponFinal" value="#{cupon.numeroCuponFinal}" />
+                                            <f:attribute name="combustibleCuponController" value="#{combustibleCuponController}" />
+                                            <p:clientValidator/>
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_sumaTotal}" for="sumaTotal" />
+                                        <p:inputText id="sumaTotal" value="#{combustibleComisionController.getTotal(cupon)}" disabled="true"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton actionListener="#{combustibleComisionController.eliminarCupon(cupon)}" value="Eliminar" oncomplete="refreshFooter();"/>
+                                    </p:column>
+                                    <f:facet name="footer">
+                                         <p:row>
+                                         <p:column colspan="3">
+                                            <h:outputText value="Total general: "/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText id="totalGeneral" value="Q. #{combustibleComisionController.getTotalGeneral()}">
+                                            </h:outputText>
+                                        </p:column>
+                                        </p:row>
+                                    </f:facet>
+
+                                </p:dataTable>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="3" style="text-align:right">
+                                <h:outputText value="Total:" />
+                            </p:column>
+
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaReceptor}" for="codPersonaReceptor" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
+                                    <f:selectItem itemLabel="Persona que recibe" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                                   var="codPersonaReceptorItem"
+                                                   itemValue="#{codPersonaReceptorItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPuestoReceptor}" for="codPuestoReceptor" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" >
+                                    <f:selectItem itemLabel="{Puesto que recibe" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
+                                                   var="codPuestoReceptorItem"
+                                                   itemValue="#{codPuestoReceptorItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                                <p:column>
+                                    <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaEncargadoTransporte}" for="codPersonaEncargadoTransporte" />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" >
+                                        <f:selectItem itemLabel="Seleccione encargado" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
+                                        <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                                       var="codPersonaEncargadoTransporteItem"
+                                                       itemValue="#{codPersonaEncargadoTransporteItem}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+
+                        </p:row>
+
+                        <ui:remove>
                         <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_placa}" for="placa" />
                         <p:inputText id="placa" value="#{combustibleComisionController.selected.placa}" title="#{bundle.EditCombustibleComisionTitle_placa}" />
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_kilometrajeActual}" for="kilometrajeActual" />
-                        <p:inputText id="kilometrajeActual" value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.EditCombustibleComisionTitle_kilometrajeActual}" />
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_comisionA}" for="comisionA" />
-                        <p:inputText id="comisionA" value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.EditCombustibleComisionTitle_comisionA}" />
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.EditCombustibleComisionTitle_observaciones}" />
                         <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_importeTotalLetras}" for="importeTotalLetras" />
                         <p:inputText id="importeTotalLetras" value="#{combustibleComisionController.selected.importeTotalLetras}" title="#{bundle.EditCombustibleComisionTitle_importeTotalLetras}" />
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_cantidadEstimadaCarga}" for="cantidadEstimadaCarga" />
-                        <p:inputText id="cantidadEstimadaCarga" value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" title="#{bundle.EditCombustibleComisionTitle_cantidadEstimadaCarga}" />
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaEncargadoTransporte}" for="codPersonaEncargadoTransporte" />
-                        <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaEncargadoTransporteItem"
-                                           itemValue="#{codPersonaEncargadoTransporteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaReceptor}" for="codPersonaReceptor" />
-                        <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaReceptorItem"
-                                           itemValue="#{codPersonaReceptorItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
-                        <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaSolicitanteItem"
-                                           itemValue="#{codPersonaSolicitanteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPuestoReceptor}" for="codPuestoReceptor" />
-                        <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
-                                           var="codPuestoReceptorItem"
-                                           itemValue="#{codPuestoReceptorItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
-                        <p:selectOneMenu id="codPuestoSolicitante" value="#{combustibleComisionController.selected.codPuestoSolicitante}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
-                                           var="codPuestoSolicitanteItem"
-                                           itemValue="#{codPuestoSolicitanteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codSede}" for="codSede" />
-                        <p:selectOneMenu id="codSede" value="#{combustibleComisionController.selected.codSede}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"
-                                           var="codSedeItem"
-                                           itemValue="#{codSedeItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codUnidad}" for="codUnidad" />
-                        <p:selectOneMenu id="codUnidad" value="#{combustibleComisionController.selected.codUnidad}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
-                                           var="codUnidadItem"
-                                           itemValue="#{codUnidadItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codVehiculo}" for="codVehiculo" />
-                        <p:selectOneMenu id="codVehiculo" value="#{combustibleComisionController.selected.codVehiculo}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
-                                           var="codVehiculoItem"
-                                           itemValue="#{codVehiculoItem}"/>
-                        </p:selectOneMenu>
+                        </ui:remove>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{combustibleComisionController.update}" value="#{bundle.Save}" update="display,:CombustibleComisionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CombustibleComisionEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CombustibleComisionEditDialog.hide()"/>

@@ -112,7 +112,7 @@ public class CuponDenominacion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.CuponDenominacion[ codCuponDenominacion=" + codCuponDenominacion + " ]";
+        return descripcion;
     }
     
 }
