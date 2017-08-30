@@ -33,27 +33,34 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     public PersonaFacade() {
         super(Persona.class);
     }
-    
+
     public List<Persona> findByDate(Date fechaInicio, Date fechaFin) {
         EntityManager em = getEntityManager();
-        Query personaQ;        
+        Query personaQ;
         personaQ = em.createNamedQuery("Persona.findByDate").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin);
         //personaQ = em.createNamedQuery("Persona.findByDate");
         return personaQ.getResultList();
     }
-    
+
     public List<Persona> findByDateAndId(Date fechaInicio, Date fechaFin, AsignacionVehiculo id) {
         EntityManager em = getEntityManager();
-        Query personaQ;        
+        Query personaQ;
         personaQ = em.createNamedQuery("Persona.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id);
         //personaQ = em.createNamedQuery("Persona.findByDate");
         return personaQ.getResultList();
     }
-    
+
     public List<Persona> findByUnidad(Unidad u) {
         EntityManager em = getEntityManager();
-        Query personaQ;        
+        Query personaQ;
         personaQ = em.createNamedQuery("Persona.findByUnidad").setParameter("unidad", u);
+        return personaQ.getResultList();
+    }
+
+    public List<Persona> findByPuesto(Integer p) {
+        EntityManager em = getEntityManager();
+        Query personaQ;
+        personaQ = em.createNamedQuery("Persona.findByPuesto").setParameter("puesto", p);
         return personaQ.getResultList();
     }
 }

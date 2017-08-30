@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle2.EditConcursoMantenimientosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_codConcursoMantenimiento}" for="codConcursoMantenimiento" />
+                    <h:inputText id="codConcursoMantenimiento" value="#{concursoMantenimientosController.selected.codConcursoMantenimiento}" title="#{bundle2.EditConcursoMantenimientosTitle_codConcursoMantenimiento}" required="true" requiredMessage="#{bundle2.EditConcursoMantenimientosRequiredMessage_codConcursoMantenimiento}"/>
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_noConcurso}" for="noConcurso" />
+                    <h:inputText id="noConcurso" value="#{concursoMantenimientosController.selected.noConcurso}" title="#{bundle2.EditConcursoMantenimientosTitle_noConcurso}" />
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_fechaConcurso}" for="fechaConcurso" />
+                    <h:inputText id="fechaConcurso" value="#{concursoMantenimientosController.selected.fechaConcurso}" title="#{bundle2.EditConcursoMantenimientosTitle_fechaConcurso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_placaVehiculo}" for="placaVehiculo" />
+                    <h:inputText id="placaVehiculo" value="#{concursoMantenimientosController.selected.placaVehiculo}" title="#{bundle2.EditConcursoMantenimientosTitle_placaVehiculo}" />
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_realizado}" for="realizado" />
+                    <h:inputText id="realizado" value="#{concursoMantenimientosController.selected.realizado}" title="#{bundle2.EditConcursoMantenimientosTitle_realizado}" />
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_codEmpleadoAutoriza}" for="codEmpleadoAutoriza" />
+                    <h:inputText id="codEmpleadoAutoriza" value="#{concursoMantenimientosController.selected.codEmpleadoAutoriza}" title="#{bundle2.EditConcursoMantenimientosTitle_codEmpleadoAutoriza}" />
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_codCargoEmpleadoAutoriza}" for="codCargoEmpleadoAutoriza" />
+                    <h:inputText id="codCargoEmpleadoAutoriza" value="#{concursoMantenimientosController.selected.codCargoEmpleadoAutoriza}" title="#{bundle2.EditConcursoMantenimientosTitle_codCargoEmpleadoAutoriza}" />
+                    <h:outputLabel value="#{bundle2.EditConcursoMantenimientosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{concursoMantenimientosController.selected.activo}" title="#{bundle2.EditConcursoMantenimientosTitle_activo}" />
+                </h:panelGrid>
+                <h:commandLink action="#{concursoMantenimientosController.update}" value="#{bundle2.EditConcursoMantenimientosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle2.EditConcursoMantenimientosViewLink}"/>
+                <br />
+                <h:commandLink action="#{concursoMantenimientosController.prepareList}" value="#{bundle2.EditConcursoMantenimientosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle2.EditConcursoMantenimientosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -6,9 +6,13 @@
 package session_beans;
 
 import entities.KilometrajeComision;
+import entities.Vehiculo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +32,13 @@ public class KilometrajeComisionFacade extends AbstractFacade<KilometrajeComisio
     public KilometrajeComisionFacade() {
         super(KilometrajeComision.class);
     }
-    
+
+    public List<KilometrajeComision> getLastByVehiculo(Vehiculo vehiculo){
+        EntityManager em = getEntityManager();
+        Query Q;
+        Q = em.createNamedQuery("KilometrajeComision.findLastByVehiculo").setParameter("vehiculo", vehiculo);
+        return Q.getResultList();
+
+    }
+
 }

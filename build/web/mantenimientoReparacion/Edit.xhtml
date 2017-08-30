@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="MantenimientoReparacionEditDlg" widgetVar="MantenimientoReparacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMantenimientoReparacionTitle}">
+            <h:form id="MantenimientoReparacionEditForm">
+                        <p:growl id="mensajes" showDetail="true" />
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{mantenimientoReparacionController.selected != null}">
+                        <p:outputLabel value="Tipo" for="mantRep" />     
+                        <p:selectOneRadio id="mantRep" value="#{mantenimientoReparacionController.selected.mantRep}" required="true" requiredMessage="Debe seleccionar uno de los tipos" >
+                            <f:selectItem itemLabel="Mantenimiento" itemValue="1" />
+                            <f:selectItem itemLabel="Reparacion" itemValue="2" />
+                            <p:ajax update="codTipoMantenimiento"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="#{bundle.codMantenimientoReparacion}" for="codMantenimientoReparacion" />
+                        <c:if test="#{mantenimientoReparacionController.selected.codMantenimientoReparacion == null}">
+                            <p:inputText id="codMantenimientoReparacion" value="#{mantenimientoReparacionController.newLabel}" title="#{bundle.CreateMantenimientoReparacionTitle_codMantenimientoReparacion}" required="true" requiredMessage="#{bundle.CreateMantenimientoReparacionRequiredMessage_codMantenimientoReparacion}" disabled="true"/>
+                        </c:if>
+                        <c:if test="#{mantenimientoReparacionController.selected.codMantenimientoReparacion != null}">
+                            <p:inputText id="codMantenimientoReparacion" value="#{mantenimientoReparacionController.selected.codMantenimientoReparacion}" title="#{bundle.CreateMantenimientoReparacionTitle_codMantenimientoReparacion}" required="true" requiredMessage="#{bundle.CreateMantenimientoReparacionRequiredMessage_codMantenimientoReparacion}" disabled="true"/>
+                        </c:if>                        
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_placa}" for="placa" />
+
+                        <p:autoComplete id="placa" value="#{mantenimientoReparacionController.selected.codVehiculo}" completeMethod="#{mantenimientoReparacionController.completePlacasVehiculo}"
+                                        var="vehiculo" itemLabel="#{vehiculo.placa}" itemValue="#{vehiculo}"  forceSelection="true"  required="true" requiredMessage="Placa es requerida">
+                            <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onItemSelect}" update="tipoVehiculo, marcaVehiculo, modeloVehiculo, lineaVehiculo" />
+                        </p:autoComplete>
+                        <p:outputLabel value="Tipo" for="tipoVehiculo" />
+                        <p:inputText id="tipoVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.codTipoUso.nombreTipoUso}" title="Tipo Uso" disabled="true" size="40" />   
+                        <p:outputLabel value="Marca" for="marcaVehiculo" />
+                        <p:inputText id="marcaVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.codMarca.nombreMarca}" title="Marca" disabled="true"/>   
+                        <p:outputLabel value="Modelo" for="modeloVehiculo" />
+                        <p:inputText id="modeloVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.modelo}" title="Modelo"  disabled="true"/>   
+                        <p:outputLabel value="Linea" for="lineaVehiculo" />
+                        <p:inputText id="lineaVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.codLinea.nombreLinea}" title="Linea"  disabled="true" size="40"/>
+                        <p:outputLabel value="Sede" for="sedeVehiculo" />
+                        <p:inputText id="sedeVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.codPersonaAsignacion.codPuesto.codSede.nombreSede}" title="Sede"  disabled="true" size="50"/>
+                        <p:outputLabel value="Unidad" for="unidadVehiculo" />
+                        <p:inputText id="unidadVehiculo" value="#{mantenimientoReparacionController.selected.codVehiculo.codPersonaAsignacion.codPuesto.codOrganigrama.codUnidad.descripcion}" title="Sede"  disabled="true" size="50"/>
+
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codNoConcurso}" for="codNoConcurso" />
+                        <p:inputText id="codNoConcurso" value="#{mantenimientoReparacionController.selected.codNoConcurso}" title="#{bundle.CreateMantenimientoReparacionTitle_codNoConcurso}" />  
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codProveedor}" for="codProveedor" />
+                        <p:autoComplete id="codProveedor" value="#{mantenimientoReparacionController.selected.codProveedor}" completeMethod="#{mantenimientoReparacionController.completeNITProveedores}"
+                                        var="proveedor" itemLabel="#{proveedor.nit}" itemValue="#{proveedor}"  forceSelection="true" >
+                            <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onNitSelect}" update="nombreProveedor" />
+                        </p:autoComplete>
+                        <p:outputLabel value="Nombre Proveedor" for="nombreProveedor" />
+                        <p:inputText id="nombreProveedor" value="#{mantenimientoReparacionController.selected.codProveedor.nombreContacto}" title="Nombre Proveedor" disabled="true" size="30"/>
+
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_noFactura}" for="noFactura" />
+                        <p:inputText id="noFactura" value="#{mantenimientoReparacionController.selected.noFactura}" title="#{bundle.CreateMantenimientoReparacionTitle_noFactura}" />
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_serieFactura}" for="serieFactura" />
+                        <p:inputText id="serieFactura" value="#{mantenimientoReparacionController.selected.serieFactura}" title="#{bundle.CreateMantenimientoReparacionTitle_serieFactura}" />
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_fechaEmisionFactura}" for="fechaEmisionFactura" />
+                        <p:calendar id="fechaEmisionFactura" pattern="dd/MM/yyyy" value="#{mantenimientoReparacionController.selected.fechaEmisionFactura}" title="#{bundle.EditMantenimientoReparacionTitle_fechaEmisionFactura}"  showOn="button"/>
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_fechaRecepcionFactura}" for="fechaRecepcionFactura" />
+                        <p:calendar id="fechaRecepcionFactura" pattern="dd/MM/yyyy" value="#{mantenimientoReparacionController.selected.fechaRecepcionFactura}" title="#{bundle.EditMantenimientoReparacionTitle_fechaRecepcionFactura}"  showOn="button"/>
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_fechaEnvioVehiculo}" for="fechaEnvioVehiculo" />
+                        <p:calendar id="fechaEnvioVehiculo" pattern="dd/MM/yyyy" value="#{mantenimientoReparacionController.selected.fechaEnvioVehiculo}" title="#{bundle.EditMantenimientoReparacionTitle_fechaEnvioVehiculo}"  showOn="button" >
+                            <p:ajax event="dateSelect" listener="#{mantenimientoReparacionController.onDateSelect}" update="diasMantenimiento,fechaRecepcionVehiculo,fechaRetornoVehiculo" />
+
+
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_fechaRecepcionVehiculo}" for="fechaRecepcionVehiculo" />
+                        <p:calendar id="fechaRecepcionVehiculo" pattern="dd/MM/yyyy" value="#{mantenimientoReparacionController.selected.fechaRecepcionVehiculo}" title="#{bundle.EditMantenimientoReparacionTitle_fechaRecepcionVehiculo}"  showOn="button"
+                                    mindate="#{mantenimientoReparacionController.selected.fechaEnvioVehiculo}"/>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_fechaRetornoVehiculo}" for="fechaRetornoVehiculo" />
+                        <p:calendar id="fechaRetornoVehiculo" pattern="dd/MM/yyyy" value="#{mantenimientoReparacionController.selected.fechaRetornoVehiculo}" 
+                                    title="#{bundle.EditMantenimientoReparacionTitle_fechaRetornoVehiculo}"  showOn="button" mindate="#{mantenimientoReparacionController.selected.fechaEnvioVehiculo}">
+                            <p:ajax event="dateSelect" listener="#{mantenimientoReparacionController.onDateSelect}" update="diasMantenimiento" />
+                        </p:calendar>
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_diasMantenimiento}" for="diasMantenimiento" />
+                        <p:inputText id="diasMantenimiento" value="#{mantenimientoReparacionController.selected.diasMantenimiento}" title="#{bundle.CreateMantenimientoReparacionTitle_diasMantenimiento}" />
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_totalMantenimientoReparaQ}" for="totalMantenimientoReparaQ" />
+                        <p:inputText id="totalMantenimientoReparaQ" value="#{mantenimientoReparacionController.selected.totalMantenimientoReparaQ}" title="#{bundle.CreateMantenimientoReparacionTitle_totalMantenimientoReparaQ}" />
+
+
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codEmpleadoRecepcion}" for="codEmpleadoRecepcion" />
+                        <p:autoComplete id="codEmpleadoRecepcion" value="#{mantenimientoReparacionController.fullEmpleadoRecepcion}" completeMethod="#{mantenimientoReparacionController.completeEmpleado}"
+                                        minQueryLength="3" var="empleado" itemLabel="#{empleado}" itemValue="#{empleado}"  forceSelection="true"  size="50">
+                            <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onEmpleadoSelect}" update="codCargoEmpleadoRecepcion" />
+                        </p:autoComplete>
+                        <p:outputLabel id="codCargoEmpleadoRecepcion" value="#{mantenimientoReparacionController.empleadoRecepcionNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" />
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codEmpleadoRecepcionFact}" for="codEmpleadoRecepcionFact" />
+                        <p:autoComplete id="codEmpleadoRecepcionFact" value="#{mantenimientoReparacionController.fullEmpleadoAutoriza}" completeMethod="#{mantenimientoReparacionController.completeEmpleado}"
+                                        minQueryLength="3" var="empleado" itemLabel="#{empleado}" itemValue="#{empleado}"  forceSelection="true" size="50">
+                            <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onEmpleadoAutorizaSelect}" update="codCargoEmpleadoAutoriza" />
+                        </p:autoComplete>
+                        <p:outputLabel id="codCargoEmpleadoAutoriza" value="#{mantenimientoReparacionController.empleadoAutorizaNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" />
+
+
+
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_utilizoSeguro}" for="utilizoSeguro" />
+                        <p:selectOneRadio id="utilizoSeguro" value="#{mantenimientoReparacionController.selected.utilizoSeguro}">
+                            <f:selectItem itemLabel="Si" itemValue="1" />
+                            <f:selectItem itemLabel="No" itemValue="0" />
+                        </p:selectOneRadio>
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_registroPago}" for="registroPago" />
+                        <p:selectOneRadio id="registroPago" value="#{mantenimientoReparacionController.selected.registroPago}">
+                            <f:selectItem itemLabel="Si" itemValue="1" />
+                            <f:selectItem itemLabel="No" itemValue="0" />
+                        </p:selectOneRadio>           
+                    </p:panelGrid>
+
+
+                    <h:panelGrid  columns="4" style="margin-top:20px">
+                        <f:facet  name="header">
+                            <p:outputLabel value="Detalle Mantenimiento/Reparacion" />
+                        </f:facet>
+
+
+                        <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codTipoMantenimiento}" for="codTipoMantenimiento" />
+                        <p:autoComplete id="codTipoMantenimiento" value="#{mantenimientoReparacionController.actualDetalleMantRep.codTipoMantRep}" completeMethod="#{mantenimientoReparacionController.completeTipoMantenimiento}"
+                                        minQueryLength="3" var="tipoManto" itemLabel="#{tipoManto.descripcion}" itemValue="#{tipoManto}"  forceSelection="true" size="70" >
+                            <p:ajax update="addButton"/>
+                        </p:autoComplete>
+                        <p:outputLabel value="Costo de Reparacion" for="costoReparacion" />
+                        <p:inputText id="costoReparacion" value="#{mantenimientoReparacionController.actualDetalleMantRep.costoReparacionDetalle}" title="Costo de Reparacion" />  
+                        <p:outputLabel value="Tiempo de Garantia" for="tiempoGarantia" />
+                        <p:inputText id="tiempoGarantia" value="#{mantenimientoReparacionController.actualDetalleMantRep.tiempoGarantia}" title="Tiempo de Garantia" />  
+                        <p:outputLabel value="Descripcion de mantenimiento/reparacion realizado" for="descManto" />
+                        <p:inputTextarea id="descManto" value="#{mantenimientoReparacionController.actualDetalleMantRep.descripcion}" rows="3" cols="50"/>
+                        <p:commandButton id="addButton" icon="ui-icon-plus"   value="Agregar" actionListener="#{mantenimientoReparacionController.agregarDetalle}" 
+                                         update="detalleMantos" />
+
+                    </h:panelGrid>
+                    <p:scrollPanel style="width:500px;height:200px">
+                        <p:dataTable id="detalleMantos" var="detalle" value="#{mantenimientoReparacionController.detalleMantos}" >
+                            <f:facet name="header">
+                                Detalle de reparacion/mantenimiento
+                            </f:facet>
+                            <p:column headerText="Tipo Mantenimiento">
+                                <h:outputText value="#{detalle.codTipoMantRep.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Costo">
+                                <h:outputText value="#{detalle.costoReparacionDetalle}" />
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{detalle.descripcion}" />
+                            </p:column>
+                            <p:column style="width:32px;text-align: center">
+                                <p:commandButton  actionListener="#{mantenimientoReparacionController.deleteDetalle(detalle)}"
+                                                  icon="ui-icon-trash" title="View" update=":growl,detalleMantos" >
+                                      
+                                       <p:confirm header="Confirmacion" message="Realmente desea eliminar el detalle?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                            </p:column>
+                        </p:dataTable>
+                    </p:scrollPanel>
+                    <p:commandButton actionListener="#{mantenimientoReparacionController.update}" value="#{bundle.Save}" update="display,:MantenimientoReparacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MantenimientoReparacionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MantenimientoReparacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

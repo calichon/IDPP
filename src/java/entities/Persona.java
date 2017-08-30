@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.XmlTransient;
             "WHERE  pl.codTipoPuesto = 2 "+
             ")\n" +
 "ORDER BY p.codPersona")
-        
+
     //, @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
     , @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) \n" +
 "from Persona p \n" +
@@ -79,6 +79,7 @@ import javax.xml.bind.annotation.XmlTransient;
 "ORDER BY p.codPersona")
         //left outer join p.asignacionVehiculoPilotoList avp
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona
+    , @NamedQuery(name = "Persona.findByPuesto", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl WHERE pl.codTipoPuesto = :puesto")
     , @NamedQuery(name = "Persona.findByUnidad", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl join pl.codOrganigrama o join o.codUnidad u WHERE u = :unidad")
     , @NamedQuery(name = "Persona.findByCodPersona", query = "SELECT p FROM Persona p WHERE p.codPersona = :codPersona")
     , @NamedQuery(name = "Persona.findByCodTipoPersona", query = "SELECT p FROM Persona p WHERE p.codTipoPersona = :codTipoPersona")
@@ -210,7 +211,7 @@ public class Persona implements Serializable {
     private List<AsignacionVehiculo> asignacionVehiculoList1;
     @OneToMany(mappedBy = "codPersonaPasajero")
     private List<AsignacionVehiculo> asignacionVehiculoList2;
-    
+
     @OneToMany(mappedBy = "codPersonaSolicitante")
     private List<AsignacionVehiculo> asignacionVehiculoList3;
     @OneToMany(mappedBy = "codCoordindor")
@@ -605,5 +606,5 @@ public class Persona implements Serializable {
     public void setCodPuesto(Puesto codPuesto) {
         this.codPuesto = codPuesto;
     }
-    
+
 }

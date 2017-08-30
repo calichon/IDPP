@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoMantenimientoReparacionCreateDlg" widgetVar="TipoMantenimientoReparacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoMantenimientoReparacionTitle}">
+            <h:form id="TipoMantenimientoReparacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoMantenimientoReparacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipoMantenimientoReparacionLabel_codTipoMantRep}" for="codTipoMantRep" />
+                        <p:inputText id="codTipoMantRep" value="#{tipoMantenimientoReparacionController.selected.codTipoMantRep}" title="#{bundle.CreateTipoMantenimientoReparacionTitle_codTipoMantRep}" required="true" requiredMessage="#{bundle.CreateTipoMantenimientoReparacionRequiredMessage_codTipoMantRep}"/>
+                        <p:outputLabel value="#{bundle.CreateTipoMantenimientoReparacionLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoMantenimientoReparacionController.selected.descripcion}" title="#{bundle.CreateTipoMantenimientoReparacionTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateTipoMantenimientoReparacionLabel_mantRepa}" for="mantRepa" />
+                        <p:inputText id="mantRepa" value="#{tipoMantenimientoReparacionController.selected.mantRepa}" title="#{bundle.CreateTipoMantenimientoReparacionTitle_mantRepa}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoMantenimientoReparacionController.create}" value="#{bundle.Save}" update="display,:TipoMantenimientoReparacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoMantenimientoReparacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoMantenimientoReparacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

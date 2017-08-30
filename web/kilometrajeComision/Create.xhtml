@@ -15,25 +15,52 @@
                         <ui:remove>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codKilometrajeComision}" for="codKilometrajeComision" />
                         <p:inputText id="codKilometrajeComision" value="#{kilometrajeComisionController.selected.codKilometrajeComision}" title="#{bundle.CreateKilometrajeComisionTitle_codKilometrajeComision}" required="true" requiredMessage="#{bundle.CreateKilometrajeComisionRequiredMessage_codKilometrajeComision}"/>
-                        </ui:remove>                        
+                        </ui:remove>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codVehiculo}" for="codVehiculo" />
-                        <p:selectOneMenu id="codVehiculo" value="#{kilometrajeComisionController.selected.codVehiculo}" >
+                        <p:selectOneMenu id="codVehiculo" value="#{kilometrajeComisionController.selected.codVehiculo}" binding="#{vehiculo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
                                            var="codVehiculoItem"
                                            itemValue="#{codVehiculoItem}"/>
                         </p:selectOneMenu>
-                        <ui:remove>
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_placa}" for="placa" />
-                        <p:inputText id="placa" value="#{kilometrajeComisionController.selected.placa}" title="#{bundle.CreateKilometrajeComisionTitle_placa}" />
-                        </ui:remove>
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_kilometrajeInicial}" for="kilometrajeInicial" />
-                        <p:inputText id="kilometrajeInicial" value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.CreateKilometrajeComisionTitle_kilometrajeInicial}" />
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codPersonaPiloto}" for="codPersonaPiloto" />
+                        <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" >
+                            <f:selectItems value="#{kilometrajeComisionController.pilotosDisponibles}"
+                                           var="codPersonaPilotoItem"
+                                           itemValue="#{codPersonaPilotoItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_fechaHoraSalida}" for="fechaHoraSalida" />
-                        <p:calendar id="fechaHoraSalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_kilometrajeFinal}" for="kilometrajeFinal" />
-                        <p:inputText id="kilometrajeFinal" value="#{kilometrajeComisionController.selected.kilometrajeFinal}" title="#{bundle.CreateKilometrajeComisionTitle_kilometrajeFinal}" />
+                        <p:calendar id="fechaHoraSalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button" binding="#{fechaSalida}">
+                            <f:validator validatorId = "com.idpp.FechaSalidaValidator" />
+                            <f:attribute name="ejbFacade" value="#{kilometrajeComisionController.getFacade()}" />
+                            <f:attribute name="vehiculo" value="#{vehiculo}" />
+                            <p:clientValidator/>
+                        </p:calendar>
+
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_fechaHoraEntrada}" for="fechaHoraEntrada" />
-                        <p:calendar id="fechaHoraEntrada" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button"/>
+                        <p:calendar id="fechaHoraEntrada" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button">
+                            <f:validator validatorId = "com.idpp.FechaEntradaValidator" />
+                            <f:attribute name="fechaSalida" value="#{fechaSalida}" />
+                            <p:clientValidator/>
+                        </p:calendar>
+
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_kilometrajeInicial}" for="kilometrajeInicial" />
+                        <p:inputText id="kilometrajeInicial" value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.CreateKilometrajeComisionTitle_kilometrajeInicial}" binding="#{kilometrajeInicial}">
+                            <f:validator validatorId = "com.idpp.KilometrajeComisionKmValidator" />
+                            <f:attribute name="ejbFacade" value="#{kilometrajeComisionController.getFacade()}" />
+                            <f:attribute name="vehiculo" value="#{vehiculo}" />
+                            <p:clientValidator/>
+                        </p:inputText>
+
+
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_kilometrajeFinal}" for="kilometrajeFinal" />
+                        <p:inputText id="kilometrajeFinal" value="#{kilometrajeComisionController.selected.kilometrajeFinal}" title="#{bundle.CreateKilometrajeComisionTitle_kilometrajeFinal}" >
+                            <f:validator validatorId = "com.idpp.KilometrajeComisionKmFinalValidator" />
+                            <f:attribute name="kilometrajeInicial" value="#{kilometrajeInicial}" />
+                            <p:clientValidator/>
+                        </p:inputText>
+
+
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_comisionRealizada}" for="comisionRealizada" />
                         <p:inputText id="comisionRealizada" value="#{kilometrajeComisionController.selected.comisionRealizada}" title="#{bundle.CreateKilometrajeComisionTitle_comisionRealizada}" />
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_causa1}" for="causa1" />
@@ -42,24 +69,21 @@
                         <p:inputText id="causa2" value="#{kilometrajeComisionController.selected.causa2}" title="#{bundle.CreateKilometrajeComisionTitle_causa2}" />
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_causa3}" for="causa3" />
                         <p:inputText id="causa3" value="#{kilometrajeComisionController.selected.causa3}" title="#{bundle.CreateKilometrajeComisionTitle_causa3}" />
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_diligenciasRealizadas}" for="diligenciasRealizadas" />
-                        <p:inputText id="diligenciasRealizadas" value="#{kilometrajeComisionController.selected.diligenciasRealizadas}" title="#{bundle.CreateKilometrajeComisionTitle_diligenciasRealizadas}" />
                         <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codDependenciaInstitucion}" for="codDependenciaInstitucion" />
                         <p:selectOneMenu id="codDependenciaInstitucion" value="#{kilometrajeComisionController.selected.codDependenciaInstitucion}" >
                             <f:selectItems value="#{dependenciaInstitucionController.itemsAvailableSelectOne}"
                                            var="codDependenciaInstitucionItem"
                                            itemValue="#{codDependenciaInstitucionItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codPersonaPiloto}" for="codPersonaPiloto" />
-                        <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" >
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="codPersonaPilotoItem"
-                                           itemValue="#{codPersonaPilotoItem}"/>
-                        </p:selectOneMenu>
-                        
-                        
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_diligenciasRealizadas}" for="diligenciasRealizadas" />
+                        <p:inputText id="diligenciasRealizadas" value="#{kilometrajeComisionController.selected.diligenciasRealizadas}" title="#{bundle.CreateKilometrajeComisionTitle_diligenciasRealizadas}" />
+
+                        <ui:remove>
+                        <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_placa}" for="placa" />
+                        <p:inputText id="placa" value="#{kilometrajeComisionController.selected.placa}" title="#{bundle.CreateKilometrajeComisionTitle_placa}" />
+                        </ui:remove>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{kilometrajeComisionController.create}" value="#{bundle.Save}" update="display,:KilometrajeComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'KilometrajeComisionCreateDialog');"/>
+                    <p:commandButton actionListener="#{kilometrajeComisionController.create}" value="#{bundle.Save}" update="display,:KilometrajeComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'KilometrajeComisionCreateDialog');" validateClient="true" />
                     <p:commandButton value="#{bundle.Cancel}" onclick="KilometrajeComisionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

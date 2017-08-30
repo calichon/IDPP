@@ -1,11 +1,13 @@
 package jsf_classes;
 
 import entities.KilometrajeComision;
+import entities.Persona;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.KilometrajeComisionFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import session_beans.PersonaFacade;
 
 @Named("kilometrajeComisionController")
 @SessionScoped
@@ -25,8 +28,11 @@ public class KilometrajeComisionController implements Serializable {
 
     @EJB
     private session_beans.KilometrajeComisionFacade ejbFacade;
+    @EJB
+    private session_beans.PersonaFacade ejbFacadePersona;
     private List<KilometrajeComision> items = null;
     private KilometrajeComision selected;
+    private List<Persona> pilotosDisponibles = null;
 
     public KilometrajeComisionController() {
     }
@@ -45,7 +51,7 @@ public class KilometrajeComisionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private KilometrajeComisionFacade getFacade() {
+    public KilometrajeComisionFacade getFacade() {
         return ejbFacade;
     }
 
@@ -119,6 +125,16 @@ public class KilometrajeComisionController implements Serializable {
 
     public List<KilometrajeComision> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public List<Persona> getPilotosDisponibles(){
+        List<Persona> itemsDisponiblesFecha = null;
+        itemsDisponiblesFecha = getFacadePersona().findByPuesto(2); //2 es el tipo puesto piloto
+        return itemsDisponiblesFecha;
+    }
+
+    private PersonaFacade getFacadePersona(){
+        return ejbFacadePersona;
     }
 
     @FacesConverter(forClass = KilometrajeComision.class)

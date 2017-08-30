@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "KilometrajeComision.findAll", query = "SELECT k FROM KilometrajeComision k")
+    , @NamedQuery(name = "KilometrajeComision.findLastByVehiculo", query = "SELECT k FROM KilometrajeComision k where k.codVehiculo = :vehiculo ORDER BY k.fechaHoraEntrada desc")
     , @NamedQuery(name = "KilometrajeComision.findByCodKilometrajeComision", query = "SELECT k FROM KilometrajeComision k WHERE k.codKilometrajeComision = :codKilometrajeComision")
     , @NamedQuery(name = "KilometrajeComision.findByPlaca", query = "SELECT k FROM KilometrajeComision k WHERE k.placa = :placa")
     , @NamedQuery(name = "KilometrajeComision.findByKilometrajeInicial", query = "SELECT k FROM KilometrajeComision k WHERE k.kilometrajeInicial = :kilometrajeInicial")
@@ -233,5 +234,5 @@ public class KilometrajeComision implements Serializable {
     public String toString() {
         return "entities.KilometrajeComision[ codKilometrajeComision=" + codKilometrajeComision + " ]";
     }
-    
+
 }
