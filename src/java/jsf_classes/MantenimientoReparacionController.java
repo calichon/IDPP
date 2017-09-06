@@ -40,30 +40,30 @@ public class MantenimientoReparacionController implements Serializable {
     @EJB
     private session_beans.ConcursoMantenimientosFacade concursoFacade;
     @EJB
-    private session_beans.ProveedoresFacade proveedoresFacade;    
+    private session_beans.ProveedoresFacade proveedoresFacade;
     @EJB
-    private session_beans.PersonaFacade personaFacade;     
+    private session_beans.PersonaFacade personaFacade;
     @EJB
-    private session_beans.TipoMantenimientoReparacionFacade tipoMantoFacade;          
+    private session_beans.TipoMantenimientoReparacionFacade tipoMantoFacade;
     private List<MantenimientoReparacion> items = null;
     private MantenimientoReparacion selected;
     private String newLabel = null;
     private String empleadoRecepcionNombreCargo;
     private String empleadoAutorizaNombreCargo;
-    
+
     private Persona fullEmpleadoRecepcion;
     private Persona fullEmpleadoAutoriza;
     private DetalleMantRep actualDetalleMantRep;
      private DetalleMantRep actualDetalleMantRepTable;
      private List<DetalleMantRep> detalleMantos;
-     
+
      static final  int UNIDAD_TRANSPORTES = 2;
      static final int UNIDAD_REPARACION = 3;
-     
+
      public static final int TIPO_MANTENIMIENTO = 1;
      public static final int TIPO_REPARACION = 2;
 
-     
+
 
     public MantenimientoReparacionController() {
     }
@@ -79,9 +79,9 @@ public class MantenimientoReparacionController implements Serializable {
     }
 
     protected void setEmbeddableKeys() {
-        
+
     }
-    
+
 
     protected void initializeEmbeddableKey() {
         newLabel = "NUEVO";
@@ -99,7 +99,7 @@ public class MantenimientoReparacionController implements Serializable {
     public MantenimientoReparacion prepareCreate() {
         selected = new MantenimientoReparacion();
 
-       
+
         initializeEmbeddableKey();
         return selected;
     }
@@ -131,7 +131,7 @@ public class MantenimientoReparacionController implements Serializable {
        detalleMantos.remove(actualDetalleMantRepTable);
 
        selected.setTotalMantenimientoReparaQ(selected.getTotalMantenimientoReparaQ()-actualDetalleMantRepTable.getCostoReparacionDetalle());
-        
+
     }
     public List<MantenimientoReparacion> getItems() {
         if (items == null) {
@@ -152,7 +152,7 @@ public class MantenimientoReparacionController implements Serializable {
                     }
                     selected.setDetalleMantRepCollection(detalleMantos);
                     getFacade().edit(selected);
-                    
+
                 } else {
                     getFacade().remove(selected);
                 }
@@ -297,47 +297,46 @@ public class MantenimientoReparacionController implements Serializable {
         }
 
     }
-    
+
     public List<Vehiculo> completePlacasVehiculo(String query) {
         List<Vehiculo> filteredVehiculos = vehiculoFacade.findByPlaca(query);
 
         return filteredVehiculos;
     }
-    
+
     public List<Proveedores> completeNITProveedores(String query){
         List<Proveedores> filteredProveedores = proveedoresFacade.findByNIT(query);
         return filteredProveedores;
     }
-    
-    public List<Persona> completeEmpleado(String query){
 
+    public List<Persona> completeEmpleado(String query){
         List<Persona> filteredPersona = personaFacade.findByNombreApellido(query, selected.getMantRep().intValue() == TIPO_MANTENIMIENTO?UNIDAD_TRANSPORTES:UNIDAD_REPARACION);
         return filteredPersona;
     }
-    
+
     public List<TipoMantenimientoReparacion> completeTipoMantenimiento(String query){
         List<TipoMantenimientoReparacion> filteredTipos = tipoMantoFacade.findByNombre(query, selected.getMantRep().intValue());
         return filteredTipos;
     }
-    
+
     public void onItemSelect(SelectEvent event) {
         Vehiculo v = (Vehiculo) event.getObject();
         List<ConcursoMantenimientos> cm = concursoFacade.getConcursosActivosByPlaca(v.getPlaca());
         if (cm.size() > 0){
             selected.setCodNoConcurso(cm.get(0));
         }
-        
+
     }
     public void onNitSelect(SelectEvent event) {
 
     }
-    
+
     public void onEmpleadoSelect(SelectEvent event){
        selected.setCodEmpleadoRecepcion(new BigDecimal(fullEmpleadoRecepcion.getCodPersona()).toBigInteger());
         selected.setCodCargoEmpleadoRecepcion(new BigDecimal(fullEmpleadoRecepcion.getCodPuesto().getCodPuesto()).toBigInteger());
         setEmpleadoRecepcionNombreCargo(fullEmpleadoRecepcion.getCodPuesto().getDescripcion());
     }
-    
+
     public void onEmpleadoAutorizaSelect(SelectEvent event){
        selected.setCodEmpleadoRecepcionFact(new BigDecimal(fullEmpleadoAutoriza.getCodPersona()).toBigInteger());
         selected.setCodCargoEmpleadoRecepcionFact(new BigDecimal(fullEmpleadoAutoriza.getCodPuesto().getCodPuesto()).toBigInteger());
@@ -348,20 +347,20 @@ public class MantenimientoReparacionController implements Serializable {
         Date envio = selected.getFechaEnvioVehiculo();
         Date retorno = selected.getFechaRetornoVehiculo();
 
-        
+
         if (envio == null || retorno == null) return;
-        
+
         long diff = retorno.getTime() - envio.getTime();
         double dayCount = (double) diff / (24 * 60 * 60 * 1000);
         selected.setDiasMantenimiento(new BigDecimal(dayCount).toBigInteger());
     }
-    
+
     public void agregarDetalle(){
-        
+
         //selected.getDetalleMantRepCollection().add(actualDetalleMantRep);
         detalleMantos.add(actualDetalleMantRep);
         selected.setTotalMantenimientoReparaQ(selected.getTotalMantenimientoReparaQ()+actualDetalleMantRep.getCostoReparacionDetalle());
-        
+
         System.out.println("Sale agrgar detalle "+selected.getTotalMantenimientoReparaQ());
     }
 
