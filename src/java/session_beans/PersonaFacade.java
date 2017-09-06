@@ -63,4 +63,13 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         personaQ = em.createNamedQuery("Persona.findByPuesto").setParameter("puesto", p);
         return personaQ.getResultList();
     }
+    
+    public List<Persona> findByNombreApellido(String query, int unidad){
+      Query byNombres = getEntityManager().createQuery("FROM Persona p WHERE concat(p.nombre1,p.nombre2,p.apellido1,p.apellido2,p.apellidoCasada) like :nombres and p.codPuesto.codOrganigrama.codUnidad.codUnidad = :laUnidad");
+      query = query.replace(' ', '%');
+        System.out.println("***query: "+query);
+      byNombres.setParameter("nombres", '%'+query+'%');
+      byNombres.setParameter("laUnidad", unidad);
+      return byNombres.getResultList();      
+    }
 }

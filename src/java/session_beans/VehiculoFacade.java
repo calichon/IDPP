@@ -97,6 +97,13 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         return resultadoPlaca;
     }
     
+    public List<Vehiculo> findByPlaca(String placa){
+      Query byPlaca = getEntityManager().createQuery("FROM Vehiculo v WHERE v.placa like :placa");
+      byPlaca.setParameter("placa", '%'+placa+'%');
+      return byPlaca.getResultList();
+    }
+
+    
     public void refreshEntity() {
         //getEntityManager().refresh(this);
         //getEntityManager().flush();
