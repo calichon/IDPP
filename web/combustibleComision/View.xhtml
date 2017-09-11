@@ -19,42 +19,40 @@
                         </p:row>
                         </f:facet>
                         <p:row>
-                            <ui:remove>
-                                <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codCombustibleComision}"/>
-                                <h:outputText value="#{combustibleComisionController.selected.codCombustibleComision}" title="#{bundle.ViewCombustibleComisionTitle_codCombustibleComision}"/>
-                            </ui:remove>
-                            <p:column >
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_fechaEntrega}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.ViewCombustibleComisionTitle_fechaEntrega}">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
-                            <p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPersonaSolicitante}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.codPersonaSolicitante.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codPersonaSolicitante}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPuestoSolicitante}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.codPuestoSolicitante.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codPuestoSolicitante}"/>
                             </p:column>
                         </p:row>
                         <p:row>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codSede}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.codSede.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codSede}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codUnidad}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.codUnidad.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codUnidad}"/>
                             </p:column>
                         </p:row>
@@ -62,50 +60,52 @@
                             <p:column styleClass="ui-widget-header">Datos del vehículo</p:column>
                         </p:row>
                         <p:row>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codVehiculo}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.codVehiculo.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codVehiculo}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.ViewCombustibleComisionLabel_vehiculoTipo}"  />
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText  id="vehiculoTipo" value="#{combustibleComisionController.selected.codVehiculo.codTipoTipo.nombreTipoTipo}"  />
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.ViewCombustibleComisionLabel_vehiculoMarca}"  />
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText  id="vehiculoMarca" value="#{combustibleComisionController.selected.codVehiculo.codMarca.nombreMarca}"  />
                             </p:column>
                         </p:row>
                         <p:row>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_kilometrajeActual}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.kilometrajeActual}" title="#{bundle.ViewCombustibleComisionTitle_kilometrajeActual}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_comisionA}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{combustibleComisionController.selected.comisionA}" title="#{bundle.ViewCombustibleComisionTitle_comisionA}"/>
                             </p:column>
-                            <p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_cantidadEstimadaCarga}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="5">
                                 <h:outputText value="#{combustibleComisionController.selected.cantidadEstimadaCarga}" title="#{bundle.ViewCombustibleComisionTitle_cantidadEstimadaCarga}"/>
                             </p:column>
                         </p:row>
                         <p:row>
-                            <p:column>
+                            <p:column colspan="1">
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_observaciones}"/>
                             </p:column>
-                            <p:column>
+                            <p:column colspan="5">
                                 <h:outputText value="#{combustibleComisionController.selected.observaciones}" title="#{bundle.ViewCombustibleComisionTitle_observaciones}"/>
                             </p:column>
                         </p:row>
@@ -115,7 +115,7 @@
 
                         <p:row>
                             <p:column colspan="6">
-                                <p:dataTable id="cuponest" var="cupon" value="#{combustibleComisionController.cupones}">
+                                <p:dataTable id="cuponest" style="width: 805px" var="cupon" value="#{combustibleComisionController.cupones}">
                                     <p:columnGroup type="header">
                                         <p:row>
                                             <p:column headerText="Cantidad"/>
@@ -152,6 +152,8 @@
                             <p:column>
                                 <h:outputText value="#{combustibleComisionController.selected.codPersonaReceptor.toString()}" title="#{bundle.ViewCombustibleComisionTitle_codPersonaReceptor}"/>
                             </p:column>
+                        </p:row>
+                        <p:row>
                             <p:column>
                                 <h:outputText value="#{bundle.ViewCombustibleComisionLabel_codPuestoReceptor}"/>
                             </p:column>

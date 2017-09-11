@@ -11,63 +11,197 @@
         <p:dialog id="VehiculoViewDlg" widgetVar="VehiculoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVehiculoTitle}">
             <h:form id="VehiculoViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="6" rendered="#{vehiculoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codVehiculo}"/>
-                        <h:outputText value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.ViewVehiculoTitle_codVehiculo}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_placa}"/>
-                        <h:outputText value="#{vehiculoController.selected.placa}" title="#{bundle.ViewVehiculoTitle_placa}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_nit}"/>
-                        <h:outputText value="#{vehiculoController.selected.nit}" title="#{bundle.ViewVehiculoTitle_nit}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_poliza}"/>
-                        <h:outputText value="#{vehiculoController.selected.poliza}" title="#{bundle.ViewVehiculoTitle_poliza}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_direccion}"/>
-                        <h:outputText value="#{vehiculoController.selected.direccion}" title="#{bundle.ViewVehiculoTitle_direccion}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_nombre}"/>
-                        <h:outputText value="#{vehiculoController.selected.nombre}" title="#{bundle.ViewVehiculoTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_modelo}"/>
-                        <h:outputText value="#{vehiculoController.selected.modelo}" title="#{bundle.ViewVehiculoTitle_modelo}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_chasis}"/>
-                        <h:outputText value="#{vehiculoController.selected.chasis}" title="#{bundle.ViewVehiculoTitle_chasis}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_vin}"/>
-                        <h:outputText value="#{vehiculoController.selected.vin}" title="#{bundle.ViewVehiculoTitle_vin}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_centimetrosCubicos}"/>
-                        <h:outputText value="#{vehiculoController.selected.centimetrosCubicos}" title="#{bundle.ViewVehiculoTitle_centimetrosCubicos}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_cilindros}"/>
-                        <h:outputText value="#{vehiculoController.selected.cilindros}" title="#{bundle.ViewVehiculoTitle_cilindros}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_toneladas}"/>
-                        <h:outputText value="#{vehiculoController.selected.toneladas}" title="#{bundle.ViewVehiculoTitle_toneladas}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_titulo}"/>
-                        <h:outputText value="#{vehiculoController.selected.titulo}" title="#{bundle.ViewVehiculoTitle_titulo}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_tarjetaCirculacion}"/>
-                        <h:outputText value="#{vehiculoController.selected.tarjetaCirculacion}" title="#{bundle.ViewVehiculoTitle_tarjetaCirculacion}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_noAsientos}"/>
-                        <h:outputText value="#{vehiculoController.selected.noAsientos}" title="#{bundle.ViewVehiculoTitle_noAsientos}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_noInventarioRegistro}"/>
-                        <h:outputText value="#{vehiculoController.selected.noInventarioRegistro}" title="#{bundle.ViewVehiculoTitle_noInventarioRegistro}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_noMotor}"/>
-                        <h:outputText value="#{vehiculoController.selected.noMotor}" title="#{bundle.ViewVehiculoTitle_noMotor}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_orden}"/>
-                        <h:outputText value="#{vehiculoController.selected.orden}" title="#{bundle.ViewVehiculoTitle_orden}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_activo}"/>
-                        <p:selectBooleanCheckbox value="#{vehiculoController.selected.activo}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codColor}"/>
-                        <h:outputText value="#{vehiculoController.selected.codColor.nombreColor}" title="#{bundle.ViewVehiculoTitle_codColor}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codDepartamento}"/>
-                        <h:outputText value="#{vehiculoController.selected.codDepartamento.descripcion}" title="#{bundle.ViewVehiculoTitle_codDepartamento}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codLinea}"/>
-                        <h:outputText value="#{vehiculoController.selected.codLinea.nombreLinea}" title="#{bundle.ViewVehiculoTitle_codLinea}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codMarca}"/>
-                        <h:outputText value="#{vehiculoController.selected.codMarca.nombreMarca}" title="#{bundle.ViewVehiculoTitle_codMarca}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codMunicipio}"/>
-                        <h:outputText value="#{vehiculoController.selected.codMunicipio.descripcion}" title="#{bundle.ViewVehiculoTitle_codMunicipio}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codPersonaAsignacion}"/>
-                        <h:outputText value="#{vehiculoController.selected.codPersonaAsignacion.apellido1.concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.apellido2).concat(', ').concat(vehiculoController.selected.codPersonaAsignacion.nombre1).concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.nombre2)}" title="#{bundle.ViewVehiculoTitle_codPersonaAsignacion}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codPueston}"/>
-                        <h:outputText value="#{vehiculoController.selected.codPueston.descripcion}" title="#{bundle.ViewVehiculoTitle_codPueston}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoTipo}"/>
-                        <h:outputText value="#{vehiculoController.selected.codTipoTipo.nombreTipoTipo}" title="#{bundle.ViewVehiculoTitle_codTipoTipo}"/>
-                        <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoUso}"/>
-                        <h:outputText value="#{vehiculoController.selected.codTipoUso.nombreTipoUso}" title="#{bundle.ViewVehiculoTitle_codTipoUso}"/>
+                    <p:panelGrid rendered="#{vehiculoController.selected != null}">
+                        <ui:remove>
+                            <h:outputText value="#{bundle.ViewVehiculoLabel_codVehiculo}"/>
+                            <h:outputText value="#{vehiculoController.selected.codVehiculo}" title="#{bundle.ViewVehiculoTitle_codVehiculo}"/>
+                        </ui:remove>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_placa}"/>
+                            </p:column>
+                            <p:column colspan="4">
+                                <h:outputText value="#{vehiculoController.selected.placa}" title="#{bundle.ViewVehiculoTitle_placa}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_nit}"/>
+                            </p:column>
+                            <p:column colspan="4">
+                                <h:outputText value="#{vehiculoController.selected.nit}" title="#{bundle.ViewVehiculoTitle_nit}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_poliza}"/>
+                            </p:column>
+                            <p:column colspan="5">
+                                <h:outputText value="#{vehiculoController.selected.poliza}" title="#{bundle.ViewVehiculoTitle_poliza}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_direccion}"/>
+                            </p:column>
+                            <p:column colspan="15">
+                                <h:outputText value="#{vehiculoController.selected.direccion}" title="#{bundle.ViewVehiculoTitle_direccion}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codDepartamento}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codDepartamento.descripcion}" title="#{bundle.ViewVehiculoTitle_codDepartamento}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codMunicipio}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codMunicipio.descripcion}" title="#{bundle.ViewVehiculoTitle_codMunicipio}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_nombre}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.nombre}" title="#{bundle.ViewVehiculoTitle_nombre}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_modelo}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.modelo}" title="#{bundle.ViewVehiculoTitle_modelo}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoUso}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codTipoUso.nombreTipoUso}" title="#{bundle.ViewVehiculoTitle_codTipoUso}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_chasis}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.chasis}" title="#{bundle.ViewVehiculoTitle_chasis}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codTipoTipo}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codTipoTipo.nombreTipoTipo}" title="#{bundle.ViewVehiculoTitle_codTipoTipo}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codMarca}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codMarca.nombreMarca}" title="#{bundle.ViewVehiculoTitle_codMarca}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codLinea}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.codLinea.nombreLinea}" title="#{bundle.ViewVehiculoTitle_codLinea}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_vin}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.vin}" title="#{bundle.ViewVehiculoTitle_vin}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_centimetrosCubicos}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.centimetrosCubicos}" title="#{bundle.ViewVehiculoTitle_centimetrosCubicos}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_cilindros}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.cilindros}" title="#{bundle.ViewVehiculoTitle_cilindros}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_toneladas}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.toneladas}" title="#{bundle.ViewVehiculoTitle_toneladas}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_titulo}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.titulo}" title="#{bundle.ViewVehiculoTitle_titulo}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_tarjetaCirculacion}"/>
+                            </p:column>
+                            <p:column colspan="7">
+                                <h:outputText value="#{vehiculoController.selected.tarjetaCirculacion}" title="#{bundle.ViewVehiculoTitle_tarjetaCirculacion}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codColor}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.codColor.nombreColor}" title="#{bundle.ViewVehiculoTitle_codColor}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_noAsientos}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.noAsientos}" title="#{bundle.ViewVehiculoTitle_noAsientos}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_noMotor}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.noMotor}" title="#{bundle.ViewVehiculoTitle_noMotor}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="3">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_noInventarioRegistro}"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <h:outputText value="#{vehiculoController.selected.noInventarioRegistro}" title="#{bundle.ViewVehiculoTitle_noInventarioRegistro}"/>
+                            </p:column>
+                            <p:column colspan="1">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codPersonaAsignacion}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{vehiculoController.selected.codPersonaAsignacion.apellido1.concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.apellido2).concat(', ').concat(vehiculoController.selected.codPersonaAsignacion.nombre1).concat(' ').concat(vehiculoController.selected.codPersonaAsignacion.nombre2)}" title="#{bundle.ViewVehiculoTitle_codPersonaAsignacion}"/>
+                            </p:column>
+                            <p:column colspan="3">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_codPueston}"/>
+                            </p:column>
+                            <p:column colspan="4">
+                                <h:outputText value="#{vehiculoController.selected.codPueston.descripcion}" title="#{bundle.ViewVehiculoTitle_codPueston}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_orden}"/>
+                            </p:column>
+                            <p:column colspan="6">
+                                <h:outputText value="#{vehiculoController.selected.orden}" title="#{bundle.ViewVehiculoTitle_orden}"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <h:outputText value="#{bundle.ViewVehiculoLabel_activo}"/>
+                            </p:column>
+                            <p:column colspan="6">
+                                <p:selectBooleanCheckbox value="#{vehiculoController.selected.activo}" disabled="true"/>
+                            </p:column>
+                        </p:row>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="VehiculoViewDialog.hide()"/>
                 </h:panelGroup>
