@@ -300,7 +300,6 @@ public class MantenimientoReparacionController implements Serializable {
 
     public List<Vehiculo> completePlacasVehiculo(String query) {
         List<Vehiculo> filteredVehiculos = vehiculoFacade.findByPlaca(query);
-
         return filteredVehiculos;
     }
 
