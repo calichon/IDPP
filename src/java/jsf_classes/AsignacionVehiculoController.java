@@ -54,7 +54,7 @@ public class AsignacionVehiculoController implements Serializable {
     private Persona pilotoAsignado;
     private Vehiculo vehiculoAsignado;
     private VehiculoController vehiculoController = new VehiculoController();
-    private AsignacionVehiculoPiloto lastAVP;    
+    private AsignacionVehiculoPiloto lastAVP;
     private AsignacionVehiculoPiloto lastAVPorig;
     private List<Vehiculo> vehiculosDisponibles = null;
     private List<Vehiculo> vehiculosDisponiblesEdit = null;
@@ -62,62 +62,63 @@ public class AsignacionVehiculoController implements Serializable {
     private List<Persona> pasajerosUnidad = null;
     private Date fechaInicio;
     private Date fechaFin;
-    
+
     private int dias = 0;
 
     public AsignacionVehiculoController() {
     }
 
     @PostConstruct
-    public void init() {        
+    public void init() {
         setPasajerosUnidad();
     }
-    
+
     public void onUnidadChange(){
         setPasajerosUnidad();
     }
-    
+
     public void setPasajerosUnidad(){
         if(selected != null){
-            pasajerosUnidad = ejbFacadePersona.findByUnidad(selected.getCodUnidadSolicitante());
+            //pasajerosUnidad = ejbFacadePersona.findByUnidad(selected.getCodUnidadSolicitante());
+            pasajerosUnidad = ejbFacadePersona.findAll();
         }
     }
-    
+
     public List<Persona> getPasajerosUnidad(){
         if(pasajerosUnidad == null){
             setPasajerosUnidad();
         }
         return pasajerosUnidad;
     }
-    
+
     public AsignacionVehiculo getSelected() {
         return selected;
     }
-    
+
     public AsignacionVehiculoPiloto getSelectedAVP() {
         return selectedAVP;
     }
-    
+
     //@Transactional
     public AsignacionVehiculoPiloto getLastAVP(){
         //em.joinTransaction();
         //em.refresh(selected);
-        //em.flush();    
+        //em.flush();
         List<AsignacionVehiculoPiloto> list = selected.getAsignacionVehiculoPilotoList();
         if(list != null){
-            for (AsignacionVehiculoPiloto avp : list) {            
+            for (AsignacionVehiculoPiloto avp : list) {
                 if(avp.getEstatusAsignacion().equals("A")){
                     lastAVPorig = avp;
                 }
             }
         }
-        
+
         if(lastAVP != null){
             if(lastAVP.getCodAsignacionVehiculo() != selected){
                 lastAVP = null;
             }
         }
-        
+
         if(lastAVP == null){
             if(lastAVPorig != null){
                 lastAVP = new AsignacionVehiculoPiloto();
@@ -129,34 +130,34 @@ public class AsignacionVehiculoController implements Serializable {
                 lastAVP.setFechaHoraAsignacion(lastAVPorig.getFechaHoraAsignacion());
                 lastAVP.setFechaHoraRetornoVehiculo(lastAVPorig.getFechaHoraRetornoVehiculo());
                 lastAVP.setFechaHoraUsoVehiculo(lastAVPorig.getFechaHoraUsoVehiculo());
-            }            
+            }
             else{
                 lastAVP = new AsignacionVehiculoPiloto();
             }
         }
-        
+
         return lastAVP;
     }
-    
+
     public List<SelectItem> getPilotoAsignadoList() {
         pilotoAsignadoList = new ArrayList<SelectItem>();
         pilotoAsignadoList.add(new SelectItem("1", "Mercedes"));
         pilotoAsignadoList.add(new SelectItem("2", "Kia"));
         return pilotoAsignadoList;
     }
-    
+
     public void setPilotoAsignado(Persona piloto){
         pilotoAsignado = piloto;
     }
-    
+
     public Persona getPilotoAsignado(){
         return pilotoAsignado;
     }
-    
+
     public void setVehiculoAsignado(Vehiculo vehiculo){
         vehiculoAsignado = vehiculo;
     }
-    
+
     public Vehiculo getVehiculoAsignado(){
         return vehiculoAsignado;
     }
@@ -164,7 +165,7 @@ public class AsignacionVehiculoController implements Serializable {
     public void setSelected(AsignacionVehiculo selected) {
         this.selected = selected;
     }
-    
+
     public void setSelectedAVP(AsignacionVehiculoPiloto selectedAVP) {
         this.selectedAVP = selectedAVP;
     }
@@ -178,32 +179,32 @@ public class AsignacionVehiculoController implements Serializable {
     private AsignacionVehiculoFacade getFacade() {
         return ejbFacade;
     }
-    
+
     private AsignacionVehiculoPilotoFacade getFacadeAVP() {
         return ejbFacadeAVP;
     }
-    
+
     private VehiculoFacade getFacadeVehiculo() {
         return ejbFacadeVehiculo;
     }
-    
+
     private PersonaFacade getFacadePersona(){
         return ejbFacadePersona;
     }
 
     public AsignacionVehiculo prepareCreate() {
-        selected = new AsignacionVehiculo();        
+        selected = new AsignacionVehiculo();
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public AsignacionVehiculoPiloto prepareCreateAVP() {
-        selectedAVP = new AsignacionVehiculoPiloto();        
+        selectedAVP = new AsignacionVehiculoPiloto();
         initializeEmbeddableKey();
         return selectedAVP;
     }
 
-    public void create() {        
+    public void create() {
         prepareCreateAVP();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AsignacionVehiculoCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -211,8 +212,8 @@ public class AsignacionVehiculoController implements Serializable {
         }
     }
 
-    
-    
+
+
     public void update() {
         prepareCreateAVP();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AsignacionVehiculoUpdated"));
@@ -232,7 +233,7 @@ public class AsignacionVehiculoController implements Serializable {
         }
         return items;
     }
-    
+
     public EntityManager getEntityManager() {
         em.getEntityManagerFactory().getCache().evictAll();
         return em;
@@ -249,9 +250,9 @@ public class AsignacionVehiculoController implements Serializable {
             try {
                 if (persistAction != PersistAction.DELETE) {
                     //getFacade().edit(selected);
-                    if (persistAction == PersistAction.CREATE) {                    
+                    if (persistAction == PersistAction.CREATE) {
                         selectedAVP.setCodAsignacionVehiculo(selected);
-                        em = getEntityManager();                    
+                        em = getEntityManager();
                         selectedAVP.setCodPersonaPilotoAsignado(pilotoAsignado);
                         selectedAVP.setCodVehiculo(vehiculoAsignado);
                         selectedAVP.setFechaHoraAsignacion(selected.getFechaAsignacion());
@@ -265,17 +266,17 @@ public class AsignacionVehiculoController implements Serializable {
                     else{
                         //getFacade().edit(selected);
                         selectedAVP.setCodAsignacionVehiculo(selected);
-                        em = getEntityManager();                    
+                        em = getEntityManager();
                         selectedAVP.setCodPersonaPilotoAsignado(lastAVP.getCodPersonaPilotoAsignado());
                         selectedAVP.setCodVehiculo(lastAVP.getCodVehiculo());
                         selectedAVP.setFechaHoraAsignacion(selected.getFechaAsignacion());
                         selectedAVP.setFechaHoraUsoVehiculo(selected.getFechaHoraUsoVehiculo());
                         selectedAVP.setFechaHoraRetornoVehiculo(selected.getFechaHoraRetornoVehiculo());
-                        selectedAVP.setEstatusAsignacion("A");                        
-                        
+                        selectedAVP.setEstatusAsignacion("A");
+
                         lastAVPorig.setEstatusAsignacion("R");
                         AsignacionVehiculoPilotoFacade favp;
-                        favp = getFacadeAVP();                        
+                        favp = getFacadeAVP();
                         favp.edit(selectedAVP);
                         favp.edit(lastAVPorig);
                         selected.setAsignacionVehiculoPilotoList(favp.findByAV(selected.getCodAsignacionVehiculo()));
@@ -315,19 +316,19 @@ public class AsignacionVehiculoController implements Serializable {
     public List<AsignacionVehiculo> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     public void setTotalDias(){
         Calendar cal1 = new GregorianCalendar();
-        Calendar cal2 = new GregorianCalendar();        
-        
-        Date date1 = selected.getFechaHoraUsoVehiculo();        
+        Calendar cal2 = new GregorianCalendar();
+
+        Date date1 = selected.getFechaHoraUsoVehiculo();
         Date date2 = selected.getFechaHoraRetornoVehiculo();
         if(date1!=null && date2!=null){
             cal1.setTime(date1);
             cal2.setTime(date2);
             dias = daysBetween(cal1.getTime(),cal2.getTime());
-        }        
-        selected.setDiasAsignacion(dias);        
+        }
+        selected.setDiasAsignacion(dias);
         fechaInicio = selected.getFechaHoraUsoVehiculo();
         fechaFin = selected.getFechaHoraRetornoVehiculo();
     }
@@ -335,7 +336,7 @@ public class AsignacionVehiculoController implements Serializable {
     public List<Vehiculo> getVehiculosDisponibles() {
         Date pFechaInicio;
         Date pFechaFin;
-        List<Vehiculo> itemsDisponiblesFecha = null;        
+        List<Vehiculo> itemsDisponiblesFecha = null;
         if(fechaInicio == null){
             pFechaInicio = new Date(0);
         }
@@ -344,17 +345,17 @@ public class AsignacionVehiculoController implements Serializable {
         }
         if(fechaFin == null){
             pFechaFin = new Date();
-            
+
         }
         else{
             pFechaFin = fechaFin;
-        }        
+        }
         if (itemsDisponiblesFecha == null) {
             itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
         }
         return itemsDisponiblesFecha;
     }
-    
+
     public List<Vehiculo> getVehiculosDisponiblesEdit() {
         Date pFechaInicio;
         Date pFechaFin;
@@ -369,17 +370,17 @@ public class AsignacionVehiculoController implements Serializable {
         }
         if(fechaFin == null){
             pFechaFin = new Date();
-            
+
         }
         else{
             pFechaFin = fechaFin;
-        }        
-        
-        itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());            
-        
+        }
+
+        itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
+
         return itemsDisponiblesFecha;
     }
-    
+
     public List<Persona> getPilotosDisponibles(){
         Date pFechaInicio;
         Date pFechaFin;
@@ -392,17 +393,18 @@ public class AsignacionVehiculoController implements Serializable {
         }
         if(fechaFin == null){
             pFechaFin = new Date();
-            
+
         }
         else{
             pFechaFin = fechaFin;
-        }        
+        }
         if (itemsDisponiblesFecha == null) {
             itemsDisponiblesFecha = getFacadePersona().findByDate(pFechaInicio,pFechaFin);
+            //itemsDisponiblesFecha = getFacadePersona().findAll();
         }
         return itemsDisponiblesFecha;
     }
-    
+
     public List<Persona> getPilotosDisponiblesEdit(){
         Date pFechaInicio;
         Date pFechaFin;
@@ -417,17 +419,17 @@ public class AsignacionVehiculoController implements Serializable {
         }
         if(fechaFin == null){
             pFechaFin = new Date();
-            
+
         }
         else{
             pFechaFin = fechaFin;
-        }        
-        
+        }
+
         itemsDisponiblesFecha = getFacadePersona().findByDateAndId(pFechaInicio,pFechaFin,selected);
-        
+
         return itemsDisponiblesFecha;
     }
-    
+
     private int daysBetween(Date d1, Date d2){
         int ret = 0;
         ret = (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
@@ -436,11 +438,11 @@ public class AsignacionVehiculoController implements Serializable {
         }
         return ret;
     }
-    
+
     public int getDias(){
         return dias;
     }
-              
+
     public List<String> autocompletarDestino(String query) {
         return getFacade().getDestinoOrderedList(query);
     }

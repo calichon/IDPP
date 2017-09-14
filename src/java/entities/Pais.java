@@ -59,10 +59,7 @@ public class Pais implements Serializable {
     @Size(max = 2)
     @Column(name = "cod_estatus")
     private String codEstatus;
-    @OneToMany(mappedBy = "codPais")
-    private List<Persona> personaList;
-    @OneToMany(mappedBy = "codPaisPasaporte")
-    private List<Persona> personaList1;
+
 
     public Pais() {
     }
@@ -119,23 +116,6 @@ public class Pais implements Serializable {
         this.codEstatus = codEstatus;
     }
 
-    @XmlTransient
-    public List<Persona> getPersonaList() {
-        return personaList;
-    }
-
-    public void setPersonaList(List<Persona> personaList) {
-        this.personaList = personaList;
-    }
-
-    @XmlTransient
-    public List<Persona> getPersonaList1() {
-        return personaList1;
-    }
-
-    public void setPersonaList1(List<Persona> personaList1) {
-        this.personaList1 = personaList1;
-    }
 
     @Override
     public int hashCode() {
@@ -162,5 +142,5 @@ public class Pais implements Serializable {
         //return "entities.Pais[ codPais=" + codPais + " ]";
         return nombrePais;
     }
-    
+
 }

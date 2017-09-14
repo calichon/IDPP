@@ -49,12 +49,7 @@ import javax.xml.bind.annotation.XmlTransient;
 "    ((:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') \n" +
 "    AND avp.fechaHoraRetornoVehiculo IS NOT NULL) \n" +
 ")"+
-"AND p.codPersona IN (" +
-            "SELECT p.codPersona\n" +
-            "FROM Persona p\n" +
-            "left outer join p.puestoList pl \n" +
-            "WHERE  pl.codTipoPuesto = 2 "+
-            ")\n" +
+"AND p.codPuesto IN :puesto\n" +
 "ORDER BY p.codPersona")
 
     //, @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
@@ -69,48 +64,27 @@ import javax.xml.bind.annotation.XmlTransient;
 "    WHERE \n" +
 "    ((:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') \n" +
 "    AND avp.fechaHoraRetornoVehiculo IS NOT NULL AND avp.codAsignacionVehiculo != :codAsignacionVehiculo ) \n" +
-"AND p.codPersona IN (" +
-"SELECT p.codPersona\n" +
-"FROM Persona p\n" +
-"left outer join p.puestoList pl \n" +
-"WHERE  pl.codTipoPuesto = 2 "+
-")\n" +
+    "AND p.codPuesto IN :puesto\n" +
 ")\n" +
 "ORDER BY p.codPersona")
         //left outer join p.asignacionVehiculoPilotoList avp
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona
-    , @NamedQuery(name = "Persona.findByPuesto", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl WHERE pl.codTipoPuesto = :puesto")
+    , @NamedQuery(name = "Persona.findByPuesto", query = "SELECT DISTINCT(p) FROM Persona p WHERE p.codPuesto IN :puesto")
     , @NamedQuery(name = "Persona.findByUnidad", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl join pl.codOrganigrama o join o.codUnidad u WHERE u = :unidad")
     , @NamedQuery(name = "Persona.findByCodPersona", query = "SELECT p FROM Persona p WHERE p.codPersona = :codPersona")
-    , @NamedQuery(name = "Persona.findByCodTipoPersona", query = "SELECT p FROM Persona p WHERE p.codTipoPersona = :codTipoPersona")
     , @NamedQuery(name = "Persona.findByNombre1", query = "SELECT p FROM Persona p WHERE p.nombre1 = :nombre1")
     , @NamedQuery(name = "Persona.findByNombre2", query = "SELECT p FROM Persona p WHERE p.nombre2 = :nombre2")
     , @NamedQuery(name = "Persona.findByApellido1", query = "SELECT p FROM Persona p WHERE p.apellido1 = :apellido1")
     , @NamedQuery(name = "Persona.findByApellido2", query = "SELECT p FROM Persona p WHERE p.apellido2 = :apellido2")
     , @NamedQuery(name = "Persona.findByApellidoCasada", query = "SELECT p FROM Persona p WHERE p.apellidoCasada = :apellidoCasada")
-    , @NamedQuery(name = "Persona.findByCodRegistro", query = "SELECT p FROM Persona p WHERE p.codRegistro = :codRegistro")
-    , @NamedQuery(name = "Persona.findByNumeroCedula", query = "SELECT p FROM Persona p WHERE p.numeroCedula = :numeroCedula")
     , @NamedQuery(name = "Persona.findByNit", query = "SELECT p FROM Persona p WHERE p.nit = :nit")
-    , @NamedQuery(name = "Persona.findByFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.fechaNacimiento = :fechaNacimiento")
-    , @NamedQuery(name = "Persona.findBySexo", query = "SELECT p FROM Persona p WHERE p.sexo = :sexo")
     , @NamedQuery(name = "Persona.findByEstadoCivil", query = "SELECT p FROM Persona p WHERE p.estadoCivil = :estadoCivil")
     , @NamedQuery(name = "Persona.findByCodEstatus", query = "SELECT p FROM Persona p WHERE p.codEstatus = :codEstatus")
-    , @NamedQuery(name = "Persona.findByCuentaBanco", query = "SELECT p FROM Persona p WHERE p.cuentaBanco = :cuentaBanco")
-    , @NamedQuery(name = "Persona.findByPasaporte", query = "SELECT p FROM Persona p WHERE p.pasaporte = :pasaporte")
-    , @NamedQuery(name = "Persona.findByDomicilio", query = "SELECT p FROM Persona p WHERE p.domicilio = :domicilio")
-    , @NamedQuery(name = "Persona.findByCodProfesion", query = "SELECT p FROM Persona p WHERE p.codProfesion = :codProfesion")
-    , @NamedQuery(name = "Persona.findByPartidaNacimiento", query = "SELECT p FROM Persona p WHERE p.partidaNacimiento = :partidaNacimiento")
     , @NamedQuery(name = "Persona.findByCodRelojPersona", query = "SELECT p FROM Persona p WHERE p.codRelojPersona = :codRelojPersona")
-    , @NamedQuery(name = "Persona.findByUrlFoto", query = "SELECT p FROM Persona p WHERE p.urlFoto = :urlFoto")
-    , @NamedQuery(name = "Persona.findByProvidad", query = "SELECT p FROM Persona p WHERE p.providad = :providad")
-    , @NamedQuery(name = "Persona.findByLugarNacimiento", query = "SELECT p FROM Persona p WHERE p.lugarNacimiento = :lugarNacimiento")
-    , @NamedQuery(name = "Persona.findByFecha", query = "SELECT p FROM Persona p WHERE p.fecha = :fecha")
-    , @NamedQuery(name = "Persona.findByClasificacionGeografica", query = "SELECT p FROM Persona p WHERE p.clasificacionGeografica = :clasificacionGeografica")})
+})
 public class Persona implements Serializable {
 
-    @Lob
-    @Column(name = "foto")
-    private byte[] foto;
+
     @JoinColumn(name = "cod_puesto", referencedColumnName = "cod_puesto")
     @ManyToOne
     private Puesto codPuesto;
@@ -121,8 +95,6 @@ public class Persona implements Serializable {
     @Basic(optional = false)
     @Column(name = "cod_persona")
     private Integer codPersona;
-    @Column(name = "cod_tipo_persona")
-    private Integer codTipoPersona;
     @Size(max = 50)
     @Column(name = "nombre_1")
     private String nombre1;
@@ -138,73 +110,30 @@ public class Persona implements Serializable {
     @Size(max = 50)
     @Column(name = "apellido_casada")
     private String apellidoCasada;
-    @Size(max = 4)
-    @Column(name = "cod_registro")
-    private String codRegistro;
-    @Size(max = 20)
-    @Column(name = "numero_cedula")
-    private String numeroCedula;
     @Size(max = 15)
     @Column(name = "nit")
     private String nit;
-    @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
-    @Size(max = 1)
-    @Column(name = "sexo")
-    private String sexo;
+
     @Size(max = 50)
     @Column(name = "estado_civil")
     private String estadoCivil;
     @Size(max = 2)
     @Column(name = "cod_estatus")
     private String codEstatus;
-    @Size(max = 30)
-    @Column(name = "cuenta_banco")
-    private String cuentaBanco;
-    @Size(max = 100)
-    @Column(name = "pasaporte")
-    private String pasaporte;
-    @Size(max = 150)
-    @Column(name = "domicilio")
-    private String domicilio;
-    @Column(name = "cod_profesion")
-    private Integer codProfesion;
-    @Size(max = 250)
-    @Column(name = "partida_nacimiento")
-    private String partidaNacimiento;
+
+
+
     @Column(name = "cod_reloj_persona")
     private Integer codRelojPersona;
-    @Size(max = 2147483647)
-    @Column(name = "url_foto")
-    private String urlFoto;
-    @Size(max = 100)
-    @Column(name = "providad")
-    private String providad;
-    @Size(max = 100)
-    @Column(name = "lugar_nacimiento")
-    private String lugarNacimiento;
-    @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Size(max = 2)
-    @Column(name = "clasificacion_geografica")
-    private String clasificacionGeografica;
     @OneToMany(mappedBy = "codPersonaEncargadoTransporte")
     private List<CombustibleComision> combustibleComisionList;
     @OneToMany(mappedBy = "codPersonaReceptor")
     private List<CombustibleComision> combustibleComisionList1;
     @OneToMany(mappedBy = "codPersonaSolicitante")
     private List<CombustibleComision> combustibleComisionList2;
-    @JoinColumn(name = "cod_municipio", referencedColumnName = "cod_municipio")
-    @ManyToOne
-    private Municipio codMunicipio;
-    @JoinColumn(name = "cod_pais", referencedColumnName = "cod_pais")
-    @ManyToOne
-    private Pais codPais;
-    @JoinColumn(name = "cod_pais_pasaporte", referencedColumnName = "cod_pais")
-    @ManyToOne
-    private Pais codPaisPasaporte;
+
+
+
     @OneToMany(mappedBy = "codPersonaAsignadorVehiculo")
     private List<AsignacionVehiculo> asignacionVehiculoList;
     @OneToMany(mappedBy = "codPersonaCoordinadorJefe")
@@ -240,13 +169,6 @@ public class Persona implements Serializable {
         this.codPersona = codPersona;
     }
 
-    public Integer getCodTipoPersona() {
-        return codTipoPersona;
-    }
-
-    public void setCodTipoPersona(Integer codTipoPersona) {
-        this.codTipoPersona = codTipoPersona;
-    }
 
     public String getNombre1() {
         return nombre1;
@@ -288,44 +210,12 @@ public class Persona implements Serializable {
         this.apellidoCasada = apellidoCasada;
     }
 
-    public String getCodRegistro() {
-        return codRegistro;
-    }
-
-    public void setCodRegistro(String codRegistro) {
-        this.codRegistro = codRegistro;
-    }
-
-    public String getNumeroCedula() {
-        return numeroCedula;
-    }
-
-    public void setNumeroCedula(String numeroCedula) {
-        this.numeroCedula = numeroCedula;
-    }
-
     public String getNit() {
         return nit;
     }
 
     public void setNit(String nit) {
         this.nit = nit;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public String getEstadoCivil() {
@@ -344,93 +234,12 @@ public class Persona implements Serializable {
         this.codEstatus = codEstatus;
     }
 
-    public String getCuentaBanco() {
-        return cuentaBanco;
-    }
-
-    public void setCuentaBanco(String cuentaBanco) {
-        this.cuentaBanco = cuentaBanco;
-    }
-
-    public String getPasaporte() {
-        return pasaporte;
-    }
-
-    public void setPasaporte(String pasaporte) {
-        this.pasaporte = pasaporte;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public Integer getCodProfesion() {
-        return codProfesion;
-    }
-
-    public void setCodProfesion(Integer codProfesion) {
-        this.codProfesion = codProfesion;
-    }
-
-    public String getPartidaNacimiento() {
-        return partidaNacimiento;
-    }
-
-    public void setPartidaNacimiento(String partidaNacimiento) {
-        this.partidaNacimiento = partidaNacimiento;
-    }
-
     public Integer getCodRelojPersona() {
         return codRelojPersona;
     }
 
     public void setCodRelojPersona(Integer codRelojPersona) {
         this.codRelojPersona = codRelojPersona;
-    }
-
-    public String getUrlFoto() {
-        return urlFoto;
-    }
-
-    public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
-    }
-
-
-    public String getProvidad() {
-        return providad;
-    }
-
-    public void setProvidad(String providad) {
-        this.providad = providad;
-    }
-
-    public String getLugarNacimiento() {
-        return lugarNacimiento;
-    }
-
-    public void setLugarNacimiento(String lugarNacimiento) {
-        this.lugarNacimiento = lugarNacimiento;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getClasificacionGeografica() {
-        return clasificacionGeografica;
-    }
-
-    public void setClasificacionGeografica(String clasificacionGeografica) {
-        this.clasificacionGeografica = clasificacionGeografica;
     }
 
     @XmlTransient
@@ -460,29 +269,6 @@ public class Persona implements Serializable {
         this.combustibleComisionList2 = combustibleComisionList2;
     }
 
-    public Municipio getCodMunicipio() {
-        return codMunicipio;
-    }
-
-    public void setCodMunicipio(Municipio codMunicipio) {
-        this.codMunicipio = codMunicipio;
-    }
-
-    public Pais getCodPais() {
-        return codPais;
-    }
-
-    public void setCodPais(Pais codPais) {
-        this.codPais = codPais;
-    }
-
-    public Pais getCodPaisPasaporte() {
-        return codPaisPasaporte;
-    }
-
-    public void setCodPaisPasaporte(Pais codPaisPasaporte) {
-        this.codPaisPasaporte = codPaisPasaporte;
-    }
 
     @XmlTransient
     public List<AsignacionVehiculo> getAsignacionVehiculoList() {
@@ -591,13 +377,7 @@ public class Persona implements Serializable {
         return apellido1 + " " + apellido2 + " " + apellidoCasada + ", " + nombre1 + " " + nombre2;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
 
     public Puesto getCodPuesto() {
         return codPuesto;

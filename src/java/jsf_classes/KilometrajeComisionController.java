@@ -129,7 +129,7 @@ public class KilometrajeComisionController implements Serializable {
 
     public List<Persona> getPilotosDisponibles(){
         List<Persona> itemsDisponiblesFecha = null;
-        itemsDisponiblesFecha = getFacadePersona().findByPuesto(2); //2 es el tipo puesto piloto
+        itemsDisponiblesFecha = getFacadePersona().findByPuesto("Piloto"); //2 es el tipo puesto piloto
         return itemsDisponiblesFecha;
     }
 

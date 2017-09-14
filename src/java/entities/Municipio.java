@@ -59,8 +59,6 @@ public class Municipio implements Serializable {
     private String clasificacionGeografica;
     @OneToMany(mappedBy = "codMunicipio")
     private List<DependenciaInstitucion> dependenciaInstitucionList;
-    @OneToMany(mappedBy = "codMunicipio")
-    private List<Persona> personaList;
     @JoinColumn(name = "cod_departamento", referencedColumnName = "cod_departamento")
     @ManyToOne
     private Departamento codDepartamento;
@@ -125,14 +123,6 @@ public class Municipio implements Serializable {
         this.dependenciaInstitucionList = dependenciaInstitucionList;
     }
 
-    @XmlTransient
-    public List<Persona> getPersonaList() {
-        return personaList;
-    }
-
-    public void setPersonaList(List<Persona> personaList) {
-        this.personaList = personaList;
-    }
 
     public Departamento getCodDepartamento() {
         return codDepartamento;
@@ -185,5 +175,5 @@ public class Municipio implements Serializable {
         //return "entities.Municipio[ codMunicipio=" + codMunicipio + " ]";
         return descripcion;
     }
-    
+
 }
