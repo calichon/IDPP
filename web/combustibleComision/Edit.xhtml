@@ -32,7 +32,7 @@
                                 <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
                             </p:column>
                             <p:column >
-                                <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" >
+                                <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" filter="true">
                                     <p:ajax listener="#{combustibleComisionController.onSolicitanteChange}" update="codVehiculo codPuestoSolicitante codUnidad codSede"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -241,7 +241,7 @@
                                 <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaReceptor}" for="codPersonaReceptor" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
+                                <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" filter="true">
                                     <p:ajax listener="#{combustibleComisionController.onReceptorChange}" update="codPuestoReceptor"/>
                                     <f:selectItem itemLabel="Persona que recibe" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -268,7 +268,7 @@
                                     <p:outputLabel value="#{bundle.EditCombustibleComisionLabel_codPersonaEncargadoTransporte}" for="codPersonaEncargadoTransporte" />
                                 </p:column>
                                 <p:column colspan="2">
-                                    <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" >
+                                    <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" filter="true">
                                         <f:selectItem itemLabel="Seleccione encargado" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                                         <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                        var="codPersonaEncargadoTransporteItem"

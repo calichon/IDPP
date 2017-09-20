@@ -34,6 +34,14 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         super(Persona.class);
     }
 
+    @Override
+    public List<Persona> findAll() {
+        EntityManager em = getEntityManager();
+        Query personaQ;
+        personaQ = em.createNamedQuery("Persona.findAll");
+        return personaQ.getResultList();
+    }
+
     public List<Persona> findByDate(Date fechaInicio, Date fechaFin) {
         EntityManager em = getEntityManager();
         Query personaQ;

@@ -30,7 +30,7 @@
                                 <p:outputLabel value="#{bundle.EditKilometrajeComisionLabel_codPersonaPiloto}" for="codPersonaPiloto" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" >
+                                <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" filter="true" >
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{kilometrajeComisionController.pilotosDisponibles}"
                                                    var="codPersonaPilotoItem"

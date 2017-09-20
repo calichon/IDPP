@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "persona")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
+    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p ORDER BY p.apellido1, p.apellido2, p.nombre1")
     //, @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) ORDER BY p.codPersona")
     , @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) \n" +
 "from Persona p \n" +
@@ -50,7 +50,7 @@ import javax.xml.bind.annotation.XmlTransient;
 "    AND avp.fechaHoraRetornoVehiculo IS NOT NULL) \n" +
 ")"+
 "AND p.codPuesto IN :puesto\n" +
-"ORDER BY p.codPersona")
+"ORDER BY p.apellido1, p.apellido2, p.nombre1")
 
     //, @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) OR avp.codAsignacionVehiculo = :codAsignacionVehiculo ORDER BY p.codPersona")
     , @NamedQuery(name = "Persona.findByDateAndId", query = "Select DISTINCT(p) \n" +
@@ -66,11 +66,11 @@ import javax.xml.bind.annotation.XmlTransient;
 "    AND avp.fechaHoraRetornoVehiculo IS NOT NULL AND avp.codAsignacionVehiculo != :codAsignacionVehiculo ) \n" +
     "AND p.codPuesto IN :puesto\n" +
 ")\n" +
-"ORDER BY p.codPersona")
+"ORDER BY p.apellido1, p.apellido2, p.nombre1")
         //left outer join p.asignacionVehiculoPilotoList avp
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona
-    , @NamedQuery(name = "Persona.findByPuesto", query = "SELECT DISTINCT(p) FROM Persona p WHERE p.codPuesto IN :puesto")
-    , @NamedQuery(name = "Persona.findByUnidad", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl join pl.codOrganigrama o join o.codUnidad u WHERE u = :unidad")
+    , @NamedQuery(name = "Persona.findByPuesto", query = "SELECT DISTINCT(p) FROM Persona p WHERE p.codPuesto IN :puesto ORDER BY p.apellido1, p.apellido2, p.nombre1")
+    , @NamedQuery(name = "Persona.findByUnidad", query = "SELECT DISTINCT(p) FROM Persona p join p.puestoList pl join pl.codOrganigrama o join o.codUnidad u WHERE u = :unidad ORDER BY p.apellido1, p.apellido2, p.nombre1")
     , @NamedQuery(name = "Persona.findByCodPersona", query = "SELECT p FROM Persona p WHERE p.codPersona = :codPersona")
     , @NamedQuery(name = "Persona.findByNombre1", query = "SELECT p FROM Persona p WHERE p.nombre1 = :nombre1")
     , @NamedQuery(name = "Persona.findByNombre2", query = "SELECT p FROM Persona p WHERE p.nombre2 = :nombre2")

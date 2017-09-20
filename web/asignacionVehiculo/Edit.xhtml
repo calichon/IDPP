@@ -49,7 +49,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaPasajero}" for="codPersonaPasajero" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:selectOneMenu id="codPersonaPasajero" value="#{asignacionVehiculoController.selected.codPersonaPasajero}" >
+                                <p:selectOneMenu id="codPersonaPasajero" value="#{asignacionVehiculoController.selected.codPersonaPasajero}" filter="true">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{asignacionVehiculoController.pasajerosUnidad}"
                                                    var="codPersonaPasajeroItem"
@@ -188,7 +188,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaAsignadorVehiculo}" for="codPersonaAsignadorVehiculo" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" >
+                                <p:selectOneMenu id="codPersonaAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" filter="true">
                                     <p:ajax listener="#{asignacionVehiculoController.onPersonaAsignadorVehiculoChange}" update="codPuestoAsignadorVehiculo"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -202,7 +202,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaCoordinadorJefe}" for="codPersonaCoordinadorJefe" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" >
+                                <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" filter="true">
                                     <p:ajax listener="#{asignacionVehiculoController.onPersonaCoordinadorJefeChange}" update="codPuestoCoordinadorJefe"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -214,7 +214,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaSolicitante" value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" >
+                                <p:selectOneMenu id="codPersonaSolicitante" value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" filter="true">
                                     <p:ajax listener="#{asignacionVehiculoController.onPersonaSolicitanteChange}" update="codPuestoSolicitante"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -276,7 +276,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_pilotoAsignado}" for="pilotoAsignado" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="pilotoAsignado" value="#{asignacionVehiculoController.lastAVP.codPersonaPilotoAsignado}" >
+                                <p:selectOneMenu id="pilotoAsignado" value="#{asignacionVehiculoController.lastAVP.codPersonaPilotoAsignado}" filter="true">
                                     <f:selectItem itemLabel="Seleccione piloto" itemDisabled="false" itemValue="#{null}" noSelectionOption="true" />
                                     <f:selectItems value="#{asignacionVehiculoController.pilotosDisponiblesEdit}"
                                                    var="pilotoAsignado"
