@@ -239,6 +239,7 @@
                             </p:column>
                             <p:column colspan="2">
                                 <p:selectOneMenu id="codPersonaReceptor" value="#{combustibleComisionController.selected.codPersonaReceptor}" >
+                                    <p:ajax listener="#{combustibleComisionController.onReceptorChange}" update="codPuestoReceptor"/>
                                     <f:selectItem itemLabel="Persona que recibe" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                    var="codPersonaReceptorItem"
@@ -251,7 +252,7 @@
                                 <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPuestoReceptor}" for="codPuestoReceptor" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" >
+                                <p:selectOneMenu id="codPuestoReceptor" value="#{combustibleComisionController.selected.codPuestoReceptor}" disabled="true">
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestoReceptorItem"
                                                    itemValue="#{codPuestoReceptorItem}"/>

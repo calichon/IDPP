@@ -220,6 +220,7 @@
                             </p:column>
                             <p:column colspan="3">
                                 <p:selectOneMenu id="codPersonaAsignacion" value="#{vehiculoController.selected.codPersonaAsignacion}" >
+                                    <p:ajax listener="#{vehiculoController.onPersonaAsignacionChange}" update="codPueston"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                    var="codPersonaAsignacionItem"
@@ -230,7 +231,7 @@
                                 <p:outputLabel value="#{bundle.EditVehiculoLabel_codPueston}" for="codPueston" />
                             </p:column>
                             <p:column colspan="4">
-                                <p:selectOneMenu id="codPueston" value="#{vehiculoController.selected.codPueston}" >
+                                <p:selectOneMenu id="codPueston" value="#{vehiculoController.selected.codPueston}" disabled="true">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestonItem"

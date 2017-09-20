@@ -4,6 +4,7 @@ import com.sun.faces.component.visit.FullVisitContext;
 import entities.CombustibleComision;
 import entities.CombustibleCupon;
 import entities.Persona;
+import entities.Puesto;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.CombustibleComisionFacade;
@@ -153,16 +154,25 @@ public class CombustibleComisionController implements Serializable {
 
     public void onSolicitanteChange(){
         Persona solicitante = selected.getCodPersonaSolicitante();
-        if(solicitante.getPuestoList().size()>0){
-            selected.setCodPuestoSolicitante(solicitante.getPuestoList().get(0));
-            if(solicitante.getPuestoList().get(0).getCodSede() != null){
-                selected.setCodSede(solicitante.getPuestoList().get(0).getCodSede());
-            }
-            if(solicitante.getPuestoList().get(0).getCodOrganigrama() != null){
-                selected.setCodUnidad(solicitante.getPuestoList().get(0).getCodOrganigrama().getCodUnidad());
-            }
+        Puesto p = solicitante.getCodPuesto();
+        if(p != null){
+            selected.setCodPuestoSolicitante(p);
+        }
+        if(p.getCodSede() != null){
+            selected.setCodSede(p.getCodSede());
+        }
+        if(p.getCodOrganigrama() != null){
+            selected.setCodUnidad(p.getCodOrganigrama().getCodUnidad());
         }
 
+    }
+
+    public void onReceptorChange(){
+        Persona receptor = selected.getCodPersonaReceptor();
+        Puesto p = receptor.getCodPuesto();
+        if(p != null){
+            selected.setCodPuestoReceptor(p);
+        }
     }
 
     public CombustibleComision getSelected() {

@@ -3,6 +3,7 @@ package jsf_classes;
 import entities.AsignacionVehiculo;
 import entities.AsignacionVehiculoPiloto;
 import entities.Persona;
+import entities.Puesto;
 import entities.Vehiculo;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
@@ -441,6 +442,30 @@ public class AsignacionVehiculoController implements Serializable {
 
     public int getDias(){
         return dias;
+    }
+
+    public void onPersonaAsignadorVehiculoChange(){
+        Persona persona = selected.getCodPersonaAsignadorVehiculo();
+        Puesto p = persona.getCodPuesto();
+        if(p != null){
+            selected.setCodPuestoAsignadorVehiculo(p);
+        }
+    }
+
+    public void onPersonaCoordinadorJefeChange(){
+        Persona persona = selected.getCodPersonaCoordinadorJefe();
+        Puesto p = persona.getCodPuesto();
+        if(p != null){
+            selected.setCodPuestoCoordinadorJefe(p);
+        }
+    }
+
+    public void onPersonaSolicitanteChange(){
+        Persona persona = selected.getCodPersonaSolicitante();
+        Puesto p = persona.getCodPuesto();
+        if(p != null){
+            selected.setCodPuestoSolicitante(p);
+        }
     }
 
     public List<String> autocompletarDestino(String query) {

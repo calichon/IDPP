@@ -189,6 +189,7 @@
                             </p:column>
                             <p:column colspan="2">
                                 <p:selectOneMenu id="codPersonaAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" >
+                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaAsignadorVehiculoChange}" update="codPuestoAsignadorVehiculo"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                    var="codPersonaAsignadorVehiculoItem"
@@ -202,6 +203,7 @@
                             </p:column>
                             <p:column colspan="2">
                                 <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" >
+                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaCoordinadorJefeChange}" update="codPuestoCoordinadorJefe"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                    var="codPersonaCoordinadorJefeItem"
@@ -213,6 +215,7 @@
                             </p:column>
                             <p:column colspan="2">
                                 <p:selectOneMenu id="codPersonaSolicitante" value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" >
+                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaSolicitanteChange}" update="codPuestoSolicitante"/>
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                                    var="codPersonaSolicitanteItem"
@@ -225,7 +228,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}" for="codPuestoAsignadorVehiculo" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPuestoAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo}" >
+                                <p:selectOneMenu id="codPuestoAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo}" disabled="true">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestoAsignadorVehiculoItem"
@@ -238,7 +241,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoCoordinadorJefe}" for="codPuestoCoordinadorJefe" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPuestoCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe}" >
+                                <p:selectOneMenu id="codPuestoCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe}" disabled="true">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestoCoordinadorJefeItem"
@@ -249,7 +252,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectOneMenu id="codPuestoSolicitante" value="#{asignacionVehiculoController.selected.codPuestoSolicitante}" >
+                                <p:selectOneMenu id="codPuestoSolicitante" value="#{asignacionVehiculoController.selected.codPuestoSolicitante}" disabled="true">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestoSolicitanteItem"

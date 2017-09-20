@@ -5,6 +5,8 @@ import entities.Imagen;
 import entities.Linea;
 import entities.Marca;
 import entities.Municipio;
+import entities.Persona;
+import entities.Puesto;
 import entities.Vehiculo;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -82,11 +84,11 @@ public class VehiculoController implements Serializable {
     private VehiculoFacade getFacade() {
         return ejbFacade;
     }
-    
+
     private MunicipioFacade getFacadeMunicipios() {
         return ejbFacadeMunicipios;
     }
-    
+
     private ImagenFacade getFacadeImagen() {
         return ejbFacadeImagen;
     }
@@ -105,49 +107,49 @@ public class VehiculoController implements Serializable {
             //aqui hacer el insert de las imágenes
             for(int i = 0; i<itemsImagen.size(); i++){
                 //inicia creación de la imagen en filesystem y guardado de la misma
-                
+
                 selectedImagen = new Imagen();
                 String basePath;
-                
+
                 FacesContext ctx = FacesContext.getCurrentInstance();
                 basePath = ctx.getExternalContext().getInitParameter("imageSavePath");
-                
+
                 String unEncryptedFileName;
                 unEncryptedFileName = itemsImagen.get(i).getFileName();
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                 unEncryptedFileName = timeStamp + "_" + unEncryptedFileName;
                 String encryptedFileName = "";
-                
+
                 try{
                     //MessageDigest messageDigest = MessageDigest.getInstance("MD5");
                     //messageDigest.update(unEncryptedFileName.getBytes());
                     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                     byte[] arr = messageDigest.digest(unEncryptedFileName.getBytes());
-                    
+
                     StringBuffer hexString = new StringBuffer();
                     for (int j=0;j<arr.length;j++) {
                         hexString.append(Integer.toHexString(0xFF & arr[j]));
                     }
 
                     encryptedFileName = hexString.toString();
-                                        
+
                     //encryptedFileName = Base64.getEncoder().encodeToString(arr);
                     //encryptedFileName = new String(messageDigest.digest());
                 }
                 catch(Exception e){
-                    
+
                 }
-                
+
                 String fullFilePath = basePath + encryptedFileName + '_' + itemsImagen.get(i).getFileName();
                 String urlFilePath = ctx.getExternalContext().getInitParameter("urlImagePath");
-                
+
                 UploadedFile uploadedFile;
                 uploadedFile = itemsImagen.get(i);
 
                 try{
                     File f = new File(basePath, encryptedFileName + '_' + unEncryptedFileName);
                     FileOutputStream fos = new FileOutputStream(f);
-                    
+
                     InputStream in = uploadedFile.getInputstream();
                     //OutputStream out = new FileOutputStream(new File(fullFilePath));
                     OutputStream out = fos;
@@ -163,7 +165,7 @@ public class VehiculoController implements Serializable {
                     selectedImagen.setPathImagen(urlFilePath + encryptedFileName + '_' + unEncryptedFileName);
                 }
                 catch(Exception e){
-                    System.out.println(e.getCause().toString());                    
+                    System.out.println(e.getCause().toString());
                 }
                 //finaliza creación de la imagen en filesystem y guardado de la misma
                 //inicia creación de la imagen en db y guardado de la misma
@@ -172,10 +174,10 @@ public class VehiculoController implements Serializable {
                     byte[] data;
                     InputStream stream = itemsImagen.get(i).getInputstream();
                     data = new byte[(int) size];
-                    stream.read(data, 0, (int) size); 
+                    stream.read(data, 0, (int) size);
                     stream.close();
                     selectedImagen.setImagenb(data);
-                } 
+                }
                 catch (Exception e) {
                 }
                 //finaliza creación de la imagen en db y guardado de la misma
@@ -190,58 +192,58 @@ public class VehiculoController implements Serializable {
                 }
                 else{
                     System.out.println("Fracaso");
-                }                
+                }
             }
         }
-        
+
     }
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoUpdated"));
         for(int i = 0; i<itemsImagen.size(); i++){
                 //inicia creación de la imagen en filesystem y guardado de la misma
-                
+
                 selectedImagen = new Imagen();
                 String basePath;
-                
+
                 FacesContext ctx = FacesContext.getCurrentInstance();
                 basePath = ctx.getExternalContext().getInitParameter("imageSavePath");
-                
+
                 String unEncryptedFileName;
                 unEncryptedFileName = itemsImagen.get(i).getFileName();
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                 unEncryptedFileName = timeStamp + "_" + unEncryptedFileName;
                 String encryptedFileName = "";
-                
+
                 try{
                     //MessageDigest messageDigest = MessageDigest.getInstance("MD5");
                     //messageDigest.update(unEncryptedFileName.getBytes());
                     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                     byte[] arr = messageDigest.digest(unEncryptedFileName.getBytes());
-                    
+
                     StringBuffer hexString = new StringBuffer();
                     for (int j=0;j<arr.length;j++) {
                         hexString.append(Integer.toHexString(0xFF & arr[j]));
                     }
 
                     encryptedFileName = hexString.toString();
-                                        
+
                     //encryptedFileName = Base64.getEncoder().encodeToString(arr);
                     //encryptedFileName = new String(messageDigest.digest());
                 }
                 catch(Exception e){
-                    
+
                 }
-                
+
                 String fullFilePath = basePath + encryptedFileName + '_' + itemsImagen.get(i).getFileName();
-                
+
                 UploadedFile uploadedFile;
                 uploadedFile = itemsImagen.get(i);
 
                 try{
                     File f = new File(basePath, encryptedFileName + '_' + unEncryptedFileName);
                     FileOutputStream fos = new FileOutputStream(f);
-                    
+
                     InputStream in = uploadedFile.getInputstream();
                     //OutputStream out = new FileOutputStream(new File(fullFilePath));
                     OutputStream out = fos;
@@ -256,7 +258,7 @@ public class VehiculoController implements Serializable {
                     selectedImagen.setPathImagen(fullFilePath);
                 }
                 catch(Exception e){
-                    System.out.println(e.getCause().toString());                    
+                    System.out.println(e.getCause().toString());
                 }
                 //finaliza creación de la imagen en filesystem y guardado de la misma
                 //inicia creación de la imagen en db y guardado de la misma
@@ -265,10 +267,10 @@ public class VehiculoController implements Serializable {
                     byte[] data;
                     InputStream stream = itemsImagen.get(i).getInputstream();
                     data = new byte[(int) size];
-                    stream.read(data, 0, (int) size); 
+                    stream.read(data, 0, (int) size);
                     stream.close();
                     selectedImagen.setImagenb(data);
-                } 
+                }
                 catch (Exception e) {
                 }
                 //finaliza creación de la imagen en db y guardado de la misma
@@ -283,7 +285,7 @@ public class VehiculoController implements Serializable {
                 }
                 else{
                     System.out.println("Fracaso");
-                }                
+                }
             }
     }
 
@@ -295,19 +297,19 @@ public class VehiculoController implements Serializable {
 
         }
     }
-    
+
     public void destroyImagen(Imagen itemI) {
         selectedImagen = itemI;
         persistImage(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ImagenDeleted"));
         if (!JsfUtil.isValidationFailed()) {
-            selectedImagen = null; // Remove selection            
+            selectedImagen = null; // Remove selection
         }
         selected.getImagenList().remove(itemI);
-        
+
         //items = getFacade().findAll();
         //getFacade().refreshEntity(selected);
         getFacade().refreshEntity();
-        
+
     }
 
     public List<Vehiculo> getItems() {
@@ -349,7 +351,7 @@ public class VehiculoController implements Serializable {
             }
         }
     }
-    
+
     private void persistImage(PersistAction persistAction, String successMessage) {
         if (selectedImagen != null) {
             setEmbeddableKeys();
@@ -395,31 +397,31 @@ public class VehiculoController implements Serializable {
     public List<Vehiculo> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
-    public void onDepartamentoChange() { 
+
+    public void onDepartamentoChange() {
             Departamento thisDepartamento;
             thisDepartamento = selected.getCodDepartamento();
             selectedDepartamento = thisDepartamento.getCodDepartamento();
             if(selectedDepartamento > 0 ){
-                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);                
+                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);
             }
             else{
                 itemsMunicipio = null;
-            }            
+            }
     }
-    
-    public void onMarcaChange() { 
+
+    public void onMarcaChange() {
             Marca thisMarca;
             thisMarca = selected.getCodMarca();
             selectedMarca = thisMarca.getCodMarca();
             if(selectedMarca > 0 ){
-                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);                
+                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);
             }
             else{
                 itemsLinea = null;
-            }            
+            }
     }
-    
+
     public void verifyPlacaOnCreate(){
         boolean placaFounded = false;
         placaFounded = getFacade().existsPlaca(selected.getPlaca());
@@ -428,7 +430,7 @@ public class VehiculoController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Placa duplicada"));
         }
         else{
-            disableButtonCreateEnabled = false;            
+            disableButtonCreateEnabled = false;
     }
     }
 
@@ -444,10 +446,10 @@ public class VehiculoController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("msgs", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Placa duplicada"));
         }
         else{
-            disableButtonCreateEnabled = false;            
+            disableButtonCreateEnabled = false;
         }
         }
-    
+
     public boolean getButtonCreateEnabled(){
         return disableButtonCreateEnabled;
     }
@@ -458,7 +460,7 @@ public class VehiculoController implements Serializable {
         if(thisDepartamento!=null){
             selectedDepartamento = thisDepartamento.getCodDepartamento();
             if(selectedDepartamento > 0 ){
-                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);                
+                itemsMunicipio = ejbFacade.getMunicipioOrderedListLimitsDepartment(thisDepartamento);
             }
             else{
                 itemsMunicipio = null;
@@ -469,14 +471,14 @@ public class VehiculoController implements Serializable {
         }
         return itemsMunicipio;
     }
-    
+
     public List<Linea> getItemsLinea(){
         Marca thisMarca;
         thisMarca = selected.getCodMarca();
         if(thisMarca!=null){
             selectedMarca = thisMarca.getCodMarca();
             if(selectedMarca > 0 ){
-                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);                
+                itemsLinea = ejbFacadeLinea.getLineaOrderedListLimitsMarca(thisMarca);
             }
             else{
                 itemsLinea = null;
@@ -484,11 +486,11 @@ public class VehiculoController implements Serializable {
         }
         else{
             itemsLinea = null;
-        }        
+        }
         return itemsLinea;
     }
-    
-    
+
+
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
@@ -498,8 +500,14 @@ public class VehiculoController implements Serializable {
             itemsImagen.add(tempUF);
         }
     }
-    
-    
+
+    public void onPersonaAsignacionChange(){
+        Persona receptor = selected.getCodPersonaAsignacion();
+        Puesto p = receptor.getCodPuesto();
+        if(p != null){
+            selected.setCodPueston(p);
+        }
+    }
 
     @FacesConverter(forClass = Vehiculo.class)
     public static class VehiculoControllerConverter implements Converter {
