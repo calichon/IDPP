@@ -19,6 +19,15 @@
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     Sistema de gestión de transporte - IDPP
+
+                    <h:form rendered="#{request.remoteUser == null}" style="display: inline-block;    float: right;    margin-right: 20px;" >
+                        <h:link outcome="/login.xhtml" value="Login" />
+                    </h:form>
+
+                    <h:form rendered="#{request.remoteUser != null}" style="display: inline-block;    float: right;    margin-right: 20px;" >
+                        <h:outputText value="Bienvenido #{request.remoteUser}" />
+                        <h:commandButton action="#{autenticacionBean.logout}" immediate="true" value="Logout" style="background: transparent;    border: 0;    font-size: 1em;    cursor: pointer; text-decoration: underline; color:blue" />
+                    </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -60,6 +69,14 @@
 <!--                    <h:link outcome="/asignacionVehiculoPiloto/List" value="Formulario de AsignacionVehiculoPiloto"/>
                     <br />-->
                     <h:link outcome="/combustibleComision/List" value="Formulario de entrega de cupones de combustible"/>
+
+
+<!--                    <h:panelGroup rendered="#{request.isUserInRole('Admin')}">-->
+                    <h:panelGroup >
+                        <h2>Administración</h2>
+                        <h:link outcome="/usuario/List" value="Administración de usuarios"/>
+                    </h:panelGroup>
+
                     <!--
                     <br />
                     <h:link outcome="/combustibleCupon/List" value="Formulario de CombustibleCupon"/>
