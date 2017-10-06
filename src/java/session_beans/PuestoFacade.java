@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.Puesto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,13 @@ public class PuestoFacade extends AbstractFacade<Puesto> {
     public PuestoFacade() {
         super(Puesto.class);
     }
-    
+
+    @Override
+    public List<Puesto> findAll() {
+        EntityManager em = getEntityManager();
+        Query personaQ;
+        personaQ = em.createNamedQuery("Puesto.findAll");
+        return personaQ.getResultList();
+    }
+
 }
