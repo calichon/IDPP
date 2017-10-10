@@ -122,7 +122,7 @@
 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{kilometrajeComisionController.update}" value="#{bundle.Save}" update="display,:KilometrajeComisionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KilometrajeComisionEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="KilometrajeComisionEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('KilometrajeComisionEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -172,17 +172,9 @@
                         <ui:remove>
                         <h:outputText value="#{bundle.ViewCombustibleComisionLabel_importeTotalLetras}"/>
                         <h:outputText value="#{combustibleComisionController.selected.importeTotalLetras}" title="#{bundle.ViewCombustibleComisionTitle_importeTotalLetras}"/>
-
-
-
-
-
                         </ui:remove>
-
-
-
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CombustibleComisionViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CombustibleComisionViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

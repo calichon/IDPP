@@ -265,7 +265,7 @@
                         </p:row>
                     </p:panelGrid>
                     <p:commandButton id="buttonCreateVehiculo" disabled="#{vehiculoController.buttonCreateEnabled}" ajax="false" actionListener="#{vehiculoController.create}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args,'VehiculoCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('VehiculoCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

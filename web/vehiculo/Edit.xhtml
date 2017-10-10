@@ -255,7 +255,7 @@
                         </p:row>
                     </p:panelGrid>
                     <p:commandButton id="buttonUpdateVehiculo" actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('VehiculoEditDialog').hide()"/>
                     <h:dataTable id="tablaImagenes" value="#{vehiculoController.selected.imagenList}" var="itemImagen">
                         <h:column><h:inputText value="#{itemImagen.pathImagen}" /></h:column>
                         <h:column><h:graphicImage value = "#{itemImagen.pathImagen}" width="80px"/></h:column>

@@ -275,7 +275,7 @@
 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{combustibleComisionController.create}" value="#{bundle.Save}" update="display,:CombustibleComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CombustibleComisionCreateDialog');" validateClient="true" />
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CombustibleComisionCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CombustibleComisionCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

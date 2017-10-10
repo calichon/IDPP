@@ -5,15 +5,20 @@
         <group>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/WEB-INF/web.xml</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/session_beans/RolUsuarioFacade.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/asignacionVehiculo/Create.xhtml</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/jsf_classes/UsuarioController.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/entities/Persona.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/WEB-INF/glassfish-resources.xml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/session_beans/AbstractFacade.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/entities/RolUsuario.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/asignacionVehiculo/View.xhtml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/session_beans/PuestoFacade.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/index.xhtml</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/kilometrajeComision/List.xhtml</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/jsf_classes/KilometrajeComisionController.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/usuario/Create.xhtml</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/jsf_classes/PuestoController.java</file>
+            <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/entities/Puesto.java</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/web/usuario/Edit.xhtml</file>
             <file>file:/D:/Freelancing/Clientes/IDPP/tono_copy2/src/java/session_beans/PersonaFacade.java</file>
         </group>
