@@ -35,7 +35,7 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-    <security-constraint>
+    <!--security-constraint>
         <display-name>asignacionVehiculo</display-name>
         <web-resource-collection>
             <web-resource-name>asignacionVehiculo</web-resource-name>
@@ -86,19 +86,19 @@
             <role-name>Admin</role-name>
             <role-name>combustibleComision</role-name>
         </auth-constraint>
-    </security-constraint>
+    </security-constraint-->
     <error-page>
         <error-code>403</error-code>
         <location>/faces/permissionerror.xhtml</location>
     </error-page>
-    <login-config>
+    <!--login-config>
         <auth-method>FORM</auth-method>
         <realm-name>jdbcRealm</realm-name>
         <form-login-config>
             <form-login-page>/faces//login.xhtml</form-login-page>
             <form-error-page>/faces//loginerror.xhtml</form-error-page>
         </form-login-config>
-    </login-config>
+    </login-config-->
     <security-role>
         <description>Administrador del sitio</description>
         <role-name>Admin</role-name>

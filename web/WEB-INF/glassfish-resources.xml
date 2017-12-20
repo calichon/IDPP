@@ -9,7 +9,7 @@
     <property name="portNumber" value="5432"/>
     <property name="databaseName" value="DB_IDPP"/>
     <property name="User" value="postgres"/>
-    <property name="Password" value="chachas"/>
+    <property name="Password" value="ds643fo2i2sd"/>
     <property name="URL" value="jdbc:postgresql://localhost:5432/DB_IDPP"/>
     <property name="driverClass" value="org.postgresql.Driver"/>
   </jdbc-connection-pool>

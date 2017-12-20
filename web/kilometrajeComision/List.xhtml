@@ -65,7 +65,7 @@
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_fechaHoraSalida}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaHoraSalida}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -73,7 +73,7 @@
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_fechaHoraEntrada}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaHoraEntrada}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -88,35 +88,11 @@
                             </f:facet>
                             <h:outputText value="#{item.kilometrajeFinal}"/>
                         </p:column>
-                         <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_causa1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.causa1}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_causa2}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.causa2}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_causa3}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.causa3}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKilometrajeComisionTitle_comisionRealizada}"/>
                             </f:facet>
                             <h:outputText value="#{item.comisionRealizada}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKilometrajeComisionTitle_diligenciasRealizadas}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.diligenciasRealizadas}"/>
                         </p:column>
                         <ui:remove>
                         <p:column>
@@ -126,17 +102,6 @@
                             <h:outputText value="#{item.codVehiculo}"/>
                         </p:column>
                         </ui:remove>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Juzgado"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codDependenciaInstitucion.nombre}"/>
-                        </p:column>
-
-
-
-
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{kilometrajeComisionController.prepareCreate}" update=":KilometrajeComisionCreateForm" oncomplete="PF('KilometrajeComisionCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KilometrajeComisionViewForm" oncomplete="PF('KilometrajeComisionViewDialog').show()" disabled="#{empty kilometrajeComisionController.selected}"/>

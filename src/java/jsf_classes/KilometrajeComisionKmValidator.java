@@ -37,27 +37,29 @@ public class KilometrajeComisionKmValidator implements Validator {
         KilometrajeComisionFacade facade = (KilometrajeComisionFacade) component.getAttributes().get("ejbFacade");
         SelectOneMenu vehiculomenu = (SelectOneMenu) component.getAttributes().get("vehiculo");
         Vehiculo vehiculo = (Vehiculo)vehiculomenu.getValue();
-        KilometrajeComision last = facade.getLastByVehiculo(vehiculo).get(0);
-        if(last != null){
-            BigInteger km_actual = (BigInteger)value;
-            BigInteger antiguo_km = last.getKilometrajeFinal();
+        if(facade.getLastByVehiculo(vehiculo).size()>0){
+            KilometrajeComision last = facade.getLastByVehiculo(vehiculo).get(0);
+            if(last != null){
+                BigInteger km_actual = (BigInteger)value;
+                BigInteger antiguo_km = last.getKilometrajeFinal();
 
-            if(km_actual.compareTo(antiguo_km) >= 0){
-//                FacesMessage msg =
-//                        new FacesMessage("Kilometraje correcto","Kilometraje correcto");
-//                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//                     throw new ValidatorException(msg);
+                if(km_actual.compareTo(antiguo_km) >= 0){
+    //                FacesMessage msg =
+    //                        new FacesMessage("Kilometraje correcto","Kilometraje correcto");
+    //                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+    //                     throw new ValidatorException(msg);
+                }
+                else{
+                    FacesMessage msg =
+                            new FacesMessage("El kilometraje debe ser mayor al anterior","El kilometraje debe ser mayor al anterior");
+                         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                         throw new ValidatorException(msg);
+                }
+
             }
             else{
-                FacesMessage msg =
-                        new FacesMessage("El kilometraje debe ser mayor al anterior","El kilometraje debe ser mayor al anterior");
-                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-                     throw new ValidatorException(msg);
+                //no hay registros anteriores, asi que cualquier fecha esta bien
             }
-
-        }
-        else{
-            //no hay registros anteriores, asi que cualquier fecha esta bien
-        }
+        }        
     }
 }

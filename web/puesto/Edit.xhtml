@@ -29,7 +29,7 @@
                         <p:outputLabel value="#{bundle.EditPuestoLabel_descripcionFemenino}" for="descripcionFemenino" />
                         <p:inputText id="descripcionFemenino" value="#{puestoController.selected.descripcionFemenino}" title="#{bundle.EditPuestoTitle_descripcionFemenino}" />
                         <p:outputLabel value="#{bundle.EditPuestoLabel_fechaSistema}" for="fechaSistema" />
-                        <p:calendar id="fechaSistema" pattern="MM/dd/yyyy HH:mm:ss" value="#{puestoController.selected.fechaSistema}" title="#{bundle.EditPuestoTitle_fechaSistema}"  showOn="button"/>
+                        <p:calendar id="fechaSistema" pattern="dd/MM/yyyy HH:mm:ss" value="#{puestoController.selected.fechaSistema}" title="#{bundle.EditPuestoTitle_fechaSistema}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditPuestoLabel_codPersona}" for="codPersona" />
                         <p:selectOneMenu id="codPersona" value="#{puestoController.selected.codPersona}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

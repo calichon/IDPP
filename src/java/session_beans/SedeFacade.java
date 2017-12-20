@@ -6,9 +6,13 @@
 package session_beans;
 
 import entities.Sede;
+import entities.Vehiculo;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +31,12 @@ public class SedeFacade extends AbstractFacade<Sede> {
 
     public SedeFacade() {
         super(Sede.class);
+    }
+    public List<Sede> findByPlace() {
+        EntityManager em = getEntityManager();
+        Query sedeQ;        
+        sedeQ = em.createNamedQuery("Sede.findByPlace");
+        return sedeQ.getResultList();
     }
     
 }

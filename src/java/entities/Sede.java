@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Sede.findByTelefono2", query = "SELECT s FROM Sede s WHERE s.telefono2 = :telefono2")
     , @NamedQuery(name = "Sede.findByCodOrganigrama", query = "SELECT s FROM Sede s WHERE s.codOrganigrama = :codOrganigrama")
     , @NamedQuery(name = "Sede.findByCodEstatus", query = "SELECT s FROM Sede s WHERE s.codEstatus = :codEstatus")
+    , @NamedQuery(name = "Sede.findByPlace", query = "SELECT s FROM Sede s WHERE s.codSede = 1 OR s.codSede = 35 OR s.codSede = 52")
     , @NamedQuery(name = "Sede.findByCodRegionSupervision", query = "SELECT s FROM Sede s WHERE s.codRegionSupervision = :codRegionSupervision")
     , @NamedQuery(name = "Sede.findByCorreoElectronico", query = "SELECT s FROM Sede s WHERE s.correoElectronico = :correoElectronico")
     , @NamedQuery(name = "Sede.findByZona", query = "SELECT s FROM Sede s WHERE s.zona = :zona")})

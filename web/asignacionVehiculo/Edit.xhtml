@@ -27,7 +27,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaAsignacion}" for="fechaAsignacion" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:calendar id="fechaAsignacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_fechaAsignacion}"  showOn="button"/>
+                                <p:calendar id="fechaAsignacion" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.EditAsignacionVehiculoTitle_fechaAsignacion}"  showOn="button"/>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -62,7 +62,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:calendar id="fechaHoraUsoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button">
+                                <p:calendar id="fechaHoraUsoVehiculo" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button">
                                     <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>
                                 </p:calendar>
                             </p:column>
@@ -72,7 +72,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_fechaHoraRetornoVehiculo}" for="fechaHoraRetornoVehiculo" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:calendar id="fechaHoraRetornoVehiculo" pattern="MM/dd/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"  showOn="button">
+                                <p:calendar id="fechaHoraRetornoVehiculo" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"  showOn="button">
                                     <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>
                                 </p:calendar>
                             </p:column>
@@ -98,7 +98,7 @@
                             <p:column colspan="2">
                                 <p:selectOneMenu id="codSedeLugarSalida" value="#{asignacionVehiculoController.selected.codSedeLugarSalida}" >
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{sedeController.itemsAvailableSelectOne}"
+                                    <f:selectItems value="#{sedeController.sedes}"
                                                    var="codSedeLugarSalidaItem"
                                                    itemValue="#{codSedeLugarSalidaItem}"/>
                                 </p:selectOneMenu>
@@ -109,7 +109,7 @@
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_destino}" for="destino" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:inputText id="destino" value="#{asignacionVehiculoController.selected.destino}" title="#{bundle.EditAsignacionVehiculoTitle_destino}" />
+                                <p:autoComplete id="destino" size="110" value="#{asignacionVehiculoController.selected.destino}" completeMethod="#{asignacionVehiculoController.autocompletarDestino}" />
                             </p:column>
                         </p:row>
                         <p:row>
@@ -118,39 +118,6 @@
                             </p:column>
                             <p:column colspan="6">
                                 <p:inputText id="diligencia" value="#{asignacionVehiculoController.selected.diligencia}" title="#{bundle.EditAsignacionVehiculoTitle_diligencia}" />
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_causa1}" for="causa1" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:inputText id="causa1" value="#{asignacionVehiculoController.selected.causa1}" title="#{bundle.EditAsignacionVehiculoTitle_causa1}" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_causa2}" for="causa2" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:inputText id="causa2" value="#{asignacionVehiculoController.selected.causa2}" title="#{bundle.EditAsignacionVehiculoTitle_causa2}" />
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_causa3}" for="causa3" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:inputText id="causa3" value="#{asignacionVehiculoController.selected.causa3}" title="#{bundle.EditAsignacionVehiculoTitle_causa3}" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codDependenciaInstitucionJuzgado}" for="codDependenciaInstitucionJuzgado" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:selectOneMenu id="codDependenciaInstitucionJuzgado" value="#{asignacionVehiculoController.selected.codDependenciaInstitucionJuzgado}" >
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{dependenciaInstitucionController.itemsAvailableSelectOne}"
-                                                   var="codDependenciaInstitucionJuzgadoItem"
-                                                   itemValue="#{codDependenciaInstitucionJuzgadoItem}"/>
-                                </p:selectOneMenu>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -196,34 +163,6 @@
                                                    itemValue="#{codPersonaAsignadorVehiculoItem}"/>
                                 </p:selectOneMenu>
                             </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaCoordinadorJefe}" for="codPersonaCoordinadorJefe" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" filter="true">
-                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaCoordinadorJefeChange}" update="codPuestoCoordinadorJefe"/>
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                                   var="codPersonaCoordinadorJefeItem"
-                                                   itemValue="#{codPersonaCoordinadorJefeItem}"/>
-                                </p:selectOneMenu>
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:selectOneMenu id="codPersonaSolicitante" value="#{asignacionVehiculoController.selected.codPersonaSolicitante}" filter="true">
-                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaSolicitanteChange}" update="codPuestoSolicitante"/>
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                                   var="codPersonaSolicitanteItem"
-                                                   itemValue="#{codPersonaSolicitanteItem}"/>
-                                </p:selectOneMenu>
-                            </p:column>
-                        </p:row>
-                        <p:row>
                             <p:column colspan="2">
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}" for="codPuestoAsignadorVehiculo" />
                             </p:column>
@@ -238,6 +177,18 @@
                         </p:row>
                         <p:row>
                             <p:column colspan="2">
+                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPersonaCoordinadorJefe}" for="codPersonaCoordinadorJefe" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:selectOneMenu id="codPersonaCoordinadorJefe" value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe}" filter="true">
+                                    <p:ajax listener="#{asignacionVehiculoController.onPersonaCoordinadorJefeChange}" update="codPuestoCoordinadorJefe"/>
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                                   var="codPersonaCoordinadorJefeItem"
+                                                   itemValue="#{codPersonaCoordinadorJefeItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>  
+                            <p:column colspan="2">
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoCoordinadorJefe}" for="codPuestoCoordinadorJefe" />
                             </p:column>
                             <p:column colspan="2">
@@ -246,17 +197,6 @@
                                     <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
                                                    var="codPuestoCoordinadorJefeItem"
                                                    itemValue="#{codPuestoCoordinadorJefeItem}"/>
-                                </p:selectOneMenu>
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
-                            </p:column>
-                            <p:column colspan="2">
-                                <p:selectOneMenu id="codPuestoSolicitante" value="#{asignacionVehiculoController.selected.codPuestoSolicitante}" disabled="true">
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{puestoController.itemsAvailableSelectOne}"
-                                                   var="codPuestoSolicitanteItem"
-                                                   itemValue="#{codPuestoSolicitanteItem}"/>
                                 </p:selectOneMenu>
                             </p:column>
                         </p:row>
@@ -272,6 +212,7 @@
                                                    itemValue="#{vehiculoAsignado}"/>
                                 </p:selectOneMenu>
                             </p:column>
+                            
                             <p:column colspan="2">
                                 <p:outputLabel value="#{bundle.EditAsignacionVehiculoLabel_pilotoAsignado}" for="pilotoAsignado" />
                             </p:column>

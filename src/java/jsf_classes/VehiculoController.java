@@ -99,6 +99,14 @@ public class VehiculoController implements Serializable {
         itemsImagen.clear();
         return selected;
     }
+    
+    public List<Vehiculo> getVehiculosDisponibles() {
+        List<Vehiculo> itemsDisponiblesFecha = null;
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacade().findOrderByLicense();
+        }
+        return itemsDisponiblesFecha;
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VehiculoCreated"));

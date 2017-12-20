@@ -19,7 +19,7 @@
                             <p:column colspan="3">
                                 <p:selectOneMenu id="codVehiculo" value="#{kilometrajeComisionController.selected.codVehiculo}" binding="#{vehiculo}">
                                     <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                    <f:selectItems value="#{vehiculoController.vehiculosDisponibles}"
                                                    var="codVehiculoItem"
                                                    itemValue="#{codVehiculoItem}"/>
                                 </p:selectOneMenu>
@@ -42,7 +42,7 @@
                                 <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_fechaHoraSalida}" for="fechaHoraSalida" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:calendar id="fechaHoraSalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button" binding="#{fechaSalida}">
+                                <p:calendar id="fechaHoraSalida" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button" binding="#{fechaSalida}">
                                     <f:validator validatorId = "com.idpp.FechaSalidaValidator" />
                                     <f:attribute name="ejbFacade" value="#{kilometrajeComisionController.getFacade()}" />
                                     <f:attribute name="vehiculo" value="#{vehiculo}" />
@@ -55,7 +55,7 @@
                                 <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_fechaHoraEntrada}" for="fechaHoraEntrada" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:calendar id="fechaHoraEntrada" pattern="MM/dd/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button">
+                                <p:calendar id="fechaHoraEntrada" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button">
                                     <f:validator validatorId = "com.idpp.FechaEntradaValidator" />
                                     <f:attribute name="fechaSalida" value="#{fechaSalida}" />
                                     <p:clientValidator/>
@@ -91,46 +91,6 @@
                             </p:column>
                             <p:column colspan="3">
                                 <p:inputText id="comisionRealizada" value="#{kilometrajeComisionController.selected.comisionRealizada}" title="#{bundle.CreateKilometrajeComisionTitle_comisionRealizada}" />
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_causa1}" for="causa1" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:inputText id="causa1" value="#{kilometrajeComisionController.selected.causa1}" title="#{bundle.CreateKilometrajeComisionTitle_causa1}" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_causa2}" for="causa2" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:inputText id="causa2" value="#{kilometrajeComisionController.selected.causa2}" title="#{bundle.CreateKilometrajeComisionTitle_causa2}" />
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_causa3}" for="causa3" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:inputText id="causa3" value="#{kilometrajeComisionController.selected.causa3}" title="#{bundle.CreateKilometrajeComisionTitle_causa3}" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codDependenciaInstitucion}" for="codDependenciaInstitucion" />
-                            </p:column>
-                            <p:column colspan="1">
-                                <p:selectOneMenu id="codDependenciaInstitucion" value="#{kilometrajeComisionController.selected.codDependenciaInstitucion}" >
-                                    <f:selectItems value="#{dependenciaInstitucionController.itemsAvailableSelectOne}"
-                                                   var="codDependenciaInstitucionItem"
-                                                   itemValue="#{codDependenciaInstitucionItem}"/>
-                                </p:selectOneMenu>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_diligenciasRealizadas}" for="diligenciasRealizadas" />
-                            </p:column>
-                            <p:column colspan="3">
-                                <p:inputText id="diligenciasRealizadas" value="#{kilometrajeComisionController.selected.diligenciasRealizadas}" title="#{bundle.CreateKilometrajeComisionTitle_diligenciasRealizadas}" />
                             </p:column>
                         </p:row>
                     </p:panelGrid>

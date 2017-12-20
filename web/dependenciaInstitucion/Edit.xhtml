@@ -29,7 +29,7 @@
                         <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codigoCausa}" for="codigoCausa" />
                         <p:inputText id="codigoCausa" value="#{dependenciaInstitucionController.selected.codigoCausa}" title="#{bundle.EditDependenciaInstitucionTitle_codigoCausa}" />
                         <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_fechaSistema}" for="fechaSistema" />
-                        <p:calendar id="fechaSistema" pattern="MM/dd/yyyy HH:mm:ss" value="#{dependenciaInstitucionController.selected.fechaSistema}" title="#{bundle.EditDependenciaInstitucionTitle_fechaSistema}"  showOn="button"/>
+                        <p:calendar id="fechaSistema" pattern="dd/MM/yyyy HH:mm:ss" value="#{dependenciaInstitucionController.selected.fechaSistema}" title="#{bundle.EditDependenciaInstitucionTitle_fechaSistema}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditDependenciaInstitucionLabel_codDepartamento}" for="codDepartamento" />
                         <p:selectOneMenu id="codDepartamento" value="#{dependenciaInstitucionController.selected.codDepartamento}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

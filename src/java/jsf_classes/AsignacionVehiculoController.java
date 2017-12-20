@@ -350,10 +350,21 @@ public class AsignacionVehiculoController implements Serializable {
         }
         else{
             pFechaFin = fechaFin;
-        }
+        }        
         if (itemsDisponiblesFecha == null) {
-            itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
+               itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
         }
+        /*if (selected.getCargaVoluminosa()){
+            //una consulta aparte q me devuelva solo los pickup y camionetas
+           if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadeVehiculo().findByTypeVehicle(pFechaInicio,pFechaFin);
+           }
+        }else{
+            //lo q ya esta abajo
+           if (itemsDisponiblesFecha == null) {
+               itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
+           }   
+        }*/
         return itemsDisponiblesFecha;
     }
 
@@ -402,7 +413,7 @@ public class AsignacionVehiculoController implements Serializable {
         if (itemsDisponiblesFecha == null) {
             itemsDisponiblesFecha = getFacadePersona().findByDate(pFechaInicio,pFechaFin);
             //itemsDisponiblesFecha = getFacadePersona().findAll();
-        }
+        }        
         return itemsDisponiblesFecha;
     }
 

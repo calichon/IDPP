@@ -34,7 +34,7 @@
                         <h:outputText value="#{personaController.selected.nit}" title="#{bundle.ViewPersonaTitle_nit}"/>
                         <h:outputText value="#{bundle.ViewPersonaLabel_fechaNacimiento}"/>
                         <h:outputText value="#{personaController.selected.fechaNacimiento}" title="#{bundle.ViewPersonaTitle_fechaNacimiento}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewPersonaLabel_sexo}"/>
                         <h:outputText value="#{personaController.selected.sexo}" title="#{bundle.ViewPersonaTitle_sexo}"/>
@@ -64,7 +64,7 @@
                         <h:outputText value="#{personaController.selected.lugarNacimiento}" title="#{bundle.ViewPersonaTitle_lugarNacimiento}"/>
                         <h:outputText value="#{bundle.ViewPersonaLabel_fecha}"/>
                         <h:outputText value="#{personaController.selected.fecha}" title="#{bundle.ViewPersonaTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewPersonaLabel_clasificacionGeografica}"/>
                         <h:outputText value="#{personaController.selected.clasificacionGeografica}" title="#{bundle.ViewPersonaTitle_clasificacionGeografica}"/>

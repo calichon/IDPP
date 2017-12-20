@@ -38,7 +38,7 @@
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaAsignacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaAsignacion}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -60,7 +60,7 @@
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaHoraUsoVehiculo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -68,7 +68,7 @@
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaHoraRetornoVehiculo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
@@ -95,7 +95,7 @@
                             </f:facet>
                             <h:outputText value="#{item.diligencia}"/>
                         </p:column>
-                        <p:column>
+                        <!--<p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_causa1}"/>
                             </f:facet>
@@ -112,7 +112,7 @@
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_causa3}"/>
                             </f:facet>
                             <h:outputText value="#{item.causa3}"/>
-                        </p:column>
+                        </p:column>-->
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_utilizaPiloto}"/>
@@ -161,12 +161,12 @@
                             </f:facet>
                             <h:outputText value="#{item.codPersonaPasajero.toString()}"/>
                         </p:column>
-                        <p:column>
+                        <!--<p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionVehiculoTitle_codPersonaSolicitante}"/>
                             </f:facet>
                             <h:outputText value="#{item.codPersonaSolicitante.toString()}"/>
-                        </p:column>
+                        </p:column>-->
                         <ui:remove>
                         <p:column>
                             <f:facet name="header">

@@ -18,7 +18,7 @@
                             </p:column>
                             <p:column colspan="2">
                                 <h:outputText value="#{asignacionVehiculoController.selected.fechaAsignacion}" title="#{bundle.ViewAsignacionVehiculoTitle_fechaAsignacion}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
                             <p:column colspan="2">
@@ -50,7 +50,7 @@
                             </p:column>
                             <p:column colspan="6">
                                 <h:outputText value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_fechaHoraUsoVehiculo}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
                         </p:row>
@@ -60,7 +60,7 @@
                             </p:column>
                             <p:column colspan="6">
                                 <h:outputText value="#{asignacionVehiculoController.selected.fechaHoraRetornoVehiculo}" title="#{bundle.ViewAsignacionVehiculoTitle_fechaHoraRetornoVehiculo}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
                         </p:row>
@@ -102,6 +102,7 @@
                                 <h:outputText value="#{asignacionVehiculoController.selected.diligencia}" title="#{bundle.ViewAsignacionVehiculoTitle_diligencia}"/>
                             </p:column>
                         </p:row>
+                        <!--
                         <p:row>
                             <p:column colspan="2">
                                 <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_causa1}"/>
@@ -130,6 +131,7 @@
                                 <h:outputText value="#{asignacionVehiculoController.selected.codDependenciaInstitucionJuzgado.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codDependenciaInstitucionJuzgado}"/>
                             </p:column>
                         </p:row>
+                        -->
                         <p:row>
                             <p:column colspan="2">
                                 <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_utilizaPiloto}"/>
@@ -167,6 +169,12 @@
                             <p:column colspan="2">
                                 <h:outputText value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaAsignadorVehiculo}"/>
                             </p:column>
+                            <p:column colspan="2">
+                                <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}"/>
+                            </p:column>
+                            <p:column colspan="2">
+                                <h:outputText value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
+                            </p:column>                            
                         </p:row>
                         <p:row>
                             <p:column colspan="2">
@@ -176,32 +184,10 @@
                                 <h:outputText value="#{asignacionVehiculoController.selected.codPersonaCoordinadorJefe.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaCoordinadorJefe}"/>
                             </p:column>
                             <p:column colspan="2">
-                                <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPersonaSolicitante}"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:outputText value="#{asignacionVehiculoController.selected.codPersonaSolicitante.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPersonaSolicitante}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2">
-                                <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoAsignadorVehiculo}"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:outputText value="#{asignacionVehiculoController.selected.codPuestoAsignadorVehiculo.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoAsignadorVehiculo}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2">
                                 <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoCoordinadorJefe}"/>
                             </p:column>
                             <p:column colspan="2">
                                 <h:outputText value="#{asignacionVehiculoController.selected.codPuestoCoordinadorJefe.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoCoordinadorJefe}"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:outputText value="#{bundle.ViewAsignacionVehiculoLabel_codPuestoSolicitante}"/>
-                            </p:column>
-                            <p:column colspan="2">
-                                <h:outputText value="#{asignacionVehiculoController.selected.codPuestoSolicitante.toString()}" title="#{bundle.ViewAsignacionVehiculoTitle_codPuestoSolicitante}"/>
                             </p:column>
                         </p:row>
                         <p:row>

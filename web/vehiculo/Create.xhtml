@@ -25,6 +25,7 @@
                                 <p:inputText id="placa" value="#{vehiculoController.selected.placa}" title="#{bundle.CreateVehiculoTitle_placa}">
                                     <p:ajax event="keypress" delay="200" listener="#{vehiculoController.verifyPlacaOnCreate}" update="buttonCreateVehiculo" />
                                 </p:inputText>
+                                
                             </p:column>
                             <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.CreateVehiculoLabel_nit}" for="nit" />

@@ -34,7 +34,7 @@
                             </p:column>
                             <p:column colspan="3">
                                 <h:outputText value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.ViewKilometrajeComisionTitle_fechaHoraSalida}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
                         </p:row>
@@ -44,7 +44,7 @@
                             </p:column>
                             <p:column colspan="3">
                                 <h:outputText value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.ViewKilometrajeComisionTitle_fechaHoraEntrada}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </h:outputText>
                             </p:column>
                         </p:row>
@@ -69,43 +69,7 @@
                             <p:column colspan="3">
                                 <h:outputText value="#{kilometrajeComisionController.selected.comisionRealizada}" title="#{bundle.ViewKilometrajeComisionTitle_comisionRealizada}"/>
                             </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa1}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{kilometrajeComisionController.selected.causa1}" title="#{bundle.ViewKilometrajeComisionTitle_causa1}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa2}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{kilometrajeComisionController.selected.causa2}" title="#{bundle.ViewKilometrajeComisionTitle_causa2}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_causa3}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{kilometrajeComisionController.selected.causa3}" title="#{bundle.ViewKilometrajeComisionTitle_causa3}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_codDependenciaInstitucion}"/>
-                            </p:column>
-                            <p:column colspan="1">
-                                <h:outputText value="#{kilometrajeComisionController.selected.codDependenciaInstitucion}" title="#{bundle.ViewKilometrajeComisionTitle_codDependenciaInstitucion}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="1">
-                                <h:outputText value="#{bundle.ViewKilometrajeComisionLabel_diligenciasRealizadas}"/>
-                            </p:column>
-                            <p:column colspan="3">
-                                <h:outputText value="#{kilometrajeComisionController.selected.diligenciasRealizadas}" title="#{bundle.ViewKilometrajeComisionTitle_diligenciasRealizadas}"/>
-                            </p:column>
-                        </p:row>
+                        </p:row>                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PF('KilometrajeComisionViewDialog').hide()"/>
                 </h:panelGroup>

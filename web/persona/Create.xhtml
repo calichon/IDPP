@@ -33,7 +33,7 @@
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_nit}" for="nit" />
                         <p:inputText id="nit" value="#{personaController.selected.nit}" title="#{bundle.CreatePersonaTitle_nit}" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
-                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:calendar id="fechaNacimiento" pattern="dd/MM/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
                         <p:inputText id="sexo" value="#{personaController.selected.sexo}" title="#{bundle.CreatePersonaTitle_sexo}" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
@@ -61,7 +61,7 @@
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_lugarNacimiento}" for="lugarNacimiento" />
                         <p:inputText id="lugarNacimiento" value="#{personaController.selected.lugarNacimiento}" title="#{bundle.CreatePersonaTitle_lugarNacimiento}" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{personaController.selected.fecha}" title="#{bundle.EditPersonaTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy HH:mm:ss" value="#{personaController.selected.fecha}" title="#{bundle.EditPersonaTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_clasificacionGeografica}" for="clasificacionGeografica" />
                         <p:inputText id="clasificacionGeografica" value="#{personaController.selected.clasificacionGeografica}" title="#{bundle.CreatePersonaTitle_clasificacionGeografica}" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_codMunicipio}" for="codMunicipio" />

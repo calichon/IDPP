@@ -1,11 +1,13 @@
 package jsf_classes;
 
 import entities.Sede;
+import entities.Vehiculo;
 import jsf_classes.util.JsfUtil;
 import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.SedeFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,7 +46,13 @@ public class SedeController implements Serializable {
 
     protected void initializeEmbeddableKey() {
     }
-
+    public List<Sede> getSedes() {
+        List<Sede> itemsDisponiblesFecha = null;
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacade().findByPlace();
+        }
+        return itemsDisponiblesFecha;
+    }
     private SedeFacade getFacade() {
         return ejbFacade;
     }

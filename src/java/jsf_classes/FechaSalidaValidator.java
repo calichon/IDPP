@@ -37,27 +37,28 @@ public class FechaSalidaValidator implements Validator {
         KilometrajeComisionFacade facade = (KilometrajeComisionFacade) component.getAttributes().get("ejbFacade");
         SelectOneMenu vehiculomenu = (SelectOneMenu) component.getAttributes().get("vehiculo");
         Vehiculo vehiculo = (Vehiculo)vehiculomenu.getValue();
-        KilometrajeComision last = facade.getLastByVehiculo(vehiculo).get(0);
-        if(last != null){
-            Date fecha_salida = (Date)value;
-            Date antigua_fecha = last.getFechaHoraEntrada();
+        if(facade.getLastByVehiculo(vehiculo).size()>0){
+           KilometrajeComision last = facade.getLastByVehiculo(vehiculo).get(0);
+           if(last != null){
+               Date fecha_salida = (Date)value;
+               Date antigua_fecha = last.getFechaHoraEntrada();
+               if(fecha_salida.after(antigua_fecha)){
+   //                FacesMessage msg =
+   //                        new FacesMessage("Fecha correcta","Fecha correcta");
+   //                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+   //                     throw new ValidatorException(msg);
+               }
+               else{
+                   FacesMessage msg =
+                           new FacesMessage("La fecha de salida debe ser mayor a la anterior","La fecha de salida debe ser mayor a la anterior");
+                        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                        throw new ValidatorException(msg);
+               }
 
-            if(fecha_salida.after(antigua_fecha)){
-//                FacesMessage msg =
-//                        new FacesMessage("Fecha correcta","Fecha correcta");
-//                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//                     throw new ValidatorException(msg);
-            }
-            else{
-                FacesMessage msg =
-                        new FacesMessage("La fecha de salida debe ser mayor a la anterior","La fecha de salida debe ser mayor a la anterior");
-                     msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-                     throw new ValidatorException(msg);
-            }
-
-        }
-        else{
-            //no hay registros anteriores, asi que cualquier fecha esta bien
-        }
+           }
+           else{
+               //no hay registros anteriores, asi que cualquier fecha esta bien
+           }   
+        }        
     }
 }

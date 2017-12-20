@@ -21,7 +21,7 @@
                     <h:inputText id="noConcurso" value="#{concursoMantenimientosController.selected.noConcurso}" title="#{bundle2.CreateConcursoMantenimientosTitle_noConcurso}" />
                     <h:outputLabel value="#{bundle2.CreateConcursoMantenimientosLabel_fechaConcurso}" for="fechaConcurso" />
                     <h:inputText id="fechaConcurso" value="#{concursoMantenimientosController.selected.fechaConcurso}" title="#{bundle2.CreateConcursoMantenimientosTitle_fechaConcurso}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle2.CreateConcursoMantenimientosLabel_placaVehiculo}" for="placaVehiculo" />
                     <h:inputText id="placaVehiculo" value="#{concursoMantenimientosController.selected.placaVehiculo}" title="#{bundle2.CreateConcursoMantenimientosTitle_placaVehiculo}" />
