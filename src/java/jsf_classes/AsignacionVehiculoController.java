@@ -78,6 +78,59 @@ public class AsignacionVehiculoController implements Serializable {
         setPasajerosUnidad();
     }
 
+    
+    public List<Vehiculo> onCargaVoluminosaEdit(){
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Vehiculo> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+
+        }
+        else{
+            pFechaFin = fechaFin;
+        }
+        Boolean llevaCargaVoluminosa = selected.getCargaVoluminosa();
+        List<Vehiculo> itemsDisponibles = null;
+        if (llevaCargaVoluminosa) {
+               itemsDisponiblesFecha = getFacadeVehiculo().findByLoadAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
+               vehiculosDisponiblesEdit=itemsDisponibles;
+        }
+        return itemsDisponibles;
+    }
+    
+    public List<Vehiculo> onCargaVoluminosa(){
+        Date pFechaInicio;
+        Date pFechaFin;
+        List<Vehiculo> itemsDisponiblesFecha = null;
+        if(fechaInicio == null){
+            pFechaInicio = new Date(0);
+        }
+        else{
+            pFechaInicio = fechaInicio;
+        }
+        if(fechaFin == null){
+            pFechaFin = new Date();
+
+        }
+        else{
+            pFechaFin = fechaFin;
+        }
+        Boolean llevaCargaVoluminosa = selected.getCargaVoluminosa();
+        List<Vehiculo> itemsDisponibles = null;
+        if (itemsDisponibles == null && llevaCargaVoluminosa) {
+               itemsDisponibles = getFacadeVehiculo().findByLoad(pFechaInicio,pFechaFin);
+               vehiculosDisponibles=itemsDisponibles;
+        }
+        return itemsDisponibles;
+    }
+    
     public void setPasajerosUnidad(){
         if(selected != null){
             //pasajerosUnidad = ejbFacadePersona.findByUnidad(selected.getCodUnidadSolicitante());
@@ -351,20 +404,14 @@ public class AsignacionVehiculoController implements Serializable {
         else{
             pFechaFin = fechaFin;
         }        
-        if (itemsDisponiblesFecha == null) {
-               itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
-        }
-        /*if (selected.getCargaVoluminosa()){
-            //una consulta aparte q me devuelva solo los pickup y camionetas
-           if (itemsDisponiblesFecha == null) {
-            itemsDisponiblesFecha = getFacadeVehiculo().findByTypeVehicle(pFechaInicio,pFechaFin);
-           }
+        
+        if (itemsDisponiblesFecha == null && vehiculosDisponibles==null){
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
+        }else if (selected.getCargaVoluminosa() && vehiculosDisponibles!=null) {
+            itemsDisponiblesFecha = vehiculosDisponibles;
         }else{
-            //lo q ya esta abajo
-           if (itemsDisponiblesFecha == null) {
-               itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
-           }   
-        }*/
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
+        }
         return itemsDisponiblesFecha;
     }
 
@@ -387,9 +434,15 @@ public class AsignacionVehiculoController implements Serializable {
         else{
             pFechaFin = fechaFin;
         }
-
-        itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
-
+        if (itemsDisponiblesFecha == null && vehiculosDisponiblesEdit==null && !selected.getCargaVoluminosa()){
+            System.out.println("aqui1 "+selected.getCargaVoluminosa());
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
+        }else if (selected.getCargaVoluminosa() && vehiculosDisponiblesEdit!=null) {
+            System.out.println("entro...");
+            itemsDisponiblesFecha = vehiculosDisponiblesEdit;
+        }else{
+            itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
+        }
         return itemsDisponiblesFecha;
     }
 

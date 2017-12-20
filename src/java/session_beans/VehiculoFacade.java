@@ -42,6 +42,26 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         vehiculoQ = em.createNamedQuery("Vehiculo.findByTypeVehicle").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin);
         return vehiculoQ.getResultList();
     }
+        
+    public List<Vehiculo> findByLoad(Date fechaInicio, Date fechaFin) {
+        EntityManager em = getEntityManager();
+        Query vehiculoQ;
+        Query tipoVehiculoQ;
+        tipoVehiculoQ = em.createNamedQuery("TipoTipo.findByLoad");
+        vehiculoQ = em.createNamedQuery("Vehiculo.findByLoad").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
+        return vehiculoQ.getResultList();
+    }
+    
+    public List<Vehiculo> findByLoadAndId(Date fechaInicio, Date fechaFin, Integer id) {
+        EntityManager em = getEntityManager();
+        Query vehiculoQ;
+        Query tipoVehiculoQ;
+        tipoVehiculoQ = em.createNamedQuery("TipoTipo.findByLoad");
+        //vehiculoQ = em.createNamedQuery("Vehiculo.findByLoadAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
+        vehiculoQ = em.createNamedQuery("Vehiculo.findByLoad").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
+        //codAsignacionVehiculo
+        return vehiculoQ.getResultList();
+    }
     public List<Vehiculo> findByDate(Date fechaInicio, Date fechaFin) {
         EntityManager em = getEntityManager();
         Query vehiculoQ;        
@@ -60,7 +80,7 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         vehiculoQ = em.createNamedQuery("Vehiculo.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id);
         //codAsignacionVehiculo
         return vehiculoQ.getResultList();
-    }
+    }        
     
     public List<Municipio> getMunicipioOrderedListLimitsDepartment(Departamento depto){
         EntityManager municipioEM;

@@ -134,7 +134,9 @@
                                 <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_cargaVoluminosa}" for="cargaVoluminosa" />
                             </p:column>
                             <p:column colspan="2">
-                                <p:selectBooleanCheckbox id="cargaVoluminosa" value="#{asignacionVehiculoController.selected.cargaVoluminosa}" />
+                                <p:selectBooleanCheckbox id="cargaVoluminosa" value="#{asignacionVehiculoController.selected.cargaVoluminosa}">
+                                    <p:ajax listener="#{asignacionVehiculoController.onCargaVoluminosa}" update="vehiculoAsignado"/>
+                                </p:selectBooleanCheckbox>
                             </p:column>
                         </p:row>
                         <p:row>

@@ -61,7 +61,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         //personaQ = em.createNamedQuery("Persona.findByDate");
         return personaQ.getResultList();
     }
-
+    
     public List<Persona> findByUnidad(Unidad u) {
         EntityManager em = getEntityManager();
         Query personaQ;

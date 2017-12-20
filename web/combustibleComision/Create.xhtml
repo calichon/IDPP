@@ -24,13 +24,15 @@
                                 <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_fechaEntrega}" for="fechaEntrega" />
                             </p:column>
                             <p:column colspan="1">
-                                <p:calendar id="fechaEntrega" pattern="dd/MM/yyyy HH:mm:ss" value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.EditCombustibleComisionTitle_fechaEntrega}"  showOn="button"/>
+                                <p:calendar id="fechaEntrega" pattern="dd/MM/yyyy" value="#{combustibleComisionController.selected.fechaEntrega}" title="#{bundle.EditCombustibleComisionTitle_fechaEntrega}"  showOn="button"/>
                             </p:column>
                         </p:row>
                         <p:row>
                             <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
                             </p:column>
+                            
+                            
                             <p:column colspan="1">
                                 <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" filter="true">
                                     <p:ajax listener="#{combustibleComisionController.onSolicitanteChange}" update="codVehiculo codPuestoSolicitante codUnidad codSede"/>
@@ -40,6 +42,7 @@
                                                    itemValue="#{codPersonaSolicitanteItem}"/>
                                 </p:selectOneMenu>
                             </p:column>
+                            
                             <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPuestoSolicitante}" for="codPuestoSolicitante" />
                             </p:column>
