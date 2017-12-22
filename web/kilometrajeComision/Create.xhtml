@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="KilometrajeComisionCreateDlg" widgetVar="KilometrajeComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateKilometrajeComisionTitle}">
+        <p:dialog id="KilometrajeComisionCreateDlg" widgetVar="KilometrajeComisionCreateDialog" modal="true"  resizable="false" appendTo="@(body)" header="#{bundle.CreateKilometrajeComisionTitle}">
             <h:form id="KilometrajeComisionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid rendered="#{kilometrajeComisionController.selected != null}">
@@ -30,7 +30,7 @@
                                 <p:outputLabel value="#{bundle.CreateKilometrajeComisionLabel_codPersonaPiloto}" for="codPersonaPiloto" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" filter="true">
+                                <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" filter="true" filterMatchMode="contains">
                                     <f:selectItems value="#{kilometrajeComisionController.pilotosDisponibles}"
                                                    var="codPersonaPilotoItem"
                                                    itemValue="#{codPersonaPilotoItem}"/>

@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="CombustibleComisionEditDlg" widgetVar="CombustibleComisionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCombustibleComisionTitle}" onShow="updateDialog()">
+        <p:dialog id="CombustibleComisionEditDlg" widgetVar="CombustibleComisionEditDialog" modal="true"  resizable="true"  width="800" height="600" appendTo="@(body)" header="#{bundle.EditCombustibleComisionTitle}" onShow="updateDialog()">
             <h:form id="CombustibleComisionEditForm">
                 <p:remoteCommand name="updateDialog" update="cuponest" actionListener="#{combustibleComisionController.init()}"/>
                 <p:remoteCommand name="refreshFooter" update="cuponest"/>
