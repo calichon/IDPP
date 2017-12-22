@@ -120,6 +120,11 @@ public class PersonaController implements Serializable {
     public List<Persona> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Persona> Coincidencias(String texto) {
+        System.out.println(texto);
+        return getFacade().findAll();
+    }
 
     @FacesConverter(forClass = Persona.class)
     public static class PersonaControllerConverter implements Converter {

@@ -61,6 +61,7 @@
                     <h:link outcome="/vehiculo/List" value="Formulario de Vehículo"/>
                     <br />
                     <h2>Listado de formularios operativos y de asignación de vehículos</h2>
+                    
                     <h:link outcome="/asignacionVehiculo/List" value="Formulario de solicitud para uso de vehículo"/>
                     <br />
                     <h:link outcome="/kilometrajeComision/List" value="Formulario de control de kilometraje y comisión del vehículo"/>
@@ -69,8 +70,9 @@
 <!--                    <h:link outcome="/asignacionVehiculoPiloto/List" value="Formulario de AsignacionVehiculoPiloto"/>
                     <br />-->
                     <h:link outcome="/combustibleComision/List" value="Formulario de entrega de cupones de combustible"/>
-
-
+                    <br />
+                    <h:link outcome="/mantenimientoReparacion/List" value="Formulario de Mantenimiento"/>
+                    <!-- h2>Listado de formularios operativos y de asignación de vehículos</h2-->                    
                     <h:panelGroup rendered="#{request.isUserInRole('Admin')}">
                         <h2>Administración</h2>
                         <h:link outcome="/usuario/List" value="Administración de usuarios"/>

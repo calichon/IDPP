@@ -56,9 +56,8 @@
                                 <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_fechaHoraUsoVehiculo}" for="fechaHoraUsoVehiculo" />
                             </p:column>
                             <p:column colspan="6">
-                                <p:calendar id="fechaHoraUsoVehiculo" readonlyInput="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button">
-                                      <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>
-                                      
+                                <p:calendar id="fechaHoraUsoVehiculo" readonlyInput="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionVehiculoController.selected.fechaHoraUsoVehiculo}" title="#{bundle.EditAsignacionVehiculoTitle_fechaHoraUsoVehiculo}"  showOn="button" >
+                                    <p:ajax event="dateSelect" update="diasAsignacion vehiculoAsignado pilotoAsignado" listener="#{asignacionVehiculoController.setTotalDias}"></p:ajax>                                    
                                 </p:calendar>
                             </p:column>
                         </p:row>

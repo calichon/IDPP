@@ -103,17 +103,19 @@ public class CombustibleComisionController implements Serializable {
 
     public String getTotal(CombustibleCupon cupon){
         String s;
-        if(cupon.getCodCuponDenominancion() != null && cupon.getCantidadCupones() != null){
-            BigInteger cuponDenominacion = cupon.getCodCuponDenominancion().getDenominacion();
-            BigInteger numero = BigInteger.valueOf(cupon.getCantidadCupones());
-            BigInteger total = cuponDenominacion.multiply(numero);
+        if(cupon.getCodCuponDenominancion() != null && cupon.getNumeroCuponFinal()!= null&& cupon.getNumeroCuponInicial()!= null){
+            BigInteger cuponDenominacion = cupon.getCodCuponDenominancion().getDenominacion();            
+            BigInteger valor=cupon.getNumeroCuponFinal().subtract(cupon.getNumeroCuponInicial());
+            //cupon.setCantidadCupones(valor);
+            BigInteger numero = BigInteger.valueOf(1);            
+            cupon.setCantidadCupones(valor.intValue()+1);            
+            BigInteger total = cuponDenominacion.multiply(valor.add(numero));
             cupon.setSumaTotal(total);
             s = total.toString();
         }
         else{
             s = "0";
         }
-
         return s;
     }
 

@@ -8,9 +8,9 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition>
-        <p:dialog id="CombustibleComisionCreateDlg" widgetVar="CombustibleComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCombustibleComisionTitle}" onShow="updateDialog()">
+        <p:dialog id="CombustibleComisionCreateDlg" resizable="true"  width="800" height="600" widgetVar="CombustibleComisionCreateDialog" modal="true" appendTo="@(body)" header="#{bundle.CreateCombustibleComisionTitle}" onShow="updateDialog()">
             <h:form id="CombustibleComisionCreateForm">
-                <p:remoteCommand name="updateDialog" update="cuponest" actionListener="#{combustibleComisionController.initCreate()}"/>
+                <p:remoteCommand name="updateDialog" update="cuponest"  actionListener="#{combustibleComisionController.initCreate()}"/>
                 <p:remoteCommand name="refreshFooter" update="cuponest"/>
                 <h:panelGroup id="display">
                     <p:panelGrid  rendered="#{combustibleComisionController.selected != null}">
@@ -31,14 +31,12 @@
                             <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_codPersonaSolicitante}" for="codPersonaSolicitante" />
                             </p:column>
-                            
-                            
                             <p:column colspan="1">
-                                <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" filter="true">
+                                <p:selectOneMenu id="codPersonaSolicitante" value="#{combustibleComisionController.selected.codPersonaSolicitante}" filter="true" filterMatchMode="contains">
                                     <p:ajax listener="#{combustibleComisionController.onSolicitanteChange}" update="codVehiculo codPuestoSolicitante codUnidad codSede"/>
                                     <f:selectItem itemLabel="Persona solicitante" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                                     <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                                   var="codPersonaSolicitanteItem"
+                                                   var="codPersonaSolicitanteItem"                                                   
                                                    itemValue="#{codPersonaSolicitanteItem}"/>
                                 </p:selectOneMenu>
                             </p:column>
@@ -172,23 +170,23 @@
                         </p:row>
                         <p:row>
                             <p:column colspan="6">
-                                <p:dataTable style="width: 805px" id="cuponest" var="cupon" value="#{combustibleComisionController.cupones}">
+                                <p:dataTable style="width: 1005px" id="cuponest" var="cupon" value="#{combustibleComisionController.cupones}">
                                     <p:columnGroup type="header">
                                         <p:row>
                                             <p:column headerText="Cantidad"/>
-                                            <p:column headerText="Denominación"/>
+                                            <p:column colspan="1" headerText="Denominación"/>
                                             <p:column colspan="2" headerText="Numeración"/>
                                             <p:column headerText="Total"/>
                                         </p:row>
                                     </p:columnGroup>
                                     <p:column>
-                                        <p:inputText id="cantidadCupones" value="#{cupon.cantidadCupones}">
+                                        <p:inputText id="cantidadCupones" value="#{cupon.cantidadCupones}" disabled="true" >
                                             <p:ajax listener="#{combustibleComisionController.getTotal(cupon)}" update="sumaTotal" oncomplete="refreshFooter();"/>
                                         </p:inputText>
                                     </p:column>
                                     <p:column>
                                         <p:outputLabel value="#{bundle.CreateCombustibleComisionLabel_denominacion}" for="denominacion" />
-                                        <p:selectOneMenu style="width: calc(100% - 15px)!important;" id="denominacion" value="#{cupon.codCuponDenominancion}">
+                                        <p:selectOneMenu style="width: calc(100% -15px)!important;" id="denominacion" value="#{cupon.codCuponDenominancion}">
                                             <p:ajax listener="#{combustibleComisionController.getTotal(cupon)}" update="sumaTotal" oncomplete="refreshFooter();"/>
                                             <f:selectItem itemLabel="Seleccione denominación" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
                                             <f:selectItems value="#{cuponDenominacionController.itemsAvailableSelectOne}"
@@ -211,6 +209,7 @@
                                             <f:attribute name="cuponFinal" value="#{cupon.numeroCuponFinal}" />
                                             <f:attribute name="combustibleCuponController" value="#{combustibleCuponController}" />
                                             <p:clientValidator/>
+                                            <p:ajax listener="#{combustibleComisionController.getTotal(cupon)}" update="cantidadCupones sumaTotal" oncomplete="refreshFooter();"/>
                                         </p:inputText>
                                     </p:column>
                                     <p:column>
@@ -279,7 +278,7 @@
                     </p:panelGrid>
                     <p:commandButton actionListener="#{combustibleComisionController.create}" value="#{bundle.Save}" update="display,:CombustibleComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CombustibleComisionCreateDialog');" validateClient="true" />
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('CombustibleComisionCreateDialog').hide()"/>
-                </h:panelGroup>
+                </h:panelGroup>>
             </h:form>
         </p:dialog>
 

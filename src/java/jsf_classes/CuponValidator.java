@@ -38,8 +38,17 @@ public class CuponValidator implements Validator {
             BigInteger cuponInicial = new BigInteger(inicialValue.toString());
             BigInteger cuponFinal = new BigInteger(value.toString());
             CombustibleCuponController cuponController = (CombustibleCuponController) component.getAttributes().get("combustibleCuponController");
-
-            List<CombustibleCupon> lista = cuponController.getItems();
+            System.out.println(cuponInicial);
+            System.out.println(cuponFinal);
+            //agregado el 21/12/17, para validar la numeracion
+            if(cuponFinal.intValue()<=cuponInicial.intValue()){
+                FacesMessage msg =
+                new FacesMessage("El número final debe ser mayor al número inicial","El número final debe ser mayor al número inicial");
+                msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                throw new ValidatorException(msg);
+            }
+            //fin de lo agregado
+            /*List<CombustibleCupon> lista = cuponController.getItems();
             if(lista.size()>0){
                 for (CombustibleCupon cuponl : lista) {
                     BigInteger ncf = cuponl.getNumeroCuponFinal();
@@ -51,7 +60,6 @@ public class CuponValidator implements Validator {
                             Integer id2 = cuponCombustibleComision.getCodCombustibleComision();
                             Integer id3 = 5;
                             if(id!=null && id==id2){
-
                             }
                             else{
                                 FacesMessage msg =
@@ -66,7 +74,6 @@ public class CuponValidator implements Validator {
                             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                             throw new ValidatorException(msg);
                         }
-
                     }
                 }
             }
@@ -87,7 +94,7 @@ public class CuponValidator implements Validator {
 //                        }
 //                    }
 //                }
-//            }
+//            }*/
         }
         else{
             FacesMessage msg =

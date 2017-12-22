@@ -5,6 +5,7 @@
  */
 package session_beans;
 
+import com.sun.javafx.scene.control.SelectedCellsMap;
 import entities.Departamento;
 import entities.Municipio;
 import entities.Sede;
@@ -58,7 +59,7 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         Query tipoVehiculoQ;
         tipoVehiculoQ = em.createNamedQuery("TipoTipo.findByLoad");
         //vehiculoQ = em.createNamedQuery("Vehiculo.findByLoadAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
-        vehiculoQ = em.createNamedQuery("Vehiculo.findByLoad").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
+        vehiculoQ = em.createNamedQuery("Vehiculo.findByLoadAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo",id).setParameter("tipoVehiculo",tipoVehiculoQ.getResultList());
         //codAsignacionVehiculo
         return vehiculoQ.getResultList();
     }

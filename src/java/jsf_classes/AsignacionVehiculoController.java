@@ -82,7 +82,6 @@ public class AsignacionVehiculoController implements Serializable {
     public List<Vehiculo> onCargaVoluminosaEdit(){
         Date pFechaInicio;
         Date pFechaFin;
-        List<Vehiculo> itemsDisponiblesFecha = null;
         if(fechaInicio == null){
             pFechaInicio = new Date(0);
         }
@@ -99,7 +98,7 @@ public class AsignacionVehiculoController implements Serializable {
         Boolean llevaCargaVoluminosa = selected.getCargaVoluminosa();
         List<Vehiculo> itemsDisponibles = null;
         if (llevaCargaVoluminosa) {
-               itemsDisponiblesFecha = getFacadeVehiculo().findByLoadAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
+               itemsDisponibles = getFacadeVehiculo().findByLoadAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
                vehiculosDisponiblesEdit=itemsDisponibles;
         }
         return itemsDisponibles;
@@ -108,7 +107,6 @@ public class AsignacionVehiculoController implements Serializable {
     public List<Vehiculo> onCargaVoluminosa(){
         Date pFechaInicio;
         Date pFechaFin;
-        List<Vehiculo> itemsDisponiblesFecha = null;
         if(fechaInicio == null){
             pFechaInicio = new Date(0);
         }
@@ -435,10 +433,8 @@ public class AsignacionVehiculoController implements Serializable {
             pFechaFin = fechaFin;
         }
         if (itemsDisponiblesFecha == null && vehiculosDisponiblesEdit==null && !selected.getCargaVoluminosa()){
-            System.out.println("aqui1 "+selected.getCargaVoluminosa());
             itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());
         }else if (selected.getCargaVoluminosa() && vehiculosDisponiblesEdit!=null) {
-            System.out.println("entro...");
             itemsDisponiblesFecha = vehiculosDisponiblesEdit;
         }else{
             itemsDisponiblesFecha = getFacadeVehiculo().findByDateAndId(pFechaInicio,pFechaFin,selected.getCodAsignacionVehiculo());

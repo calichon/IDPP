@@ -65,7 +65,7 @@ import javax.xml.bind.annotation.XmlTransient;
 "AND  v.codTipoTipo IN :tipoVehiculo  \n" +
 "ORDER BY v.placa")
     //, @NamedQuery(name = "Vehiculo.findByLoadAndId", query = "Select DISTINCT(v) from Vehiculo v left outer join v.asignacionVehiculoPilotoList avp left join avp.codAsignacionVehiculo av WHERE (NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL) OR av.codAsignacionVehiculo = :codAsignacionVehiculo  ORDER BY v.codVehiculo")
-    ,/*@NamedQuery(name = "Vehiculo.findByLoadAndId", query = "Select DISTINCT(v) \n" +
+    ,@NamedQuery(name = "Vehiculo.findByLoadAndId", query = "Select DISTINCT(v) \n" +
 "from Vehiculo v \n" +
 "left outer join v.asignacionVehiculoPilotoList avp \n" +
 "left join avp.codAsignacionVehiculo av \n" +
@@ -76,13 +76,13 @@ import javax.xml.bind.annotation.XmlTransient;
 "    left outer join v.asignacionVehiculoPilotoList avp \n" +
 "    left join avp.codAsignacionVehiculo av \n" +
 "    WHERE\n" +
-//"    ((:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') AND av.fechaHoraRetornoVehiculo IS NOT NULL AND  av.codAsignacionVehiculo != :codAsignacionVehiculo)  \n" +
-"    ((:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') AND av.fechaHoraRetornoVehiculo IS NOT NULL AND)  \n" +
+"    ((:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') AND av.fechaHoraRetornoVehiculo IS NOT NULL AND  av.codAsignacionVehiculo != :codAsignacionVehiculo)  \n" +
+//"    ((:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') AND av.fechaHoraRetornoVehiculo IS NOT NULL AND)  \n" +
 ") \n" +
 "AND  v.codTipoTipo IN :tipoVehiculo  \n" +
 "ORDER BY v.placa")
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin)
-     ,*/ @NamedQuery(name = "Vehiculo.findByDateAndId", query = "Select DISTINCT(v) \n" +
+     , @NamedQuery(name = "Vehiculo.findByDateAndId", query = "Select DISTINCT(v) \n" +
 "from Vehiculo v \n" +
 "left outer join v.asignacionVehiculoPilotoList avp \n" +
 "left join avp.codAsignacionVehiculo av \n" +
