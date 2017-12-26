@@ -6,9 +6,11 @@
 package session_beans;
 
 import entities.Unidad;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,10 @@ public class UnidadFacade extends AbstractFacade<Unidad> {
     public UnidadFacade() {
         super(Unidad.class);
     }
-    
+    public List<Unidad> findAll1() {
+        EntityManager em = getEntityManager();
+        Query unidadQ;
+        unidadQ = em.createNamedQuery("Unidad.findAll");
+        return unidadQ.getResultList();
+    }
 }

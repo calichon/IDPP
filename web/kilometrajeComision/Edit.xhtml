@@ -43,7 +43,12 @@
                                 <p:outputLabel value="#{bundle.EditKilometrajeComisionLabel_fechaHoraSalida}" for="fechaHoraSalida" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:calendar id="fechaHoraSalida" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button"/>
+                                <p:calendar id="fechaHoraSalida" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraSalida}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraSalida}"  showOn="button">
+                                    <f:validator validatorId = "com.idpp.FechaSalidaValidator" />
+                                    <f:attribute name="ejbFacade" value="#{kilometrajeComisionController.getFacade()}" />
+                                    <f:attribute name="vehiculo" value="#{vehiculo}" />
+                                    <p:clientValidator/>
+                                </p:calendar>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -51,7 +56,11 @@
                                 <p:outputLabel value="#{bundle.EditKilometrajeComisionLabel_fechaHoraEntrada}" for="fechaHoraEntrada" />
                             </p:column>
                             <p:column colspan="3">
-                                <p:calendar id="fechaHoraEntrada" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button"/>
+                                <p:calendar id="fechaHoraEntrada" pattern="dd/MM/yyyy HH:mm:ss" value="#{kilometrajeComisionController.selected.fechaHoraEntrada}" title="#{bundle.EditKilometrajeComisionTitle_fechaHoraEntrada}"  showOn="button">
+                                    <f:validator validatorId = "com.idpp.FechaEntradaValidator" />
+                                    <f:attribute name="fechaSalida" value="#{fechaSalida}" />
+                                    <p:clientValidator/>
+                                </p:calendar>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -59,13 +68,22 @@
                                 <p:outputLabel value="#{bundle.EditKilometrajeComisionLabel_kilometrajeInicial}" for="kilometrajeInicial" />
                             </p:column>
                             <p:column colspan="1">
-                                <p:inputText id="kilometrajeInicial" value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.EditKilometrajeComisionTitle_kilometrajeInicial}" />
+                                <p:inputText id="kilometrajeInicial" value="#{kilometrajeComisionController.selected.kilometrajeInicial}" title="#{bundle.EditKilometrajeComisionTitle_kilometrajeInicial}"  binding="#{kilometrajeInicial}">
+                                    <f:validator validatorId = "com.idpp.KilometrajeComisionKmValidator" />
+                                    <f:attribute name="ejbFacade" value="#{kilometrajeComisionController.getFacade()}" />
+                                    <f:attribute name="vehiculo" value="#{vehiculo}" />
+                                    <p:clientValidator/>
+                                </p:inputText>
                             </p:column>
                             <p:column colspan="1">
                                 <p:outputLabel value="#{bundle.EditKilometrajeComisionLabel_kilometrajeFinal}" for="kilometrajeFinal" />
                             </p:column>
                             <p:column colspan="1">
-                                <p:inputText id="kilometrajeFinal" value="#{kilometrajeComisionController.selected.kilometrajeFinal}" title="#{bundle.EditKilometrajeComisionTitle_kilometrajeFinal}" />
+                                <p:inputText id="kilometrajeFinal" value="#{kilometrajeComisionController.selected.kilometrajeFinal}" title="#{bundle.EditKilometrajeComisionTitle_kilometrajeFinal}">
+                                    <f:validator validatorId = "com.idpp.KilometrajeComisionKmFinalValidator" />
+                                    <f:attribute name="kilometrajeInicial" value="#{kilometrajeInicial}" />
+                                    <p:clientValidator/>
+                                </p:inputText>
                             </p:column>
                         </p:row>
                         <p:row>

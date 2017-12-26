@@ -31,7 +31,7 @@
                                 <p:selectOneMenu id="codUnidadSolicitante" value="#{asignacionVehiculoController.selected.codUnidadSolicitante}" effect="fold" filter="true" filterMatchMode="contains" >
                                     <p:ajax listener="#{asignacionVehiculoController.onUnidadChange}" update="codPersonaPasajero" />
                                     <f:selectItem itemLabel="Seleccione unidad" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                                    <f:selectItems value="#{unidadController.itemsAvailableSelectOne}"
+                                    <f:selectItems value="#{unidadController.itemsAvailableSelectOnePlace}"
                                                    var="codUnidadSolicitanteItem"
                                                    itemValue="#{codUnidadSolicitanteItem}"/>
                                 </p:selectOneMenu>
@@ -76,7 +76,7 @@
                                 <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_diasAsignacion}" for="diasAsignacion" />
                             </p:column >
                             <p:column colspan="2">
-                                <p:inputText id="diasAsignacion" value="#{asignacionVehiculoController.selected.diasAsignacion}" title="#{bundle.CreateAsignacionVehiculoTitle_diasAsignacion}" />
+                                <p:inputText id="diasAsignacion" disabled="true" value="#{asignacionVehiculoController.selected.diasAsignacion}" title="#{bundle.CreateAsignacionVehiculoTitle_diasAsignacion}" />
                             </p:column>
                             <p:column colspan="2">
                                 <p:outputLabel value="#{bundle.CreateAsignacionVehiculoLabel_numPersonasViaje}" for="numPersonasViaje" />
@@ -155,7 +155,7 @@
                                 <p:selectOneMenu id="codPersonaAsignadorVehiculo" value="#{asignacionVehiculoController.selected.codPersonaAsignadorVehiculo}" filter="true">
                                     <p:ajax listener="#{asignacionVehiculoController.onPersonaAsignadorVehiculoChange}" update="codPuestoAsignadorVehiculo"/>
                                     <f:selectItem itemLabel="Seleccione persona" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                                    <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                    <f:selectItems value="#{personaController.itemsAvailableSelectOneTransport}"
                                                    var="codPersonaAsignadorVehiculoItem"
                                                    itemValue="#{codPersonaAsignadorVehiculoItem}"/>
                                 </p:selectOneMenu>

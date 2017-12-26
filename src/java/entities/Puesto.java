@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Puesto.findAll", query = "SELECT p FROM Puesto p")
     , @NamedQuery(name = "Puesto.findByCodPuesto", query = "SELECT p FROM Puesto p WHERE p.codPuesto = :codPuesto")
     , @NamedQuery(name = "Puesto.findByCodTipoPuesto", query = "SELECT p FROM Puesto p WHERE p.codTipoPuesto = :codTipoPuesto")
-    , @NamedQuery(name = "Puesto.findByCodOrganigrama", query = "SELECT p FROM Puesto p WHERE p.codOrganigrama = :codOrganigrama")
+    , @NamedQuery(name = "Puesto.findByCodOrganigrama", query = "SELECT p FROM Puesto p WHERE p.codOrganigrama IN :codOrganigrama")
     , @NamedQuery(name = "Puesto.findByDescripcion", query = "SELECT p FROM Puesto p WHERE p.descripcion = :descripcion")
     , @NamedQuery(name = "Puesto.findByCodEstatus", query = "SELECT p FROM Puesto p WHERE p.codEstatus = :codEstatus")
     , @NamedQuery(name = "Puesto.findByNoDocCreacion", query = "SELECT p FROM Puesto p WHERE p.noDocCreacion = :noDocCreacion")

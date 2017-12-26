@@ -114,15 +114,21 @@ public class PersonaController implements Serializable {
     }
 
     public List<Persona> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findAll();        
     }
 
     public List<Persona> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findAll();        
     }
     
+    public List<Persona> getItemsAvailableSelectManyTransport() {
+        return getFacade().findBySection();
+    }
+    
+    public List<Persona> getItemsAvailableSelectOneTransport() {
+        return getFacade().findBySection();
+    }
     public List<Persona> Coincidencias(String texto) {
-        System.out.println(texto);
         return getFacade().findAll();
     }
 

@@ -41,7 +41,16 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         personaQ = em.createNamedQuery("Persona.findAll");
         return personaQ.getResultList();
     }
-
+    public List<Persona> findBySection() {
+        EntityManager em = getEntityManager();
+        Query personaQ;
+        Query organigramaQ;
+        Query puestoQ;        
+        organigramaQ = em.createNamedQuery("Organigrama.findByCodOrganigrama").setParameter("codOrganigrama",82);
+        puestoQ = em.createNamedQuery("Puesto.findByCodOrganigrama").setParameter("codOrganigrama",organigramaQ.getResultList());        
+        personaQ = em.createNamedQuery("Persona.findBySection").setParameter("Puesto", puestoQ.getResultList());                        
+        return personaQ.getResultList();
+    }
     public List<Persona> findByDate(Date fechaInicio, Date fechaFin) {
         EntityManager em = getEntityManager();
         Query personaQ;
@@ -57,8 +66,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         Query personaQ;
         Query puestoQ;
         puestoQ = em.createNamedQuery("Puesto.findByDescripcion").setParameter("descripcion","Piloto");
-        personaQ = em.createNamedQuery("Persona.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id).setParameter("puesto", puestoQ.getResultList());
-        //personaQ = em.createNamedQuery("Persona.findByDate");
+        personaQ = em.createNamedQuery("Persona.findByDateAndId").setParameter("fecha_inicio", fechaInicio).setParameter("fecha_fin", fechaFin).setParameter("codAsignacionVehiculo", id).setParameter("puesto", puestoQ.getResultList());        
         return personaQ.getResultList();
     }
     

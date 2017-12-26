@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p ORDER BY p.nombre1, p.apellido1, p.apellido2")
+    ,@NamedQuery(name = "Persona.findBySection", query = "SELECT DISTINCT(per) FROM Puesto p, Persona per where "
+            +"per.codPuesto IN :Puesto ORDER BY per.nombre1, per.apellido1, per.apellido2")
     //, @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) from Persona p left outer join p.asignacionVehiculoPilotoList avp WHERE (NOT(:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') OR avp.fechaHoraRetornoVehiculo IS NULL) ORDER BY p.codPersona")
     , @NamedQuery(name = "Persona.findByDate", query = "Select DISTINCT(p) \n" +
 "from Persona p \n" +

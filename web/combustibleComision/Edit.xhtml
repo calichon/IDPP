@@ -271,7 +271,7 @@
                                 <p:column colspan="2">
                                     <p:selectOneMenu id="codPersonaEncargadoTransporte" value="#{combustibleComisionController.selected.codPersonaEncargadoTransporte}" filter="true">
                                         <f:selectItem itemLabel="Seleccione encargado" itemDisabled="true" itemValue="#{null}" noSelectionOption="true" />
-                                        <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                        <f:selectItems value="#{personaController.itemsAvailableSelectOneTransport}"
                                                        var="codPersonaEncargadoTransporteItem"
                                                        itemValue="#{codPersonaEncargadoTransporteItem}"/>
                                     </p:selectOneMenu>

@@ -31,6 +31,7 @@
                             </p:column>
                             <p:column colspan="3">
                                 <p:selectOneMenu id="codPersonaPiloto" value="#{kilometrajeComisionController.selected.codPersonaPiloto}" filter="true" filterMatchMode="contains">
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                     <f:selectItems value="#{kilometrajeComisionController.pilotosDisponibles}"
                                                    var="codPersonaPilotoItem"
                                                    itemValue="#{codPersonaPilotoItem}"/>

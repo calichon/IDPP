@@ -120,6 +120,14 @@ public class UnidadController implements Serializable {
     public List<Unidad> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    public List<Unidad> getItemsAvailableSelectManyPlace() {
+       return getFacade().findAll1();
+    }
+
+    public List<Unidad> getItemsAvailableSelectOnePlace() {
+       return getFacade().findAll1();
+    }
 
     @FacesConverter(forClass = Unidad.class)
     public static class UnidadControllerConverter implements Converter {
