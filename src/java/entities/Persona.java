@@ -66,8 +66,8 @@ import javax.xml.bind.annotation.XmlTransient;
 "    WHERE \n" +
 "    ((:fecha_inicio <= avp.fechaHoraRetornoVehiculo AND avp.fechaHoraUsoVehiculo <= :fecha_fin AND avp.estatusAsignacion='A') \n" +
 "    AND avp.fechaHoraRetornoVehiculo IS NOT NULL AND avp.codAsignacionVehiculo != :codAsignacionVehiculo ) \n" +
-    "AND p.codPuesto IN :puesto\n" +
 ")\n" +
+"AND p.codPuesto IN :puesto\n" +            
 "ORDER BY p.nombre1, p.apellido1, p.apellido2")
         //left outer join p.asignacionVehiculoPilotoList avp
         //WHERE NOT(:fecha_inicio <= av.fechaHoraRetornoVehiculo AND av.fechaHoraUsoVehiculo <= :fecha_fin) OR av.fechaHoraRetornoVehiculo IS NULL ORDER BY p.codPersona

@@ -7,6 +7,7 @@ import jsf_classes.util.JsfUtil.PersistAction;
 import session_beans.KilometrajeComisionFacade;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;

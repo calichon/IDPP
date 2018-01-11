@@ -132,16 +132,16 @@
 
 
                         <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codTipoMantenimiento}" for="codTipoMantenimiento" />
-                        <p:autoComplete id="codTipoMantenimiento" value="#{mantenimientoReparacionController.actualDetalleMantRep.codTipoMantRep}" completeMethod="#{mantenimientoReparacionController.completeTipoMantenimiento}"
+                        <p:autoComplete id="codTipoMantenimiento" value="#{mantenimientoReparacionController.actualDetalleMantRep}" completeMethod="#{mantenimientoReparacionController.completeTipoMantenimiento}"
                                         minQueryLength="3" var="tipoManto" itemLabel="#{tipoManto.descripcion}" itemValue="#{tipoManto}"  forceSelection="true" size="70" >
                             <p:ajax update="addButton"/>
                         </p:autoComplete>
                         <p:outputLabel value="Costo de Reparacion" for="costoReparacion" />
-                        <p:inputText id="costoReparacion" value="#{mantenimientoReparacionController.actualDetalleMantRep.costoReparacionDetalle}" title="Costo de Reparacion" />  
+                        <p:inputText id="costoReparacion" value="#{mantenimientoReparacionController.actualDetalleMantRep}" title="Costo de Reparacion" />  
                         <p:outputLabel value="Tiempo de Garantia" for="tiempoGarantia" />
-                        <p:inputText id="tiempoGarantia" value="#{mantenimientoReparacionController.actualDetalleMantRep.tiempoGarantia}" title="Tiempo de Garantia" />  
+                        <p:inputText id="tiempoGarantia" value="#{mantenimientoReparacionController.actualDetalleMantRep}" title="Tiempo de Garantia" />  
                         <p:outputLabel value="Descripcion de mantenimiento/reparacion realizado" for="descManto" />
-                        <p:inputTextarea id="descManto" value="#{mantenimientoReparacionController.actualDetalleMantRep.descripcion}" rows="3" cols="50"/>
+                        <p:inputTextarea id="descManto" value="#{mantenimientoReparacionController.actualDetalleMantRep}" rows="3" cols="50"/>
                         <p:commandButton id="addButton" icon="ui-icon-plus"   value="Agregar" actionListener="#{mantenimientoReparacionController.agregarDetalle}" 
                                          update="detalleMantos" />
 

@@ -130,7 +130,7 @@ public class AsignacionVehiculoPiloto implements Serializable {
         return codPersonaPilotoAsignado;
     }
 
-    public void setCodPersonaPilotoAsignado(Persona codPersonaPilotoAsignado) {
+    public void setCodPersonaPilotoAsignado(Persona codPersonaPilotoAsignado){        
         this.codPersonaPilotoAsignado = codPersonaPilotoAsignado;
     }
 

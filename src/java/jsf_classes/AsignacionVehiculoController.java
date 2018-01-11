@@ -405,7 +405,7 @@ public class AsignacionVehiculoController implements Serializable {
         
         if (itemsDisponiblesFecha == null && vehiculosDisponibles==null){
             itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
-        }else if (selected.getCargaVoluminosa() && vehiculosDisponibles!=null) {
+        }else if (selected.getCargaVoluminosa()!=null && selected.getCargaVoluminosa() && vehiculosDisponibles!=null) {
             itemsDisponiblesFecha = vehiculosDisponibles;
         }else{
             itemsDisponiblesFecha = getFacadeVehiculo().findByDate(pFechaInicio,pFechaFin);
@@ -485,9 +485,10 @@ public class AsignacionVehiculoController implements Serializable {
         else{
             pFechaFin = fechaFin;
         }
-
-        itemsDisponiblesFecha = getFacadePersona().findByDateAndId(pFechaInicio,pFechaFin,selected);
-
+        if (itemsDisponiblesFecha == null) {
+            itemsDisponiblesFecha = getFacadePersona().findByDateAndId(pFechaInicio,pFechaFin,selected);
+            //itemsDisponiblesFecha = getFacadePersona().findByDate(pFechaInicio,pFechaFin);
+        }
         return itemsDisponiblesFecha;
     }
 

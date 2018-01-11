@@ -41,7 +41,7 @@ public class CuponValidator implements Validator {
             System.out.println(cuponInicial);
             System.out.println(cuponFinal);
             //agregado el 21/12/17, para validar la numeracion
-            if(cuponFinal.intValue()<=cuponInicial.intValue()){
+            if(cuponFinal.intValue()<cuponInicial.intValue()){
                 FacesMessage msg =
                 new FacesMessage("El número final debe ser mayor al número inicial","El número final debe ser mayor al número inicial");
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);

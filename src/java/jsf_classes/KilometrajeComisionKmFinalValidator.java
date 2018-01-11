@@ -32,7 +32,10 @@ public class KilometrajeComisionKmFinalValidator implements Validator {
              msg.setSeverity(FacesMessage.SEVERITY_ERROR);
              throw new ValidatorException(msg);
         }
-        InputText kilometrajeInicialMenu = (InputText) component.getAttributes().get("kilometrajeInicial");
+        InputText kilometrajeInicialMenu = (InputText) component.getAttributes().get("kilometrajeInicialBinding");
+        /*if(kilometrajeInicialMenu==null){
+            kilometrajeInicialMenu = (InputText) component.getAttributes().get("kilometrajeInicial");
+        }*/
         BigInteger kilometraje_inicial = (BigInteger)kilometrajeInicialMenu.getValue();
 
         if(kilometraje_inicial != null){
