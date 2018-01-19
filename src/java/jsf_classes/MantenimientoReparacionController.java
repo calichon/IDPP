@@ -72,10 +72,10 @@ public class MantenimientoReparacionController implements Serializable {
         return selected;
     }
 
-    public void setSelected(MantenimientoReparacion selected) {
+    public void setSelected(MantenimientoReparacion selected){
         this.selected = selected;
         detalleMantos = (List<DetalleMantRep>) this.selected.getDetalleMantRepCollection();
-         actualDetalleMantRep = new DetalleMantRep();
+        actualDetalleMantRep = new DetalleMantRep();
     }
 
     protected void setEmbeddableKeys() {
@@ -97,9 +97,7 @@ public class MantenimientoReparacionController implements Serializable {
     }
 
     public MantenimientoReparacion prepareCreate() {
-        selected = new MantenimientoReparacion();
-
-
+        selected = new MantenimientoReparacion();       
         initializeEmbeddableKey();
         return selected;
     }
@@ -137,6 +135,7 @@ public class MantenimientoReparacionController implements Serializable {
         if (items == null) {
             items = getFacade().findAll();
         }
+        //actualDetalleMantRep = new DetalleMantRep();
         return items;
     }
 
@@ -300,6 +299,7 @@ public class MantenimientoReparacionController implements Serializable {
 
     public List<Vehiculo> completePlacasVehiculo(String query) {
         List<Vehiculo> filteredVehiculos = vehiculoFacade.findByPlaca(query);
+
         return filteredVehiculos;
     }
 
@@ -309,6 +309,7 @@ public class MantenimientoReparacionController implements Serializable {
     }
 
     public List<Persona> completeEmpleado(String query){
+
         List<Persona> filteredPersona = personaFacade.findByNombreApellido(query, selected.getMantRep().intValue() == TIPO_MANTENIMIENTO?UNIDAD_TRANSPORTES:UNIDAD_REPARACION);
         return filteredPersona;
     }

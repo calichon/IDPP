@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TipoTipo.findAll", query = "SELECT t FROM TipoTipo t")
     , @NamedQuery(name = "TipoTipo.findByCodTipoTipo", query = "SELECT t FROM TipoTipo t WHERE t.codTipoTipo = :codTipoTipo")
-    , @NamedQuery(name = "TipoTipo.findByLoad", query = "SELECT t FROM TipoTipo t WHERE t.codTipoTipo = 4 OR t.codTipoTipo = 10")
+    , @NamedQuery(name = "TipoTipo.findByLoad", query = "SELECT t FROM TipoTipo t WHERE t.codTipoTipo = 1 OR t.codTipoTipo = 2")
     , @NamedQuery(name = "TipoTipo.findByNombreTipoTipo", query = "SELECT t FROM TipoTipo t WHERE t.nombreTipoTipo = :nombreTipoTipo")
     , @NamedQuery(name = "TipoTipo.findByOrden", query = "SELECT t FROM TipoTipo t WHERE t.orden = :orden")
     , @NamedQuery(name = "TipoTipo.findByActivo", query = "SELECT t FROM TipoTipo t WHERE t.activo = :activo")})

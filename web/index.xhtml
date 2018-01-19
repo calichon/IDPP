@@ -76,40 +76,13 @@
                     <h:link outcome="/concursoMantenimientos/List" value="Formulario de Concurso de Mantenimiento"/>
                     <br />
                     <h:link outcome="/tipoMantenimientoReparacion/List" value="Formulario de Tipo de Mantenimiento"/>
+                    <br />
+                    <h:link outcome="/proveedores/List" value="Formulario de Proveedores"/>
                     <!-- h2>Listado de formularios operativos y de asignación de vehículos</h2-->                    
                     <h:panelGroup rendered="#{request.isUserInRole('Admin')}">
                         <h2>Administración</h2>
                         <h:link outcome="/usuario/List" value="Administración de usuarios"/>
                     </h:panelGroup>
-
-                    <!--
-                    <br />
-                    <h:link outcome="/combustibleCupon/List" value="Formulario de CombustibleCupon"/>
-                    <br />
-                    <h:link outcome="/cuponDenominacion/List" value="Formulario de CuponDenominacion"/>
-                    <br />
-                    -->
-<!--                    <br />
-                    <h:link outcome="/kilometrajeComision/List" value="Formulario de control de kilometraje y comisión de vehículo"/>
-                    <br />-->
-                    <!-- h2>Listado de catálogos geográficos</h2>
-                    <h:link outcome="/departamento/List" value="Catálogo de Departamento"/>
-                    <br />
-                    <h:link outcome="/municipio/List" value="Catálogo de Municipio"/>
-                    <br />
-                    <h:link outcome="/pais/List" value="Catálogo de País"/>
-                    <br />
-                    <h:link outcome="/region/List" value="Catálogo de Region"/>
-                    <br />
-                    <h2>Listado de catálogos organizacionales</h2>
-                    <h:link outcome="/persona/List" value="Catálogo de Persona"/>
-                    <br />
-                    <h:link outcome="/puesto/List" value="Catálogo de Puesto"/>
-                    <br />
-                    <h:link outcome="/sede/List" value="Catálogo de Sede"/>
-                    <br />
-                    <h:link outcome="/unidad/List" value="Catálogo de Unidad"/>
-                    <br / -->
                 </p:layoutUnit>
 
             </p:layout>
