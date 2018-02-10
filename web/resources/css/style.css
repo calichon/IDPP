@@ -1,0 +1,44 @@
+table.ui-panelgrid-border{
+    border-collapse: inherit ;
+    border-spacing: 10px ;
+}
+.ui-panelgrid .ui-panelgrid-cell.tabla-row-column{
+    border:none;
+    float:right;
+    padding-top: 8px;
+    padding-right: 0px;
+}
+.ui-panelgrid .ui-panelgrid-cell.tabla-row-column-two{
+    border:none;
+    padding-left: 0px;
+}
+div .ui-selectonemenu.dropdownlistReport{
+    width:235px !important;
+    margin-left: calc(11% - 3px);
+    padding: 2px 0px;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger .ui-icon{
+    margin-top: 5px !important;
+}
+.calendar-inline-block{
+    display:inline-block;
+}
+.calendar-inline-block input{
+    display: inline-block;
+    width: 69% !important;
+    padding-top: 7px;
+    border-right: 0px !important;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.calendar-inline-block button{
+    display: inline-block;
+    width: 18%;
+    height: 30px;
+    border-left: 0px !important;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-bottom: 29px;
+    margin-top: 1px;
+}
