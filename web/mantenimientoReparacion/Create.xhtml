@@ -9,7 +9,7 @@
 
     <ui:composition>
 
-        <p:dialog id="MantenimientoReparacionCreateDlg" widgetVar="MantenimientoReparacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMantenimientoReparacionTitle}">
+        <p:dialog id="MantenimientoReparacionCreateDlg" widgetVar="MantenimientoReparacionCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.CreateMantenimientoReparacionTitle}">
             <h:form id="MantenimientoReparacionCreateForm">
                 <p:growl id="mensajes" showDetail="true" />
                 <h:panelGroup id="display">
@@ -92,21 +92,27 @@
                         <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_totalMantenimientoReparaQ}" for="totalMantenimientoReparaQ" />
                         <p:inputText id="totalMantenimientoReparaQ" value="#{mantenimientoReparacionController.selected.totalMantenimientoReparaQ}" title="#{bundle.CreateMantenimientoReparacionTitle_totalMantenimientoReparaQ}" />
 
+                        <h:outputText value="Espaciador"  style ="color:white" />
+                        <h:outputText value="Espaciador"  style ="color:white" />
 
 
                         <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codEmpleadoRecepcion}" for="codEmpleadoRecepcion" />
                         <p:autoComplete id="codEmpleadoRecepcion" value="#{mantenimientoReparacionController.fullEmpleadoRecepcion}" completeMethod="#{mantenimientoReparacionController.completeEmpleado}"
                                         minQueryLength="3" var="empleado" itemLabel="#{empleado}" itemValue="#{empleado}"  forceSelection="true"  size="50">
                             <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onEmpleadoSelect}" update="codCargoEmpleadoRecepcion" />
-                        </p:autoComplete>
-                        <p:outputLabel id="codCargoEmpleadoRecepcion" value="#{mantenimientoReparacionController.empleadoRecepcionNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" />
+                        </p:autoComplete> 
+                        <p:outputLabel value="Cargo" />
+                        <p:inputText id="codCargoEmpleadoRecepcion" value="#{mantenimientoReparacionController.empleadoRecepcionNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" disabled="true" size="30"/>
+
+
 
                         <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codEmpleadoRecepcionFact}" for="codEmpleadoRecepcionFact" />
                         <p:autoComplete id="codEmpleadoRecepcionFact" value="#{mantenimientoReparacionController.fullEmpleadoAutoriza}" completeMethod="#{mantenimientoReparacionController.completeEmpleado}"
                                         minQueryLength="3" var="empleado" itemLabel="#{empleado}" itemValue="#{empleado}"  forceSelection="true" size="50">
                             <p:ajax event="itemSelect" listener="#{mantenimientoReparacionController.onEmpleadoAutorizaSelect}" update="codCargoEmpleadoAutoriza" />
                         </p:autoComplete>
-                        <p:outputLabel id="codCargoEmpleadoAutoriza" value="#{mantenimientoReparacionController.empleadoAutorizaNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" />
+                        <p:outputLabel value="Cargo" />
+                        <p:inputText id="codCargoEmpleadoAutoriza" value="#{mantenimientoReparacionController.empleadoAutorizaNombreCargo}" title="#{bundle.CreateMantenimientoReparacionTitle_codCargoEmpleadoRecepcion}" disabled="true" size="30"/>
 
 
 
@@ -133,7 +139,7 @@
 
                         <p:outputLabel value="#{bundle.CreateMantenimientoReparacionLabel_codTipoMantenimiento}" for="codTipoMantenimiento" />
                         <p:autoComplete id="codTipoMantenimiento" value="#{mantenimientoReparacionController.actualDetalleMantRep.codTipoMantRep}" completeMethod="#{mantenimientoReparacionController.completeTipoMantenimiento}"
-                                        minQueryLength="3" var="tipoManto" itemLabel="#{tipoManto.descripcion}" itemValue="#{tipoManto}"  forceSelection="true" size="70" >
+                                        minQueryLength="3" var="tipoManto" itemLabel="#{tipoManto.descripcion}" itemValue="#{tipoManto}"  forceSelection="true" size="50" >
                             <p:ajax update="addButton"/>
                         </p:autoComplete>
                         <p:outputLabel value="Costo de Reparacion" for="costoReparacion" />

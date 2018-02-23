@@ -27,6 +27,10 @@
     <role-name>kilometrajeComision</role-name>
     <group-name>kilometrajeComision</group-name>
   </security-role-mapping>
+    <security-role-mapping>
+    <role-name>mantenimientoReparacion</role-name>
+    <group-name>mantenimientoReparacion</group-name>
+  </security-role-mapping>
   <session-config>
     <session-properties>
       <property name="timeoutSeconds" value="60"/>

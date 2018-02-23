@@ -32,8 +32,8 @@ public class TipoMantenimientoReparacionFacade extends AbstractFacade<TipoManten
     }
     
     public List<TipoMantenimientoReparacion> findByNombre(String nombre, int tipo){
-       Query byNombre = getEntityManager().createQuery("FROM TipoMantenimientoReparacion t WHERE t.descripcion like :nombre and t.mantRepa = :tipo");
-      byNombre.setParameter("nombre", '%'+nombre+'%');
+       Query byNombre = getEntityManager().createQuery("FROM TipoMantenimientoReparacion t WHERE UPPER(t.descripcion) like :nombre and t.mantRepa = :tipo");
+      byNombre.setParameter("nombre", '%'+nombre.toUpperCase()+'%');
       byNombre.setParameter("tipo", tipo);
       return byNombre.getResultList();        
     }

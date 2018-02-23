@@ -309,7 +309,6 @@ public class MantenimientoReparacionController implements Serializable {
     }
 
     public List<Persona> completeEmpleado(String query){
-
         List<Persona> filteredPersona = personaFacade.findByNombreApellido(query, selected.getMantRep().intValue() == TIPO_MANTENIMIENTO?UNIDAD_TRANSPORTES:UNIDAD_REPARACION);
         return filteredPersona;
     }

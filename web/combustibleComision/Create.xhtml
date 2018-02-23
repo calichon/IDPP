@@ -8,7 +8,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition>
-        <p:dialog id="CombustibleComisionCreateDlg" resizable="true"  width="800" height="600" widgetVar="CombustibleComisionCreateDialog" modal="true" appendTo="@(body)" header="#{bundle.CreateCombustibleComisionTitle}" onShow="updateDialog()">
+        <p:dialog id="CombustibleComisionCreateDlg" resizable="true"  dwidth="1100" dheight="600" widgetVar="CombustibleComisionCreateDialog" modal="true" appendTo="@(body)" header="#{bundle.CreateCombustibleComisionTitle}" onShow="updateDialog()">
             <h:form id="CombustibleComisionCreateForm">
                 <p:remoteCommand name="updateDialog" update="cuponest"  actionListener="#{combustibleComisionController.initCreate()}"/>
                 <p:remoteCommand name="refreshFooter" update="cuponest"/>

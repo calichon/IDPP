@@ -87,6 +87,20 @@
             <role-name>combustibleComision</role-name>
         </auth-constraint>
     </security-constraint>
+        <security-constraint>
+        <display-name>mantenimientoReparacion</display-name>
+        <web-resource-collection>
+            <web-resource-name>mantenimientoReparacion</web-resource-name>
+            <description>Mantenimientos o Reparación</description>
+            <url-pattern>/faces/mantenimientoReparacion/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Admin</role-name>
+            <role-name>mantenimientoReparacion</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
     <error-page>
         <error-code>403</error-code>
         <location>/faces/permissionerror.xhtml</location>

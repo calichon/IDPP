@@ -88,11 +88,13 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     }
 
     public List<Persona> findByNombreApellido(String query, int unidad){
-      Query byNombres = getEntityManager().createQuery("FROM Persona p WHERE concat(p.nombre1,p.nombre2,p.apellido1,p.apellido2,p.apellidoCasada) like :nombres and p.codPuesto.codOrganigrama.codUnidad.codUnidad = :laUnidad");
-      query = query.replace(' ', '%');
-        System.out.println("***query: "+query);
-      byNombres.setParameter("nombres", '%'+query+'%');
-      byNombres.setParameter("laUnidad", unidad);
+//      Query byNombres = getEntityManager().createQuery("FROM Persona p WHERE concat(p.nombre1,p.nombre2,p.apellido1,p.apellido2,p.apellidoCasada) like :nombres and p.codPuesto.codOrganigrama.codUnidad.codUnidad = :laUnidad");
+      System.out.println("***query_1: "+query.toUpperCase());
+      Query byNombres = getEntityManager().createQuery("FROM Persona p WHERE UPPER(CONCAT(COALESCE(p.nombre1,'NoName') ,COALESCE(p.nombre2,'NoName'),COALESCE(p.apellido1,'NoName'),COALESCE(p.apellido2,'NoName'), COALESCE(p.apellidoCasada , 'NoName'))) like :nombres " );
+      query = query.replace(' ', '%').toUpperCase();
+      byNombres.setParameter("nombres", '%'+query.toUpperCase()+'%');
+      //byNombres.setParameter("laUnidad", unidad);
+      List<Persona> listadepersonas =  byNombres.getResultList();
       return byNombres.getResultList();
     }
 }
